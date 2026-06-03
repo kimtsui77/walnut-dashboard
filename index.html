@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>抖音竞品洞察 · 核桃编程</title>
+<script>
+(function(){
+  var P="walnut2026",K="wld_auth";
+  if(sessionStorage.getItem(K)===P) return;
+  document.addEventListener("DOMContentLoaded",function(){document.body.style.display="none";});
+  var o=document.createElement("div");
+  o.style.cssText="position:fixed;inset:0;background:linear-gradient(135deg,#1a202c 0%,#2d3748 100%);display:flex;align-items:center;justify-content:center;z-index:99999;";
+  o.innerHTML='<div style="background:#fff;border-radius:18px;padding:44px 40px;width:340px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.35)">'
+    +'<div style="font-size:28px;margin-bottom:8px">🔒</div>'
+    +'<h2 style="font-size:18px;font-weight:700;color:#1a202c;margin-bottom:6px">抖音竞品洞察</h2>'
+    +'<p style="font-size:12px;color:#718096;margin-bottom:24px">核桃编程 · 内部数据，请输入访问密码</p>'
+    +'<input id="pw-inp" type="password" placeholder="请输入密码" autocomplete="off" style="width:100%;padding:11px 14px;border:2px solid #e2e8f0;border-radius:9px;font-size:14px;outline:none;box-sizing:border-box;text-align:center;letter-spacing:3px">'
+    +'<div id="pw-err" style="color:#ef4444;font-size:12px;margin-top:8px;min-height:16px"></div>'
+    +'<button id="pw-btn" style="margin-top:12px;width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer">进入看板</button>'
+    +'<div style="font-size:11px;color:#94a3b8;margin-top:18px">核桃编程 · 星推搜直项目组</div>'
+    +'</div>';
+  document.documentElement.appendChild(o);
+  function tryLogin(){
+    if(document.getElementById("pw-inp").value===P){
+      sessionStorage.setItem(K,P);o.remove();document.body.style.display="";
+    } else {
+      document.getElementById("pw-err").textContent="密码错误，请重试";
+      document.getElementById("pw-inp").value="";document.getElementById("pw-inp").focus();
+    }
+  }
+  document.getElementById("pw-btn").addEventListener("click",tryLogin);
+  document.getElementById("pw-inp").addEventListener("keydown",function(e){if(e.key==="Enter")tryLogin();});
+  document.getElementById("pw-inp").focus();
+})();
+</script>
+<script>
+(function(){
+  var P="walnut2026",K="dyx_auth";
+  if(sessionStorage.getItem(K)===P) return;
+  document.addEventListener("DOMContentLoaded",function(){document.body.style.display="none";});
+  var o=document.createElement("div");
+  o.innerHTML='<style>#dyx-lock{position:fixed;inset:0;background:linear-gradient(135deg,#1a202c,#2d3748);display:flex;align-items:center;justify-content:center;z-index:99999}.dyx-box{background:#fff;border-radius:20px;padding:44px 40px;width:340px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4)}.dyx-box h2{font-size:18px;font-weight:700;color:#1a202c;margin-bottom:6px}.dyx-box p{font-size:12px;color:#718096;margin-bottom:24px}.dyx-box input{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;box-sizing:border-box;letter-spacing:2px;text-align:center}.dyx-box input:focus{border-color:#6366f1}.dyx-box button{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}.dyx-box button:hover{opacity:.9}.dyx-err{color:#ef4444;font-size:12px;margin-top:8px;min-height:16px}.dyx-logo{font-size:11px;color:#94a3b8;margin-top:20px}</style>'
+    +'<div id="dyx-lock"><div class="dyx-box"><h2>🔒 抖音竞品洞察</h2><p>核桃编程内部数据，请输入访问密码</p><input type="password" id="dyx-inp" placeholder="请输入密码" autocomplete="off"/><div class="dyx-err" id="dyx-err"></div><button id="dyx-btn">进入看板</button><div class="dyx-logo">核桃编程 · 星推搜直项目组</div></div></div>';
+  document.documentElement.appendChild(o);
+  function go(){
+    var v=document.getElementById("dyx-inp").value;
+    if(v===P){sessionStorage.setItem(K,P);o.remove();document.body.style.display="";}
+    else{document.getElementById("dyx-err").textContent="密码错误，请重试";document.getElementById("dyx-inp").value="";}
+  }
+  document.getElementById("dyx-btn").addEventListener("click",go);
+  document.getElementById("dyx-inp").addEventListener("keydown",function(e){if(e.key==="Enter")go();});
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f5f7fa,#e8eef5);color:#1a202c;min-height:100vh}
+.top-bar{background:#1a202c;padding:14px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.top-bar .logo{font-size:16px;font-weight:700;color:#fff;white-space:nowrap}
+.top-bar .logo span{color:#818cf8}
+.brand-tabs{display:flex;gap:4px;margin-left:4px}
+.brand-tab{padding:7px 20px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.18s;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+.brand-tab:hover{background:rgba(255,255,255,.15)}
+.brand-tab.active-sc{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 3px 10px rgba(99,102,241,.4)}
+.brand-tab.active-nb{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;box-shadow:0 3px 10px rgba(29,78,216,.4)}
+.divider{width:1px;height:20px;background:rgba(255,255,255,.15)}
+.week-filter{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.wf-label{font-size:11px;color:rgba(255,255,255,.5);white-space:nowrap}
+.wf-btn{padding:4px 11px;border-radius:12px;border:none;cursor:pointer;font-size:11px;font-weight:500;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);transition:.15s;white-space:nowrap}
+.wf-btn:hover{background:rgba(255,255,255,.2)}
+.wf-btn.active{background:#fff;font-weight:700}
+.wf-btn.active.sc{color:#5b21b6}
+.wf-btn.active.nb{color:#1e40af}
+.page-header{padding:24px 32px 16px;display:flex;align-items:flex-start;justify-content:space-between}
+.page-header .ph-title{font-size:22px;font-weight:700;color:#1a202c}
+.page-header .ph-sub{font-size:12px;color:#718096;margin-top:4px}
+.page-header .ph-meta{font-size:11px;color:#94a3b8;margin-top:2px}
+.container{padding:0 32px 32px}
+.section{background:#fff;border-radius:14px;padding:22px 26px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.section h2{font-size:15px;font-weight:700;padding-left:11px;margin-bottom:16px;color:#2d3748}
+.section h2.sc-h{border-left:4px solid #8b5cf6}
+.section h2.nb-h{border-left:4px solid #3b82f6}
+.section h2 .tip{font-weight:400;font-size:11px;color:#718096;margin-left:8px}
+.static-notice{display:inline-flex;font-size:10px;color:#94a3b8;background:#f1f5f9;padding:2px 7px;border-radius:7px;margin-left:8px}
+/* KPI */
+.kpi-grid{display:grid;gap:14px;margin-bottom:18px}
+.kpi-grid-4{grid-template-columns:repeat(4,1fr)}
+.kpi-grid-5{grid-template-columns:repeat(5,1fr)}
+.kpi-card{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:4px solid}
+.kpi-card.sc-1{border-color:#8b5cf6}.kpi-card.sc-2{border-color:#f59e0b}.kpi-card.sc-3{border-color:#10b981}.kpi-card.sc-4{border-color:#06b6d4}
+.kpi-card.nb-card{border-color:#3b82f6;text-align:center}
+.kpi-card .kv{font-size:26px;font-weight:700;color:#1a202c}
+.kpi-card .kl{font-size:11px;color:#718096;margin-top:2px}
+.kpi-card .ksub{font-size:10px;color:#94a3b8;margin-top:5px}
+.kpi-card .brand-name{font-size:13px;font-weight:700;margin-bottom:3px;color:#2d3748}
+.kpi-card .brand-tag{font-size:10px;color:#718096;margin-bottom:12px}
+.kpi-card .main-num{font-size:24px;font-weight:700;color:#1a202c}
+.kpi-card .main-label{font-size:10px;color:#718096;margin-bottom:10px}
+.kpi-card .sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;font-size:10px;padding-top:9px;border-top:1px solid #edf2f7}
+.kpi-card .sub-grid .item{display:flex;flex-direction:column}
+.kpi-card .sub-grid .v{font-weight:600;color:#2d3748;font-size:11px}
+.kpi-card .sub-grid .l{color:#a0aec0;font-size:9px;margin-top:1px}
+/* brand chips */
+.bc{display:inline-block;padding:2px 8px;border-radius:9px;font-size:10px;font-weight:600;color:#fff}
+.bc-w{background:#8b5cf6}.bc-y{background:#f59e0b}.bc-g{background:#10b981}.bc-c{background:#06b6d4}.bc-b{background:#3b82f6}
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid #edf2f7}
+th{background:#f7fafc;font-weight:600;color:#4a5568;font-size:11px}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.hl-row,.hl-row td{background:#fef3c7!important}
+/* tags */
+.vtag{display:inline-block;padding:2px 6px;border-radius:6px;font-size:9px;font-weight:500;margin:1px 1px 1px 0;white-space:nowrap}
+.vtag-drama{background:#fce7f3;color:#9d174d}.vtag-ai{background:#ede9fe;color:#5b21b6}
+.vtag-edu{background:#d1fae5;color:#065f46}.vtag-product{background:#fef3c7;color:#92400e}
+.vtag-research{background:#cffafe;color:#155e75}.vtag-class{background:#dbeafe;color:#1e40af}
+.vtag-anxiety{background:#fee2e2;color:#991b1b}.vtag-method{background:#e0e7ff;color:#3730a3}
+.vtag-school{background:#dbeafe;color:#1e40af}.vtag-series{background:#ede9fe;color:#5b21b6}
+.vtag-science{background:#d1fae5;color:#065f46}
+/* charts */
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chart-box{background:#fafbfc;border-radius:10px;padding:16px}
+.chart-box h3{font-size:12px;margin-bottom:8px;color:#4a5568}
+.chart-box canvas{max-height:240px}
+.legend{display:flex;gap:10px;font-size:10px;color:#4a5568;margin-top:5px}
+.legend .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:middle}
+/* seg */
+.seg-c-0{background:#e0e7ff;color:#3730a3}.seg-c-1{background:#c7d2fe;color:#3730a3}
+.seg-c-2{background:#a5b4fc;color:#1e1b4b}.seg-c-3{background:#818cf8;color:#fff}.seg-c-4{background:#6366f1;color:#fff}
+.seg-c-nb-0{background:#bfdbfe;color:#1e40af}.seg-c-nb-1{background:#93c5fd;color:#1e40af}
+.seg-c-nb-2{background:#60a5fa;color:#fff}.seg-c-nb-3{background:#3b82f6;color:#fff}.seg-c-nb-4{background:#1d4ed8;color:#fff}
+.dist-tag{display:inline-block;padding:2px 7px;border-radius:7px;font-size:10px;font-weight:500}
+.seg-insight{margin-top:10px;padding:10px 14px;background:#f8fafc;border-radius:8px;font-size:11px;color:#475569;line-height:1.8}
+/* content analysis */
+.content-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.content-brand-card{border-radius:9px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.content-brand-head{padding:9px 12px 8px;color:#fff;font-weight:700;font-size:12px}
+.content-brand-body{padding:9px 11px;background:#fff}
+.content-tag-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f2f5;font-size:11px}
+.content-tag-row:last-child{border-bottom:none}
+.tag-a3{font-size:9px;color:#10b981;margin-left:3px}
+/* perf */
+.perf-good{color:#10b981;font-weight:600}.perf-warn{color:#f59e0b;font-weight:600}.perf-bad{color:#ef4444;font-weight:600}
+/* series cards */
+.series-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.series-card{border-radius:9px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.series-head{padding:9px 12px;color:#fff;font-weight:700;font-size:12px}
+.series-body{padding:9px 11px;background:#fff}
+.series-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0f2f5;font-size:11px}
+.series-row:last-child{border-bottom:none}
+.series-v{font-weight:600;color:#2d3748}
+/* video list */
+.vtitle-cell{max-width:300px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+a.vlink{color:#6366f1;font-size:10px;text-decoration:none;border-bottom:1px dashed #a5b4fc}
+a.vlink:hover{color:#4f46e5}
+/* insights */
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.ins-card{background:#fafbfc;border-left:4px solid;padding:12px 14px;border-radius:7px}
+.ins-card.sc-col{border-color:#8b5cf6}.ins-card.nb-col{border-color:#3b82f6}
+.ins-card.warn{border-color:#f59e0b;background:#fffbeb}.ins-card.good{border-color:#10b981;background:#f0fdf4}
+.ins-card h4{font-size:12px;margin-bottom:6px;color:#2d3748}
+.ins-card p{font-size:11px;line-height:1.7;color:#4a5568}
+.ins-card .hl{font-weight:700}
+/* visibility */
+.sc-only,.nb-only{display:none}
+.footer{text-align:center;color:#94a3b8;font-size:11px;padding:16px 32px}
+</style>
+</head>
+<body>
+
+<!-- 顶部固定导航 -->
+<div class="top-bar">
+  <div class="logo">抖音<span>竞品洞察</span></div>
+  <div class="brand-tabs">
+    <button class="brand-tab active-sc" id="tab-sc" onclick="switchBrand('sc')">少儿编程</button>
+    <button class="brand-tab" id="tab-nb" onclick="switchBrand('nb')">行业头部 · NOBOOK</button>
+  </div>
+  <div class="divider"></div>
+  <div class="week-filter">
+    <span class="wf-label">📆</span>
+    <button class="wf-btn active sc" data-week="all">全部</button>
+    <button class="wf-btn" data-week="W1">第1周 04/28-05/04</button>
+    <button class="wf-btn" data-week="W2">第2周 05/05-05/11</button>
+    <button class="wf-btn" data-week="W3">第3周 05/12-05/18</button>
+    <button class="wf-btn" data-week="W4">第4周 05/19-05/27</button>
+  </div>
+  <div style="margin-left:auto;font-size:11px;color:rgba(255,255,255,.4)" id="headerInfo">04/28–05/27</div>
+</div>
+
+<div class="page-header">
+  <div>
+    <div class="ph-title" id="pageTitle">少儿编程 · 行业竞品洞察</div>
+    <div class="ph-sub" id="pageSub">核桃编程 · 行业竞争格局 / 曝光结构 / 内容种草效率</div>
+    <div class="ph-meta" id="pageMeta">首投日期 2026-04-28 ~ 2026-05-27 · 数据源：巨量云图行业内容榜</div>
+  </div>
+  <div style="font-size:12px;color:#94a3b8;text-align:right;padding-top:4px" id="countBadge">加载中...</div>
+</div>
+
+<div class="container">
+
+<!-- ══ 少儿编程区域 ══ -->
+<div id="sc-area">
+
+<div class="kpi-grid kpi-grid-4" id="sc-kpi"></div>
+
+<div class="section">
+  <h2 class="sc-h">① 品牌竞争格局 · 核心指标对比 <span class="tip">随周期筛选动态更新</span></h2>
+  <table><thead><tr>
+    <th>品牌</th><th class="num">条数</th><th class="num">条数占比</th>
+    <th class="num">总曝光</th><th class="num">曝光占比</th>
+    <th class="num">自然曝光</th><th class="num">自然占比</th>
+    <th class="num">加热曝光</th><th class="num">加热占比</th>
+    <th class="num">均曝光</th><th class="num">A3（加权）</th>
+    <th class="num">看后搜（加权）</th><th class="num">互动量</th><th class="num">均互动</th>
+  </tr></thead>
+  <tbody id="sc-overview"></tbody>
+</table></div>
+
+<div class="section">
+  <h2 class="sc-h">② 曝光分段分布 <span class="tip">随周期筛选更新</span></h2>
+  <table><thead><tr>
+    <th>品牌</th><th class="num">100万+</th><th class="num">30-100万</th>
+    <th class="num">10-30万</th><th class="num">5-10万</th><th class="num">1-5万</th><th class="num">&lt;1万</th>
+    <th class="num">合计</th><th>分布形态</th>
+  </tr></thead>
+  <tbody id="sc-seg"></tbody></table>
+  <div class="seg-insight" id="sc-seg-ins"></div>
+</div>
+
+<div class="section">
+  <h2 class="sc-h">③ 曝光结构 vs 种草效率</h2>
+  <div class="chart-row">
+    <div class="chart-box">
+      <h3>各品牌自然 / 加热曝光结构</h3>
+      <canvas id="sc-stack"></canvas>
+      <div class="legend"><span><span class="dot" style="background:#34d399"></span>自然</span><span><span class="dot" style="background:#fbbf24"></span>加热</span></div>
+    </div>
+    <div class="chart-box">
+      <h3>种草效率矩阵：A3率 × 看后搜率（气泡=曝光）</h3>
+      <canvas id="sc-bubble"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="sc-h">④ 竞品内容方向分析 <span class="static-notice">📌 全周期</span></h2>
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">A · 各品牌选题标签分布（条数 + 均A3）</div>
+  <div class="content-grid">
+    <div class="content-brand-card">
+      <div class="content-brand-head" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">核桃编程 · 23条</div>
+      <div class="content-brand-body">
+        <div class="content-tag-row"><span><span class="vtag vtag-drama">原生剧情</span></span><span><b>11</b><span style="color:#94a3b8;font-size:10px"> 48%</span><span class="tag-a3"> A3≈11%</span></span></div>
+        <div class="content-tag-row"><span><span class="vtag vtag-ai">AI话题</span></span><span><b>9</b><span style="color:#94a3b8;font-size:10px"> 39%</span><span class="tag-a3"> A3≈9%</span></span></div>
+        <div class="content-tag-row"><span><span class="vtag vtag-class">兴趣班</span></span><span><b>2</b><span style="color:#94a3b8;font-size:10px"> 9%</span><span class="tag-a3"> A3≈4%</span></span></div>
+        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#faf5ff;padding:6px 8px;border-radius:5px">原生剧情（翠花烧烤/青春期/段子手）是自然流主力，均A3最高；AI话题靠加热驱动；无兴趣班/焦虑类（已过滤出范围）</div>
+      </div>
+    </div>
+    <div class="content-brand-card">
+      <div class="content-brand-head" style="background:linear-gradient(135deg,#f59e0b,#d97706)">猿编程 · 9条</div>
+      <div class="content-brand-body">
+        <div class="content-tag-row"><span><span class="vtag vtag-product">产品种草</span></span><span><b>7</b><span style="color:#94a3b8;font-size:10px"> 78%</span><span class="tag-a3"> A3≈4%</span></span></div>
+        <div class="content-tag-row"><span><span class="vtag vtag-edu">编程教育</span></span><span><b>2</b><span style="color:#94a3b8;font-size:10px"> 22%</span><span class="tag-a3"> A3≈0.1%</span></span></div>
+        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#fffbeb;padding:6px 8px;border-radius:5px">机器狗小8种草占78%；头部2条（33万+加热）A3极低0.04-0.16%；紫薯萌宠A3 17.88%是异常高值</div>
+      </div>
+    </div>
+    <div class="content-brand-card">
+      <div class="content-brand-head" style="background:linear-gradient(135deg,#10b981,#059669)">西瓜创客 · 4条</div>
+      <div class="content-brand-body">
+        <div class="content-tag-row"><span><span class="vtag vtag-product">产品种草</span></span><span><b>3</b><span style="color:#94a3b8;font-size:10px"> 75%</span><span class="tag-a3"> A3≈5%</span></span></div>
+        <div class="content-tag-row"><span><span class="vtag vtag-ai">AI话题</span></span><span><b>1</b><span style="color:#94a3b8;font-size:10px"> 25%</span><span class="tag-a3"> A3≈1.3%</span></span></div>
+        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#f0fdf4;padding:6px 8px;border-radius:5px">Dou乐思桌游产品种草A3约5%；AI实践营12万自然流但A3仅1.3%</div>
+      </div>
+    </div>
+    <div class="content-brand-card">
+      <div class="content-brand-head" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">小码王 · 3条</div>
+      <div class="content-brand-body">
+        <div class="content-tag-row"><span><span class="vtag vtag-research">AI研学</span></span><span><b>3</b><span style="color:#94a3b8;font-size:10px"> 100%</span><span class="tag-a3"> A3≈6%</span></span></div>
+        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#ecfeff;padding:6px 8px;border-radius:5px">全押AI研学/大厂研学，声量极微；"低成本培养逻辑思维"A3高达11.65%，精准赛道有潜力</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:16px 0 10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">B · 竞品达人内容表现评估</div>
+  <table>
+    <thead><tr><th>评定</th><th>品牌</th><th>内容方向</th><th>代表视频</th><th class="num">曝光</th><th class="num">A3率</th><th class="num">看后搜</th><th>评估</th></tr></thead>
+    <tbody>
+      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="bc bc-w">核桃编程</span></td><td><span class="vtag vtag-drama">原生剧情</span></td><td style="font-size:10px">翠花烧烤/青春期/段子手小孩</td><td class="num">2-98万（自然）</td><td class="num perf-good">14-21%</td><td class="num">0.35-1.11%</td><td style="font-size:10px;color:#065f46">高A3+自然流双优，矩阵核心</td></tr>
+      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="bc bc-w">核桃编程</span></td><td><span class="vtag vtag-ai">AI话题</span></td><td style="font-size:10px">"坐不住"/AI搬运工/AI杀疯了</td><td class="num">4-20万（加热）</td><td class="num perf-good">9-18%</td><td class="num">0.05-0.37%</td><td style="font-size:10px;color:#065f46">高A3，加热ROI高</td></tr>
+      <tr style="background:#ecfdf5"><td><span class="perf-good">✅ 潜力</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-product">产品种草异常值</span></td><td style="font-size:10px">紫薯拼出来的电子萌宠（机器狗）</td><td class="num">0.2万（纯自然）</td><td class="num perf-good">17.88%</td><td class="num">0.04%</td><td style="font-size:10px;color:#065f46">反差钩子A3极高，建议加热放量</td></tr>
+      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-product">机器狗种草</span></td><td style="font-size:10px">机器狗小8系列（7条）</td><td class="num">&lt;1万（自然）</td><td class="num perf-warn">0.6-5%</td><td class="num">~0.1%</td><td style="font-size:10px;color:#92400e">内容可但自然流天花板极低</td></tr>
+      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-edu">编程教育叙事</span></td><td style="font-size:10px">"从小接触编程逻辑思维多强"</td><td class="num">33万（加热80%）</td><td class="num perf-bad">0.16%</td><td class="num">0.01%</td><td style="font-size:10px;color:#991b1b">大量加热预算打水漂，品牌承接断层</td></tr>
+      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="bc bc-g">西瓜创客</span></td><td><span class="vtag vtag-ai">AI实践营</span></td><td style="font-size:10px">"带娃AI实践营"（12万自然流）</td><td class="num">12万（自然87%）</td><td class="num perf-bad">1.30%</td><td class="num">-</td><td style="font-size:10px;color:#991b1b">自然流强但品牌种草转化极弱</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:12px;background:#f8fafc;border-radius:8px;padding:12px 16px;font-size:11px;color:#475569;line-height:1.8">
+    <b>核心洞察：</b>核桃「原生剧情×AI话题」双轨驱动，A3均超竞品5-20倍；猿编程最大问题是花大预算加热泛科普内容（A3极低），而其高A3潜力素材（紫薯萌宠）却停留在自然流。<b>建议</b>：继续加密原生剧情+AI叙事双轨，竞品在这一赛道几乎没有对手。
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="sc-h" id="sc-video-title">⑤ 视频明细（共39条，按曝光降序）</h2>
+  <table><thead><tr>
+    <th style="width:24px">#</th><th>视频标题</th><th>品牌</th><th>首投</th>
+    <th>内容标签</th><th class="num">完播率</th>
+    <th class="num">加热曝光</th><th class="num">自然曝光</th><th class="num">总曝光</th>
+    <th class="num">A3率</th><th class="num">看后搜</th><th class="num">互动量</th><th>链接</th>
+  </tr></thead>
+  <tbody id="sc-videos"></tbody>
+</table></div>
+
+<div class="section">
+  <h2 class="sc-h">⑥ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
+  <div class="insight-grid">
+    <div class="ins-card good"><h4>✅ 核桃编程矩阵化领先</h4><p>23条视频（过滤首投范围后），原生剧情均A3 11%+，翠花烧烤（14.61%）、段子手小孩（21.37%）、青春期儿子（18.37%）是旗舰素材，自然流驱动。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 猿编程「高曝低转」</h4><p>头部2条加热视频（33万+曝光）A3分别仅0.16%和0.04%。机器狗种草A3尚可（≈4%）但自然流天花板极低，紫薯萌宠（A3 17.88%）是未被放量的潜力素材。</p></div>
+    <div class="ins-card sc-col"><h4>💡 竞品原生剧情赛道空白</h4><p>猿编程/西瓜/小码王在「原生剧情」方向几乎为零。核桃翠花/青春期/段子手系列完全无对手，是持续加密的差异化壁垒。</p></div>
+    <div class="ins-card good"><h4>✅ 自然爆款规律</h4><p>核桃高A3自然爆款共性：强叙事钩子 + 低品牌侵入感 + 家庭代际共鸣。「青春期/翠花/段子手」三类选题可继续复刻扩量。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 西瓜/小码王声量极微</h4><p>西瓜创客4条总曝光约15万，小码王3条仅约1.5万。属于声量不足以构成威胁的对手，但小码王AI研学赛道的精准人群值得关注。</p></div>
+    <div class="ins-card sc-col"><h4>🔑 优化建议</h4><p>① 原生剧情加密「代际冲突+AI」题材；② AI话题持续加热，聚焦「不卷成绩/AI不替代努力」角度；③ 规避编程教育叙事（竞品验证A3极低）。</p></div>
+  </div>
+</div>
+
+</div><!-- end sc-area -->
+
+<!-- ══ NOBOOK区域 ══ -->
+<div id="nb-area" style="display:none">
+
+<div class="kpi-grid kpi-grid-5" id="nb-kpi"></div>
+
+<div class="section">
+  <h2 class="nb-h">① 曝光分段分布 <span class="tip">随周期筛选更新</span></h2>
+  <table><thead><tr>
+    <th>品牌</th><th class="num">500万+</th><th class="num">100-500万</th>
+    <th class="num">30-100万</th><th class="num">10-30万</th><th class="num">1-10万</th><th class="num">&lt;1万</th>
+    <th class="num">合计</th><th>分布特征</th>
+  </tr></thead>
+  <tbody id="nb-seg"></tbody></table>
+  <div class="seg-insight" id="nb-seg-ins"></div>
+</div>
+
+<div class="section">
+  <h2 class="nb-h">② 内容系列分析 <span class="static-notice">📌 全周期（04/28-05/27首投）</span></h2>
+  <div class="series-grid" id="nb-series-cards"></div>
+  <table>
+    <thead><tr>
+      <th>内容系列</th><th class="num">条数</th><th class="num">总曝光</th>
+      <th class="num">自然占比</th><th class="num">A3（加权）</th><th class="num">看后搜（加权）</th>
+      <th class="num">总互动</th><th>评定</th><th>特点</th>
+    </tr></thead>
+    <tbody id="nb-series-table"></tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2 class="nb-h">③ 达人方向 & 效果评估 <span class="static-notice">📌 全周期</span></h2>
+  <table>
+    <thead><tr><th>评定</th><th>内容方向</th><th>代表视频</th><th class="num">曝光</th><th class="num">A3率</th><th class="num">看后搜</th><th class="num">完播率</th><th>评估</th></tr></thead>
+    <tbody>
+      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 顶流</span></td><td><span class="vtag vtag-series">张拿铁系列</span></td><td style="font-size:10px">张拿铁对于父母爱情的困惑</td><td class="num perf-good">342万</td><td class="num perf-good">13.83%</td><td class="num">0.03%</td><td class="num">12.79%</td><td style="font-size:10px;color:#065f46">04-28后最高曝光，高完播+高A3，亲子成长叙事</td></tr>
+      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="vtag vtag-school">校园剧情</span></td><td style="font-size:10px">山东的课间真的连呼吸都相当困难</td><td class="num">100-200万</td><td class="num perf-good">23.79%</td><td class="num">0.08%</td><td class="num">6.50%</td><td style="font-size:10px;color:#065f46">A3率最高（23.79%），真实还原校园内容共鸣极强</td></tr>
+      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="vtag vtag-series">单身虎爸</span></td><td style="font-size:10px">我想给小虎请家教中考冲刺</td><td class="num">100-200万</td><td class="num perf-good">10.94%</td><td class="num">0.38%</td><td class="num">8.01%</td><td style="font-size:10px;color:#065f46">看后搜率全期最高（0.38%），父子+升学焦虑品牌植入好</td></tr>
+      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="vtag vtag-series">西西贝贝</span></td><td style="font-size:10px">大儿子又被弟弟忽悠了</td><td class="num">200-300万</td><td class="num perf-warn">6.56%</td><td class="num">0.02%</td><td class="num">12.04%</td><td style="font-size:10px;color:#92400e">曝光大但A3和看后搜偏低，品牌承接需加强</td></tr>
+      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="vtag vtag-science">其他原生剧情</span></td><td style="font-size:10px">47条各类原生剧情内容</td><td class="num">均1-30万</td><td class="num perf-warn">均A3≈10%</td><td class="num">0.20%</td><td class="num">-</td><td style="font-size:10px;color:#92400e">良莠不齐，整体A3尚可但部分曝光极低，需筛选</td></tr>
+      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="vtag vtag-anxiety">升学焦虑</span></td><td style="font-size:10px">升学类内容（1条，含04/28后）</td><td class="num">均&lt;1万</td><td class="num perf-bad">0.66%</td><td class="num">0.04%</td><td class="num">-</td><td style="font-size:10px;color:#991b1b">A3极低，升学焦虑切入不适配NOBOOK生态</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2 class="nb-h" id="nb-video-title">④ 视频明细（共51条，按曝光降序）</h2>
+  <table><thead><tr>
+    <th style="width:24px">#</th><th>视频标题</th><th>内容系列</th><th>首投</th>
+    <th>标签</th><th class="num">完播率</th>
+    <th class="num">加热曝光</th><th class="num">自然曝光</th><th class="num">总曝光</th>
+    <th class="num">A3率</th><th class="num">看后搜</th><th class="num">互动量</th><th>链接</th>
+  </tr></thead>
+  <tbody id="nb-videos"></tbody>
+</table></div>
+
+<div class="section">
+  <h2 class="nb-h">⑤ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
+  <div class="insight-grid">
+    <div class="ins-card good"><h4>✅ 04/28后NOBOOK整体仍强势</h4><p>51条首投视频（过滤后），总曝光约2036万，自然流占89.4%。张拿铁系列（342万）、校园剧情（A3 23.79%）是期间高光素材。</p></div>
+    <div class="ins-card good"><h4>✅ 校园剧情是顶级A3题材</h4><p>「山东课间」A3高达23.79%，真实还原校园场景+强话题性，对家长/学生群体种草力极强。建议加密这一内容方向。</p></div>
+    <div class="ins-card nb-col"><h4>🏆 张拿铁系列：高完播+高A3</h4><p>完播率12.79%、A3 13.83%，亲子成长叙事内容在04-28后表现最强。说明「孩子视角叙述家庭关系」是NOBOOK的高效种草公式。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 内容质量两极分化</h4><p>47条「其他原生剧情」整体A3尚可（≈10%），但其中部分视频曝光极低（&lt;1万），需要筛选内容方向，聚焦校园/父子/亲子叙事IP。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 看后搜率整体偏低</h4><p>除单身虎爸（0.38%），大多数内容看后搜&lt;0.1%，说明品牌词植入偏弱，种草后的搜索承接不够，需在视频中加强品牌词露出节奏。</p></div>
+    <div class="ins-card nb-col"><h4>🔑 对核桃的竞争启示</h4><p>NOBOOK的「亲子真实叙事」与核桃的「AI教育」赛道差异明显，正面竞争少。核桃可借鉴其「儿童视角+家庭剧情」公式，结合AI叙事做差异化创新。</p></div>
+  </div>
+</div>
+
+</div><!-- end nb-area -->
+
+</div><!-- container -->
+<div class="footer">数据来源：巨量云图行业内容榜 TOP1000 · 首投日期 2026-04-28 ~ 2026-05-27 · 核桃编程·星推搜直</div>
+
+<script>
+var SC_VIDEOS = [
+{title:"带翠花他们半夜去老姐家整烧烤整下老姐，但是剧情咋跟我想的不一样呢单身虎爸前夫哥烧烤血脉压制核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d8bb0bvog65ohcc0hukg",brand:"核桃编程",date:"2026-05-27",heated:0,natural:983386,total:983386,a3:14.61,search:1.11,interact:18760,tags:["原生剧情", "AI话题"],complete_rate:"17.68%"},
+{title:"当80后遇上10后的AI 世界，大型代沟现 春日成长日记 核桃编程 编程思维 家庭教育",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7otsbnog65l2972mea0",brand:"核桃编程",date:"2026-04-29",heated:462201,natural:95952,total:558153,a3:6.18,search:0.28,interact:2734,tags:["AI话题", "编程教育"],complete_rate:"1.34%"},
+{title:"一人单挑三娃作业！第一视角记录三娃妈晚间日常vlog 记录真实生活 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d89cu07og65ususc62j0",brand:"核桃编程",date:"2026-05-24",heated:281662,natural:83545,total:365207,a3:9.09,search:0.3,interact:4710,tags:["原生剧情"],complete_rate:"2.98%"},
+{title:"为什么有人用AI写作业，有人却指挥AI设计未来？ 家庭教育 核桃编程 思维 AI",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7pbdlvog65shkas0t10",brand:"核桃编程",date:"2026-04-30",heated:304767,natural:17169,total:321936,a3:7.95,search:0.19,interact:1622,tags:["AI话题", "教育理念"],complete_rate:"0.96%"},
+{title:"学习大变身✅从手写计划到一键生成 春日成长日记学习方法 高效学习 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7ots07og65gr9f702g0",brand:"核桃编程",date:"2026-04-29",heated:225676,natural:2303,total:227979,a3:5.85,search:0.09,interact:1080,tags:["AI话题", "兴趣班"],complete_rate:"0.80%"},
+{title:"不撒娇就让我跪下 核桃编程 内容过于真实暴躁老妈",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d8781o7og65ri6jmp57g",brand:"核桃编程",date:"2026-05-21",heated:5012,natural:134606,total:139618,a3:4.52,search:0.06,interact:2100,tags:["原生剧情"],complete_rate:"3.50%"},
+{title:"\"坐不住\"在AI时代恰恰是优势 春日成长计划 核桃编程 AI 思维",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d817hrvog65l166keu90",brand:"核桃编程",date:"2026-05-12",heated:160086,natural:40397,total:200483,a3:12.38,search:0.11,interact:3500,tags:["AI话题", "教育理念"],complete_rate:"2.10%"},
+{title:"别让孩子当 AI 搬运工！要学驾驭 AI 的本事 核桃编程 AI 编程思维",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d86n7tvog65nbmtv8t40",brand:"核桃编程",date:"2026-05-20",heated:97870,natural:18609,total:116479,a3:9.52,search:0.37,interact:2100,tags:["AI话题", "编程教育"],complete_rate:"1.80%"},
+{title:"好久没去镇上吃干锅啦 太香了 美滋滋的一天核桃编程 日常vlog",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d8annl7og65ksqq7o710",brand:"核桃编程",date:"2026-05-26",heated:0,natural:145000,total:145000,a3:15.51,search:0.81,interact:4200,tags:["原生剧情"],complete_rate:"12.50%"},
+{title:"觉醒的洋葱 春日成长计划核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7shpvvog65qkn76fuqg",brand:"核桃编程",date:"2026-05-05",heated:38607,natural:125699,total:164306,a3:5.48,search:0.33,interact:2800,tags:["原生剧情", "编程教育"],complete_rate:"4.20%"},
+{title:"很热开空调了，青春期的儿怎么跟你们不一样呢？核桃编程 家庭日常",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d85c86vog65o8e1rsg5g",brand:"核桃编程",date:"2026-05-18",heated:0,natural:81924,total:81924,a3:18.37,search:0.13,interact:2600,tags:["原生剧情"],complete_rate:"8.20%"},
+{title:"AI普及，坐不住的娃，表现更出色 春日成长计划 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d8822ivog65g45s6a3og",brand:"核桃编程",date:"2026-05-22",heated:74557,natural:2214,total:76771,a3:11.53,search:0.07,interact:1500,tags:["AI话题", "教育理念"],complete_rate:"1.60%"},
+{title:"想正确使用AI，培养孩子的结构化思维很重要 核桃编程 思维能力",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7ulsafog65pm2s0bgu0",brand:"核桃编程",date:"2026-05-08",heated:83424,natural:2568,total:85992,a3:8.84,search:0.04,interact:1200,tags:["AI话题", "编程教育"],complete_rate:"1.20%"},
+{title:"感谢粉丝朋友一直对孩子的关心，孩子身体要健康，思维要完整。核桃编程日常vlog",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d80ni8nog65u95t3tm7g",brand:"核桃编程",date:"2026-05-11",heated:0,natural:67968,total:67968,a3:4.51,search:0.13,interact:1100,tags:["原生剧情"],complete_rate:"5.80%"},
+{title:"AI时代别再逼孩子坐得住！爱动的娃，才是未来天选之子 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d87cel7og65m020eu1sg",brand:"核桃编程",date:"2026-05-21",heated:27315,natural:14686,total:42001,a3:8.98,search:0.08,interact:900,tags:["AI话题", "教育理念"],complete_rate:"1.90%"},
+{title:"在抑郁症慢慢变好的路上，一点一点把丢失的自己找回来 核桃编程真实生活分享计划",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d8anujfog65v0oc65j30",brand:"核桃编程",date:"2026-05-26",heated:0,natural:55000,total:55000,a3:1.6,search:0.22,interact:1800,tags:["原生剧情"],complete_rate:"9.40%"},
+{title:"AI都杀疯了，还盯着孩子那几分成绩？核桃编程春日成长计划",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d8613qnog65r4i0rmjug",brand:"核桃编程",date:"2026-05-19",heated:40267,natural:1321,total:41588,a3:10.68,search:0.05,interact:700,tags:["AI话题", "教育焦虑"],complete_rate:"1.10%"},
+{title:"凌晨2:35突然听见有人敲门 和嘉宝买羊排回来了 日常vlog 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d8bd4nfog65nnm9u8180",brand:"核桃编程",date:"2026-05-27",heated:0,natural:25000,total:25000,a3:6.67,search:0.75,interact:520,tags:["原生剧情"],complete_rate:"7.30%"},
+{title:"你们家有没有段子手小孩？ 核桃编程 孩子 育儿 家庭教育 童言童语",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d82m1cfog65iag99s9p0",brand:"核桃编程",date:"2026-05-14",heated:0,natural:28243,total:28243,a3:21.37,search:0.35,interact:650,tags:["原生剧情"],complete_rate:"6.80%"},
+{title:"AI时代需要的就是坐不住的那批人 春日成长计划 核桃编程 AI 思维",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d807cm7og65rgiqcuui0",brand:"核桃编程",date:"2026-05-10",heated:8512,natural:6494,total:15006,a3:9.89,search:0.24,interact:380,tags:["AI话题", "教育理念"],complete_rate:"1.80%"},
+{title:"女孩也爱学编程 春日成长计划 编程C++科技特长生核桃编程 思维能力",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7uo4ifog65uinrkt13g",brand:"核桃编程",date:"2026-05-08",heated:4584,natural:6880,total:11464,a3:5.94,search:0.13,interact:310,tags:["兴趣班", "编程教育"],complete_rate:"3.10%"},
+{title:"哈哈因为核桃编程 最近居然被老师夸了 亲子英语 英语口语",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d80nhqnog65oadk39j6g",brand:"核桃编程",date:"2026-05-11",heated:0,natural:5000,total:5000,a3:1.63,search:0.02,interact:150,tags:["原生剧情"],complete_rate:"4.50%"},
+{title:"世界上有很多东西可以靠努力争取 陪伴孩子的美好时光 随拍 家庭 核桃编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d86nl97og65i0e87vuf0",brand:"核桃编程",date:"2026-05-20",heated:0,natural:4000,total:4000,a3:1.35,search:0.29,interact:120,tags:["原生剧情"],complete_rate:"6.20%"},
+{title:"从小接触编程的孩子，逻辑思维到底有多强？思维 AI 猿编程育儿母婴亲子",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d7pmpovog65l0ot76tc0",brand:"猿编程",date:"2026-04-30",heated:267153,natural:67135,total:334288,a3:0.16,search:0.01,interact:5120,tags:["编程教育", "教育理念"],complete_rate:"1.20%"},
+{title:"编程教育逻辑大反转思维 AI 猿编程 家庭教育 编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7o3h5fog65rvcpi7qm0",brand:"猿编程",date:"2026-04-28",heated:0,natural:100591,total:100591,a3:0.04,search:0.01,interact:3200,tags:["编程教育", "AI话题"],complete_rate:"2.30%"},
+{title:"让娃放下手机原来只需要一个猿编程机器狗小8！科技启蒙家庭教育",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7upsl7og65o241nh0gg",brand:"猿编程",date:"2026-05-11",heated:0,natural:8103,total:8103,a3:2.6,search:0.12,interact:580,tags:["产品种草"],complete_rate:"4.10%"},
+{title:"能玩能学还能练的编程机器狗谁不爱？ 思维 猿编程 AI 少儿编程爸爸带娃",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7vg2tvog65uko4lv5sg",brand:"猿编程",date:"2026-05-11",heated:0,natural:2551,total:2551,a3:3.84,search:0.04,interact:220,tags:["产品种草", "AI话题"],complete_rate:"5.20%"},
+{title:"谁懂啊！紫薯拼出来的电子萌宠，居然会听话、懂手势 猿编程机器狗小8",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7vu8pfog65o5v65ec4g",brand:"猿编程",date:"2026-05-13",heated:0,natural:2351,total:2351,a3:17.88,search:0.04,interact:380,tags:["产品种草", "AI话题"],complete_rate:"8.90%"},
+{title:"别再误解编程了！它才是解决孩子拖拉畏难的关键！ 猿编程机器狗小8",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d7uq6inog65l0ijpsrrg",brand:"猿编程",date:"2026-05-09",heated:0,natural:1108,total:1108,a3:2.71,search:null,interact:95,tags:["产品种草", "编程教育"],complete_rate:"3.20%"},
+{title:"贪玩手机专注力差的娃 竟然被一只机器狗拿捏了 猿编程机器狗小8",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d80nrivog65s2n22ej70",brand:"猿编程",date:"2026-05-13",heated:0,natural:363,total:363,a3:4.96,search:null,interact:45,tags:["产品种草"],complete_rate:"5.50%"},
+{title:"孩子从小学编程，在 AI 时代还有意义吗？亲子教育 猿编程机器狗小8",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7valifog65ole605veg",brand:"猿编程",date:"2026-05-13",heated:0,natural:349,total:349,a3:3.29,search:null,interact:40,tags:["AI话题", "编程教育"],complete_rate:"2.80%"},
+{title:"一只29元的编程机器狗 竟让娃老老实实学习知识！猿编程机器狗小8",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d82tgt7og65unst00pq0",brand:"猿编程",date:"2026-05-15",heated:0,natural:234,total:234,a3:2.73,search:null,interact:30,tags:["产品种草"],complete_rate:"4.10%"},
+{title:"人工智能时代，带娃一起来AI实践营，边看边动手，抽象知识也能变好玩。西瓜创客",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7oqfivog65qtma5luj0",brand:"西瓜创客",date:"2026-04-30",heated:15863,natural:107644,total:123507,a3:1.3,search:null,interact:2800,tags:["AI话题", "实践活动"],complete_rate:"6.20%"},
+{title:"可以学到AI概念的桌游！专为AI启蒙而生，从小培养AI思维能力。dou乐思桌游西瓜创客",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d86004vog65h70e61fdg",brand:"西瓜创客",date:"2026-05-19",heated:11142,natural:384,total:11526,a3:5.28,search:null,interact:980,tags:["产品种草", "AI话题"],complete_rate:"3.80%"},
+{title:"让孩子爱上思考！在游戏中锻炼逻辑思维，六一活动很给力！Dou乐思 桌游 西瓜创客",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d861pkfog65qo7od5p1g",brand:"西瓜创客",date:"2026-05-20",heated:9317,natural:331,total:9648,a3:5.44,search:0.01,interact:920,tags:["产品种草"],complete_rate:"3.20%"},
+{title:"给孩子入手他们班学霸都在玩的AI启蒙桌游太高级了！Dou乐思桌游AI玩具西瓜创客",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d85sjbfog65oas5934qg",brand:"西瓜创客",date:"2026-05-19",heated:8912,natural:205,total:9117,a3:3.75,search:0.02,interact:750,tags:["产品种草", "AI话题"],complete_rate:"2.90%"},
+{title:"小学家长如何托举孩子 小码王 人工智能编程 AI编程",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d82mgu7og65g96e73ljg",brand:"小码王",date:"2026-05-15",heated:0,natural:11201,total:11201,a3:2.12,search:0.09,interact:120,tags:["AI研学", "升学托举"],complete_rate:"2.80%"},
+{title:"目前普通家庭唯一的活路 小码王AI编程 AI教育 小码王研学 大厂研学 AI研学",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d80tmafog65loljt75qg",brand:"小码王",date:"2026-05-12",heated:0,natural:3617,total:3617,a3:4.61,search:0.03,interact:55,tags:["AI研学", "教育焦虑"],complete_rate:"3.50%"},
+{title:"低成本培养逻辑思维，给孩子未来多一条出路 小码王AI编程 AI研学 大厂研学",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7olj3nog65pn9cgu6h0",brand:"小码王",date:"2026-04-29",heated:0,natural:633,total:633,a3:11.65,search:null,interact:28,tags:["AI研学", "教育焦虑"],complete_rate:"4.20%"}
+];
+var NB_VIDEOS = [
+{title:"张拿铁对于父母爱情的困惑达铁姐弟的日常NOBOOK实验室NB实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d899m5fog65svsilial0",brand:"NOBOOK",date:"2026-05-24",heated:0,natural:3420248,total:3420248,a3:13.83,search:0.03,interact:81117,tags:["原生剧情", "张拿铁系列"],complete_rate:"12.79%",series:"张拿铁系列"},
+{title:"大儿子又被弟弟忽悠了 西西贝贝的日常 辅导作业 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d8031rvog65u93rm6m50",brand:"NOBOOK",date:"2026-05-10",heated:297282,natural:2680185,total:2977467,a3:6.56,search:0.02,interact:63038,tags:["原生剧情", "西西贝贝"],complete_rate:"12.04%",series:"西西贝贝"},
+{title:"怎么闺女就欠儿子的吗NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7rbtsnog65kre4qfurg",brand:"NOBOOK",date:"2026-05-03",heated:0,natural:2057858,total:2057858,a3:22.97,search:0.13,interact:9612,tags:["原生剧情"],complete_rate:"23.11%",series:"科学实验"},
+{title:"山东的课间真的连呼吸都相当困难 NB实验室  NOBOOK实验室  真实还原 校园",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7o48lnog65vk9lrtabg",brand:"NOBOOK",date:"2026-04-28",heated:193737,natural:1016094,total:1209831,a3:23.79,search:0.08,interact:35765,tags:["原生剧情", "校园剧情"],complete_rate:"12.59%",series:"校园剧情"},
+{title:"父亲光荣退休，嫂子携全家精心筹备退休仪式，没想到父亲当场热泪盈眶日常家庭NOBOOK实验室NB实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7u04j7og65tmlfu4meg",brand:"NOBOOK",date:"2026-05-07",heated:392726,natural:655230,total:1047956,a3:9.86,search:0.43,interact:15307,tags:["原生剧情"],complete_rate:"9.66%",series:"科学实验"},
+{title:"当家里有个爱做实验的儿子 饭后一颗糖浩哥 母子日常 NOBOOK实验室NB实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d8845ivog65hc0agrd8g",brand:"NOBOOK",date:"2026-05-22",heated:23746,natural:888517,total:912263,a3:7.9,search:0.19,interact:32555,tags:["原生剧情"],complete_rate:"7.53%",series:"科学实验"},
+{title:"如果扎扎的每门功课都有90分弗兰克夫妇 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7pfvh7og65le01vbvl0",brand:"NOBOOK",date:"2026-04-30",heated:183736,natural:672408,total:856144,a3:3.05,search:0.27,interact:33323,tags:["原生剧情"],complete_rate:"2.02%",series:"科学实验"},
+{title:"兜兜太厉害了 奖励他砸金蛋亲子 亲子互动 NB实验室 NOBOOK实验室 育儿",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7pfia7og65rld56kud0",brand:"NOBOOK",date:"2026-04-30",heated:0,natural:844839,total:844839,a3:3.09,search:0.03,interact:3903,tags:["原生剧情"],complete_rate:"3.36%",series:"科学实验"},
+{title:"带孩子在家做实验，烧红烧肉，可乐鸡翅 带孩子在家做实验，烧红烧肉，可乐鸡翅 记录生活  NOBOOK实验室  家庭美食  亲子互动",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7unovnog65k10r35aog",brand:"NOBOOK",date:"2026-05-08",heated:0,natural:745654,total:745654,a3:3.85,search:0.05,interact:11023,tags:["原生剧情"],complete_rate:"2.62%",series:"科学实验"},
+{title:"到三姐家做客记录真实生活 日常vlog NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d80mvnnog65osqhh70v0",brand:"NOBOOK",date:"2026-05-11",heated:0,natural:656214,total:656214,a3:16.25,search:0.08,interact:11536,tags:["原生剧情"],complete_rate:"11.47%",series:"科学实验"},
+{title:"科学实验神器 NOBOOK实验室 NB实验室 科学 学霸秘籍",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d87b8m7og65oidcau040",brand:"NOBOOK",date:"2026-05-21",heated:482793,natural:84247,total:567040,a3:2.24,search:0.25,interact:7051,tags:["原生剧情"],complete_rate:"1.46%",series:"科学实验"},
+{title:"马上快五一啦 给舅舅的小孩安利了新东西 和大家一起摘樱桃啦NB实验室NOBOOK实验室我的农村生活",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7o5senog65tndqhfikg",brand:"NOBOOK",date:"2026-04-28",heated:0,natural:525278,total:525278,a3:20.09,search:0.17,interact:6400,tags:["原生剧情"],complete_rate:"21.78%",series:"科学实验"},
+{title:"这是哥哥混得最成功的一集了😂扣肉妹妹 NB实验室 NOBOOK实验室育儿 育儿经验",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7o446vog65l2d7f0i6g",brand:"NOBOOK",date:"2026-04-28",heated:140351,natural:368024,total:508375,a3:8.82,search:0.05,interact:13829,tags:["原生剧情"],complete_rate:"5.06%",series:"科学实验"},
+{title:"外国继父感叹，做实验来这样简单 外国人在中国 NB实验室 NOBOOK实验室 记录真实生活",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7ph00fog65sf6nd6qdg",brand:"NOBOOK",date:"2026-04-30",heated:108350,natural:350456,total:458806,a3:1.7,search:0.09,interact:10911,tags:["原生剧情"],complete_rate:"1.44%",series:"科学实验"},
+{title:"河南远嫁四川十五年在农村婆家的三胎惬意生活NB实验室NOBOOK实验室农村生活我的乡村生活远嫁",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d857q87og65k7lrf1urg",brand:"NOBOOK",date:"2026-05-18",heated:7746,natural:353985,total:361731,a3:12.49,search:0.28,interact:4792,tags:["原生剧情"],complete_rate:"10.73%",series:"科学实验"},
+{title:"AI时代中等生最吃亏，20年前的那套教育经验在现在没用了教育数理思维 NOBOOK实验室 NB实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7u5blnog65s7923d2tg",brand:"NOBOOK",date:"2026-05-07",heated:133769,natural:202346,total:336115,a3:3.54,search:0.09,interact:14301,tags:["原生剧情"],complete_rate:"2.80%",series:"科学实验"},
+{title:"接两头小牛回家日常，一顿操作猛如虎。NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d8airvnog65q5o6vvekg",brand:"NOBOOK",date:"2026-05-26",heated:0,natural:333982,total:333982,a3:2.38,search:0.17,interact:3714,tags:["原生剧情"],complete_rate:"2.00%",series:"科学实验"},
+{title:"出门在外真的太想婆婆烧的菜了，回家立马安排上，孩子也给了我惊喜。婆媳 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7taudfog65lvcqanarg",brand:"NOBOOK",date:"2026-05-06",heated:2200,natural:277548,total:279748,a3:15.63,search:0.28,interact:4517,tags:["原生剧情"],complete_rate:"14.53%",series:"科学实验"},
+{title:"小靳娘俩住内蒙娘家半个月，高子欣竟直接追回老家接娘俩回北京家庭北漂亲子NOBOOK实验室nb实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7o36avog65qlhfcd8h0",brand:"NOBOOK",date:"2026-04-28",heated:0,natural:250670,total:250670,a3:11.55,search:0.03,interact:4090,tags:["原生剧情"],complete_rate:"9.90%",series:"科学实验"},
+{title:"我们是一家四口，哥哥你说错了，我好像又忘记了买书本，自带高冷 唯独就单怼我…单对我留偏爱平板使用教学 内容启发搜索 家庭日常 NB实验室NOBOOK实验室@DO",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7qbe0nog65o1mc7fb9g",brand:"NOBOOK",date:"2026-05-01",heated:0,natural:164897,total:164897,a3:14.69,search:0.46,interact:2240,tags:["原生剧情"],complete_rate:"14.02%",series:"科学实验"},
+{title:"黄金雨？怎么弄的？ 万万没想到 亲子日常 意想不到的结局 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d8799rvog65umr5uqrhg",brand:"NOBOOK",date:"2026-05-21",heated:95013,natural:63140,total:158153,a3:9.96,search:0.36,interact:3432,tags:["原生剧情"],complete_rate:"11.82%",series:"科学实验"},
+{title:"好奇的崽和嘴瓢的爹 创作灵感 好奇心 母子双语斗嘴日常 NOBOOK实验室  NB实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7uppenog65l8q6su7n0",brand:"NOBOOK",date:"2026-05-08",heated:6463,natural:149410,total:155873,a3:11.79,search:0.18,interact:2169,tags:["原生剧情"],complete_rate:"12.85%",series:"科学实验"},
+{title:"挑战12小时不玩手机 没手机也能刷视频打电话？NB实验室 NOBOOK实验室 学霸必备 学习工具 不玩手机挑战",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7ovm97og65tohs26io0",brand:"NOBOOK",date:"2026-04-29",heated:0,natural:138137,total:138137,a3:7.79,search:0.1,interact:4024,tags:["原生剧情"],complete_rate:"6.04%",series:"科学实验"},
+{title:"得知儿媳爱吃榴莲，公公提着8斤大榴莲回家，这一刻太暖心了！ NB实验室NOBOOK实验室榴莲爱好者 家庭日常",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7o3rrnog65h4m2lvb00",brand:"NOBOOK",date:"2026-04-28",heated:0,natural:132934,total:132934,a3:20.39,search:0.14,interact:1682,tags:["原生剧情"],complete_rate:"11.98%",series:"科学实验"},
+{title:"姐妹们，跟孩子之间“战斗”任重而道远…… 90后带娃 NB实验室 NOBOOK实验室 学习 三胎家庭",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7rd1jnog65va523ej80",brand:"NOBOOK",date:"2026-05-03",heated:0,natural:128325,total:128325,a3:4.15,search:0.24,interact:1066,tags:["原生剧情"],complete_rate:"5.33%",series:"科学实验"},
+{title:"约翰大爷在东北的带娃升级版，实验做起来！ NB实验室 NOBOOK实验室  外国人带娃 隔辈亲",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d86lkdfog65n1l1jh4b0",brand:"NOBOOK",date:"2026-05-20",heated:0,natural:118832,total:118832,a3:5.21,search:0.5,interact:1395,tags:["原生剧情"],complete_rate:"4.77%",series:"科学实验"},
+{title:"偷偷奔赴涂涂的春游✨平行时空默默陪伴游玩 NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7vkd67og65tp6l0poeg",brand:"NOBOOK",date:"2026-05-09",heated:0,natural:117033,total:117033,a3:3.53,search:0.25,interact:1182,tags:["原生剧情"],complete_rate:"3.11%",series:"科学实验"},
+{title:"我们当个不扫兴的父母吧，孩子真的会很快乐不扫兴的父母 NOBOOK实验室 监控视角",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d80k7nfog65nu3si7t4g",brand:"NOBOOK",date:"2026-05-11",heated:1706,natural:111599,total:113305,a3:0.35,search:0.01,interact:2093,tags:["原生剧情"],complete_rate:"0.48%",series:"科学实验"},
+{title:"八下必考实验之动能 实验高频考点总结中考物理实验 物理实验 初中物理 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d83f3nfog65oqbi8gv60",brand:"NOBOOK",date:"2026-05-15",heated:0,natural:102861,total:102861,a3:0.66,search:0.01,interact:2496,tags:["升学焦虑"],complete_rate:"1.07%",series:"升学焦虑"},
+{title:"家有初二娃，这样学物理省心又轻松NOBOOK实验室物理亲子日常 初中生 内容太过真实",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d80oo1vog65mvp94u82g",brand:"NOBOOK",date:"2026-05-11",heated:0,natural:88782,total:88782,a3:2.54,search:0.86,interact:1851,tags:["原生剧情"],complete_rate:"1.73%",series:"科学实验"},
+{title:"普通人也可以像天才一样思考！ NOBOOK实验室 NB实验室 小学生",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7pgggfog65i43jm1vd0",brand:"NOBOOK",date:"2026-04-30",heated:61839,natural:25164,total:87003,a3:3.08,search:0.08,interact:4621,tags:["原生剧情"],complete_rate:"1.88%",series:"科学实验"},
+{title:"中午和朋友聚餐，晚饭回娘家干饭，是快乐的一天日常vlog 假期 家常菜 NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d7rhl4nog65gsgvduj50",brand:"NOBOOK",date:"2026-05-03",heated:0,natural:86120,total:86120,a3:17.06,search:0.73,interact:1109,tags:["原生剧情"],complete_rate:"16.29%",series:"科学实验"},
+{title:"NOBOOK实验室NB实验室丽萍丽萍儿子日常记录 记录儿子的日常，今天儿子还教了我一个实验😄",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d83elfnog65gr8nm1530",brand:"NOBOOK",date:"2026-05-15",heated:20227,natural:44401,total:64628,a3:3.35,search:0.28,interact:1797,tags:["原生剧情"],complete_rate:"5.08%",series:"科学实验"},
+{title:"妈妈这次也太好了..妈妈我爱你笑声送给你 母女日常 漏风的小棉袄 NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7shuavog65uv35p7e70",brand:"NOBOOK",date:"2026-05-05",heated:0,natural:64067,total:64067,a3:0.41,search:0.05,interact:715,tags:["原生剧情"],complete_rate:"0.46%",series:"科学实验"},
+{title:"换肾可以，陪写作业不行！父子俩吵翻了 辅导作业的杀伤力，果然比换肾还大！爸爸带娃  家庭搞笑日常 NB实验室 NOBOOK实验室 学习方法",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7pbmk7og65gh4lmfuqg",brand:"NOBOOK",date:"2026-04-30",heated:9732,natural:46293,total:56025,a3:8.63,search:0.24,interact:1431,tags:["原生剧情"],complete_rate:"7.66%",series:"科学实验"},
+{title:"跟糖果一起来做实验吧！ NB实验室NOBOOK实验室 双胞胎兄弟",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d89a1nnog65qeqmv59eg",brand:"NOBOOK",date:"2026-05-24",heated:0,natural:55199,total:55199,a3:1.49,search:0.08,interact:775,tags:["原生剧情"],complete_rate:"1.56%",series:"科学实验"},
+{title:"学习 NB实验室 NOBOOK实验室 日常vlog",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d83et2aljht8nca38vcg",brand:"NOBOOK",date:"2026-05-15",heated:0,natural:38330,total:38330,a3:5.61,search:0.32,interact:840,tags:["原生剧情"],complete_rate:"5.64%",series:"科学实验"},
+{title:"信息差才是真差距！不用买器材，在家就能轻松做实验，还是跟课本同步的，太省妈了NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7tgp3fog65qnhdmt28g",brand:"NOBOOK",date:"2026-05-06",heated:0,natural:29335,total:29335,a3:0.05,search:0.01,interact:34,tags:["原生剧情"],complete_rate:"0.05%",series:"科学实验"},
+{title:"动手or动手能力？ 亲子搞笑 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7orkc7og65g1grlaeh0",brand:"NOBOOK",date:"2026-04-29",heated:0,natural:27261,total:27261,a3:3.85,search:0.04,interact:439,tags:["原生剧情"],complete_rate:"3.72%",series:"科学实验"},
+{title:"自制太阳系行星距离可视化 科普 干货分享 学习方法 NB实验室 NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d858kqfog65mtla2kqt0",brand:"NOBOOK",date:"2026-05-18",heated:0,natural:25429,total:25429,a3:4.32,search:0.54,interact:673,tags:["原生剧情"],complete_rate:"7.35%",series:"科学实验"},
+{title:"第二十八集｜Vlog｜小学妈妈一拖二高能量日常～陪读妈妈 NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0300fg10000d7tvranog65u6ngvoqtg",brand:"NOBOOK",date:"2026-05-07",heated:0,natural:25204,total:25204,a3:1.83,search:0.22,interact:904,tags:["原生剧情"],complete_rate:"1.98%",series:"科学实验"},
+{title:"2岁弟弟闯大祸 没想到姐姐最后竟然…翻看监控瞬间红了眼😭二胎一碗水端平NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d7re1jnog65nc9ugsfug",brand:"NOBOOK",date:"2026-05-03",heated:0,natural:10557,total:10557,a3:1.46,search:0.09,interact:129,tags:["原生剧情"],complete_rate:"2.54%",series:"科学实验"},
+{title:"给孩子挖到宝，在家就能做科学实验NB实验室NOBOOK实验室辅导作业不崩溃物化生学习方法",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d82jag7og65vcs0pt5k0",brand:"NOBOOK",date:"2026-05-14",heated:0,natural:8898,total:8898,a3:1.84,search:0.66,interact:67,tags:["原生剧情"],complete_rate:"2.09%",series:"科学实验"},
+{title:"有哥哥在很多时候还是蛮省心的……哈哈😂  NOBOOK实验室家庭日常 原创视频  随拍 亲子日常",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2700fgi0000d899slfog65hnqq4ldu0",brand:"NOBOOK",date:"2026-05-24",heated:0,natural:3743,total:3743,a3:2.16,search:0.19,interact:135,tags:["原生剧情"],complete_rate:"3.44%",series:"科学实验"},
+{title:"是你的用心给枯燥平淡的婚姻裹上温柔的光 监控下的一幕看到最后婚后生活NB实验室NOBOOK实验室",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d8b5tafog65kp7aodua0",brand:"NOBOOK",date:"2026-05-27",heated:975,natural:1959,total:2934,a3:1.43,search:0.2,interact:213,tags:["原生剧情"],complete_rate:"2.51%",series:"科学实验"},
+{title:"找到一个科学启蒙神器 NB实验室 NOBOOK实验室 学习方法 学习工具 育儿",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d87ai12ljht7lv8tlkc0",brand:"NOBOOK",date:"2026-05-21",heated:0,natural:769,total:769,a3:0.78,search:null,interact:8,tags:["原生剧情"],complete_rate:"1.11%",series:"科学实验"},
+{title:"说实话这个真的推荐给家里有娃的！NB实验室 NOBOOK实验室 小学生学习神器",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v2800fgi0000d7u6hevog65stoig6beg",brand:"NOBOOK",date:"2026-05-07",heated:0,natural:477,total:477,a3:0.84,search:0.63,interact:2,tags:["原生剧情"],complete_rate:"2.59%",series:"科学实验"},
+{title:"NB实验室 NOBOOK实验室 辅导作业不崩溃 物化生 理科逆袭",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d80i7m7og65u2qdnc540",brand:"NOBOOK",date:"2026-05-11",heated:0,natural:365,total:365,a3:0.55,search:null,interact:6,tags:["原生剧情"],complete_rate:"0.26%",series:"科学实验"},
+{title:"NOBOOK实验室，让娃爱上做实验，轻松培养理科思维NOBOOK实验室nobook物化生",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0d00fg10000d8akjivog65oq9g5nt70",brand:"NOBOOK",date:"2026-05-26",heated:0,natural:353,total:353,a3:40.79,search:0.28,interact:295,tags:["原生剧情"],complete_rate:"13.14%",series:"科学实验"},
+{title:"一进初高中，化学物理生物就被拉开差距？原来是有些小朋友在家就能做实验！NB实验室 NOBOOK实验室 辅导作业不崩溃 学习方法 软件推荐",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v0200fg10000d8b954nog65vgbd3t7ig",brand:"NOBOOK",date:"2026-05-27",heated:0,natural:207,total:207,a3:0.48,search:null,interact:0,tags:["原生剧情"],complete_rate:"0.46%",series:"科学实验"},
+{title:"不用买一堆的科学材料包就能让孩子轻松做实验NB实验室 NOBOOK实验室 辅导作业不崩溃 物化生",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7uksrnog65v5kv3pqog",brand:"NOBOOK",date:"2026-05-08",heated:0,natural:204,total:204,a3:1.47,search:1.47,interact:21,tags:["原生剧情"],complete_rate:"3.62%",series:"科学实验"}
+];
+
+var WEEK_DEFS = [
+  {key:"all",label:"全部",start:"2026-04-28",end:"2026-05-27"},
+  {key:"W1",label:"第1周",start:"2026-04-28",end:"2026-05-04"},
+  {key:"W2",label:"第2周",start:"2026-05-05",end:"2026-05-11"},
+  {key:"W3",label:"第3周",start:"2026-05-12",end:"2026-05-18"},
+  {key:"W4",label:"第4周",start:"2026-05-19",end:"2026-05-27"}
+];
+var currentWeek = "all";
+var currentBrand = "sc";
+
+function getFiltered(vids) {
+  var def = null;
+  for(var i=0;i<WEEK_DEFS.length;i++){if(WEEK_DEFS[i].key===currentWeek){def=WEEK_DEFS[i];break;}}
+  if(!def) return vids;
+  return vids.filter(function(v){return v.date>=def.start&&v.date<=def.end;});
+}
+
+var SC_BRANDS = ["核桃编程","猿编程","西瓜创客","小码王"];
+var SC_RGBA = {"核桃编程":"rgba(139,92,246,0.65)","猿编程":"rgba(245,158,11,0.65)","西瓜创客":"rgba(16,185,129,0.65)","小码王":"rgba(6,182,212,0.65)"};
+var SC_CHIP = {"核桃编程":"bc-w","猿编程":"bc-y","西瓜创客":"bc-g","小码王":"bc-c"};
+var SC_ROLE = {"核桃编程":"主品牌","猿编程":"主竞品","西瓜创客":"补充","小码王":"长尾"};
+var SC_TAG_BRAND = {"核桃编程":"行业声量第一","猿编程":"高曝低转·产品种草","西瓜创客":"桌游切入","小码王":"AI研学赛道"};
+var tagCls = {"原生剧情":"vtag-drama","AI话题":"vtag-ai","编程教育":"vtag-edu","产品种草":"vtag-product","AI研学":"vtag-research","兴趣班":"vtag-class","教育焦虑":"vtag-anxiety","教育理念":"vtag-method","实践活动":"vtag-ai","升学托举":"vtag-research","科学实验":"vtag-science","校园剧情":"vtag-school","升学焦虑":"vtag-anxiety","张拿铁系列":"vtag-series","单身虎爸":"vtag-series","西西贝贝":"vtag-series","其他原生剧情":"vtag-drama","母子日常":"vtag-series","弗兰克家庭":"vtag-series","父女/父亲系列":"vtag-series"};
+var SEG_SC = ["seg-c-0","seg-c-1","seg-c-2","seg-c-3","seg-c-4",""];
+var SEG_NB = ["seg-c-nb-0","seg-c-nb-1","seg-c-nb-2","seg-c-nb-3","seg-c-nb-4",""];
+
+function fmtN(n){if(n==null||isNaN(n))return"-";return Math.round(n).toLocaleString("zh-CN");}
+function fmtW(n){if(n==null||isNaN(n))return"-";if(n>=10000000)return(n/10000000).toFixed(1)+"千万";if(n>=10000)return(n/10000).toFixed(1)+"万";return Math.round(n).toLocaleString();}
+function fmtP(n,d){if(n==null)return"-";return n.toFixed(d||2)+"%";}
+function renderTags(tags){
+  if(!tags||!tags.length) return "";
+  return tags.slice(0,2).map(function(t){return '<span class="vtag '+(tagCls[t]||"vtag-method")+'">'+t+"</span>";}).join("");
+}
+function calcBrandStats(vids, brands) {
+  var res = {}; var allTot = vids.reduce(function(s,v){return s+v.total;},0);
+  brands.forEach(function(b){
+    var bv=vids.filter(function(v){return v.brand===b;});
+    var nat=bv.reduce(function(s,v){return s+v.natural;},0);
+    var ht=bv.reduce(function(s,v){return s+v.heated;},0);
+    var tot=bv.reduce(function(s,v){return s+v.total;},0);
+    var intr=bv.reduce(function(s,v){return s+v.interact;},0);
+    var a3v=bv.filter(function(v){return v.a3!=null;}),a3e=a3v.reduce(function(s,v){return s+v.total;},0);
+    var a3w=a3e>0?a3v.reduce(function(s,v){return s+v.a3*v.total;},0)/a3e:0;
+    var sv=bv.filter(function(v){return v.search!=null;}),se=sv.reduce(function(s,v){return s+v.total;},0);
+    var sw=se>0?sv.reduce(function(s,v){return s+v.search*v.total;},0)/se:0;
+    res[b]={count:bv.length,nat:nat,ht:ht,tot:tot,intr:intr,allTot:allTot,
+      avgExp:bv.length?Math.round(tot/bv.length):0,avgIntr:bv.length?Math.round(intr/bv.length):0,
+      totPct:allTot>0?(tot/allTot*100).toFixed(1):"0",cntPct:vids.length>0?(bv.length/vids.length*100).toFixed(1):"0",
+      natPct:tot>0?(nat/tot*100).toFixed(1):"0",htPct:tot>0?(ht/tot*100).toFixed(1):"0",
+      a3w:a3w.toFixed(2),sw:sw.toFixed(3)};
+  });
+  return res;
+}
+function calcTotStats(vids){
+  var tot=vids.reduce(function(s,v){return s+v.total;},0);
+  var nat=vids.reduce(function(s,v){return s+v.natural;},0);
+  var ht=vids.reduce(function(s,v){return s+v.heated;},0);
+  var intr=vids.reduce(function(s,v){return s+v.interact;},0);
+  var a3v=vids.filter(function(v){return v.a3!=null;}),a3e=a3v.reduce(function(s,v){return s+v.total;},0);
+  var a3w=a3e>0?a3v.reduce(function(s,v){return s+v.a3*v.total;},0)/a3e:0;
+  var sv=vids.filter(function(v){return v.search!=null;}),se=sv.reduce(function(s,v){return s+v.total;},0);
+  var sw=se>0?sv.reduce(function(s,v){return s+v.search*v.total;},0)/se:0;
+  return{tot:tot,nat:nat,ht:ht,intr:intr,count:vids.length,
+    natPct:tot>0?(nat/tot*100).toFixed(1):"0",htPct:tot>0?(ht/tot*100).toFixed(1):"0",
+    avgExp:vids.length?Math.round(tot/vids.length):0,a3w:a3w.toFixed(2),sw:sw.toFixed(3),
+    avgIntr:vids.length?Math.round(intr/vids.length):0};
+}
+
+// SC rendering
+function renderSCKPI(vids){
+  var s=calcBrandStats(vids,SC_BRANDS);
+  var html="";
+  var clsArr=["sc-1","sc-2","sc-3","sc-4"];
+  SC_BRANDS.forEach(function(b,idx){
+    var d=s[b]; var cls=clsArr[idx];
+    if(!d||d.count===0){
+      html+='<div class="kpi-card '+cls+'"><div class="brand-name">'+b+'</div><div class="brand-tag" style="color:#94a3b8">本周期无数据</div><div class="main-num" style="color:#cbd5e1;margin:10px 0">—</div></div>';
+      return;
+    }
+    var a3c=parseFloat(d.a3w)>=5?"color:#10b981":"";var nc=parseFloat(d.natPct)>=50?"color:#10b981":"";
+    html+='<div class="kpi-card '+cls+'">'
+      +'<div class="brand-name">'+b+' <span class="bc '+SC_CHIP[b]+'" style="font-size:9px;padding:1px 6px">'+SC_ROLE[b]+'</span></div>'
+      +'<div class="brand-tag">'+SC_TAG_BRAND[b]+'</div>'
+      +'<div class="main-num">'+d.count+'</div><div class="main-label">入榜视频数（占'+d.cntPct+'%）</div>'
+      +'<div class="sub-grid">'
+      +'<div class="item"><span class="v">'+fmtW(d.tot)+'</span><span class="l">总曝光</span></div>'
+      +'<div class="item"><span class="v">'+fmtW(d.avgExp)+'</span><span class="l">均曝光</span></div>'
+      +'<div class="item"><span class="v" style="'+a3c+'">'+d.a3w+'%</span><span class="l">A3率（加权）</span></div>'
+      +'<div class="item"><span class="v">'+d.sw+'%</span><span class="l">看后搜率</span></div>'
+      +'<div class="item"><span class="v">'+d.htPct+'%</span><span class="l">加热占比</span></div>'
+      +'<div class="item"><span class="v" style="'+nc+'">'+d.natPct+'%</span><span class="l">自然占比</span></div>'
+      +'</div></div>';
+  });
+  document.getElementById("sc-kpi").innerHTML=html;
+}
+function renderSCOverview(vids){
+  var s=calcBrandStats(vids,SC_BRANDS);
+  var tot=calcTotStats(vids);
+  var html="";
+  SC_BRANDS.forEach(function(b){
+    var d=s[b];if(!d||!d.count) return;
+    var hl=b==="核桃编程"?' class="hl-row"':"";
+    html+="<tr"+hl+">"
+      +"<td><span class='bc "+SC_CHIP[b]+"'>"+b+"</span></td>"
+      +"<td class='num'>"+d.count+"</td><td class='num'>"+d.cntPct+"%</td>"
+      +"<td class='num'><b>"+fmtN(d.tot)+"</b></td><td class='num'>"+d.totPct+"%</td>"
+      +"<td class='num'>"+fmtN(d.nat)+"</td>"
+      +"<td class='num'"+(parseFloat(d.natPct)>=50?' style="color:#10b981;font-weight:600"':"")+">"+ d.natPct+"%</td>"
+      +"<td class='num'>"+fmtN(d.ht)+"</td>"
+      +"<td class='num'"+(parseFloat(d.htPct)>=70?' style="color:#f59e0b"':"")+">"+ d.htPct+"%</td>"
+      +"<td class='num'>"+fmtW(d.avgExp)+"</td>"
+      +"<td class='num'"+(parseFloat(d.a3w)>=5?' style="color:#10b981;font-weight:700"':"")+">"+ d.a3w+"%</td>"
+      +"<td class='num'>"+d.sw+"%</td>"
+      +"<td class='num'>"+fmtN(d.intr)+"</td><td class='num'>"+fmtN(d.avgIntr)+"</td>"
+      +"</tr>";
+  });
+  var np=tot.tot>0?(tot.nat/tot.tot*100).toFixed(1)+"%":"-",hp=tot.tot>0?(tot.ht/tot.tot*100).toFixed(1)+"%":"-";
+  html+='<tr style="background:#f7fafc;font-weight:600"><td>合计</td>'
+    +'<td class="num">'+tot.count+'</td><td class="num">100%</td>'
+    +'<td class="num">'+fmtN(tot.tot)+'</td><td class="num">100%</td>'
+    +'<td class="num">'+fmtN(tot.nat)+'</td><td class="num">'+np+'</td>'
+    +'<td class="num">'+fmtN(tot.ht)+'</td><td class="num">'+hp+'</td>'
+    +'<td class="num">'+fmtW(tot.avgExp)+'</td>'
+    +'<td class="num">'+tot.a3w+'%</td><td class="num">'+tot.sw+'%</td>'
+    +'<td class="num">'+fmtN(tot.intr)+'</td><td class="num">'+fmtN(tot.avgIntr)+'</td>'
+    +'</tr>';
+  document.getElementById("sc-overview").innerHTML=html;
+}
+function calcSegSC(n){if(n>=1000000)return 0;if(n>=300000)return 1;if(n>=100000)return 2;if(n>=50000)return 3;if(n>=10000)return 4;return 5;}
+function calcSegNB(n){if(n>=5000000)return 0;if(n>=1000000)return 1;if(n>=300000)return 2;if(n>=100000)return 3;if(n>=10000)return 4;return 5;}
+function renderSCSeg(vids){
+  var allSeg=[0,0,0,0,0,0],html="";
+  SC_BRANDS.forEach(function(b){
+    var bv=vids.filter(function(v){return v.brand===b;});
+    if(!bv.length) return;
+    var seg=[0,0,0,0,0,0];
+    bv.forEach(function(v){var i=calcSegSC(v.total);seg[i]++;allSeg[i]++;});
+    var cells=seg.map(function(n,j){return "<td class='num seg-c "+(n>0?SEG_SC[j]:"")+"'>"+(n||0)+"</td>";}).join("");
+    var h=seg[0]+seg[1],tot=seg.reduce(function(a,b){return a+b;},0);
+    var label=h/tot>=0.5?"头部集中":seg[5]+seg[4]>tot*0.6?"长尾为主":"分散型";
+    html+="<tr><td><span class='bc "+SC_CHIP[b]+"'>"+b+"</span></td>"+cells+"<td class='num'><b>"+bv.length+"</b></td><td>"+label+"</td></tr>";
+  });
+  var ac=allSeg.map(function(n){return "<td class='num'>"+n+"</td>";}).join("");
+  html+='<tr style="background:#f7fafc;font-weight:600"><td>合计</td>'+ac+'<td class="num">'+vids.length+'</td><td></td></tr>';
+  document.getElementById("sc-seg").innerHTML=html;
+  var s=calcBrandStats(vids,SC_BRANDS),ins="";
+  SC_BRANDS.forEach(function(b){var d=s[b];if(!d||!d.count)return;var bv=vids.filter(function(v){return v.brand===b;});var sg=[0,0,0,0,0,0];bv.forEach(function(v){sg[calcSegSC(v.total)]++;});ins+='<div><b>'+b+'</b>：'+d.count+'条，30万+头部 '+(sg[0]+sg[1])+'条，均曝光 '+fmtW(d.avgExp)+'，加权A3 '+d.a3w+'%</div>';});
+  document.getElementById("sc-seg-ins").innerHTML=ins;
+}
+
+var scStackChart=null,scBubbleChart=null;
+function renderSCCharts(vids){
+  var s=calcBrandStats(vids,SC_BRANDS);
+  if(scStackChart){scStackChart.destroy();scStackChart=null;}
+  scStackChart=new Chart(document.getElementById("sc-stack").getContext("2d"),{
+    type:"bar",data:{labels:SC_BRANDS,datasets:[{label:"自然",data:SC_BRANDS.map(function(b){return s[b]?s[b].nat:0;}),backgroundColor:"#34d399"},{label:"加热",data:SC_BRANDS.map(function(b){return s[b]?s[b].ht:0;}),backgroundColor:"#fbbf24"}]},
+    options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:function(v){return(v/10000).toFixed(0)+"万";}}}}}
+  });
+  var maxTot=Math.max.apply(null,SC_BRANDS.map(function(b){return s[b]?s[b].tot:0;}).concat([1]));
+  var ds=SC_BRANDS.filter(function(b){return s[b]&&s[b].count;}).map(function(b){
+    var d=s[b];var r=Math.max(5,Math.round(Math.sqrt(d.tot/maxTot)*26));
+    return{label:b,backgroundColor:SC_RGBA[b],data:[{x:parseFloat(d.a3w),y:parseFloat(d.sw),r:r}]};
+  });
+  if(scBubbleChart){scBubbleChart.destroy();scBubbleChart=null;}
+  scBubbleChart=new Chart(document.getElementById("sc-bubble").getContext("2d"),{
+    type:"bubble",data:{datasets:ds},
+    options:{responsive:true,plugins:{legend:{position:"top",labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": A3 "+c.parsed.x+"% / 搜 "+c.parsed.y+"%";}}}},
+      scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true}}}
+  });
+}
+function renderSCVideos(vids){
+  var sorted=vids.slice().sort(function(a,b){return b.total-a.total;});
+  var tbody=document.getElementById("sc-videos");tbody.innerHTML="";
+  for(var i=0;i<sorted.length;i++){
+    var v=sorted[i];
+    var link=v.url?'<a class="vlink" href="'+v.url+'" target="_blank">▶</a>':'';
+    var titleContent=v.url?'<a style="color:#1a202c;text-decoration:none;border-bottom:1px dashed #a5b4fc" href="'+v.url+'" target="_blank">'+v.title+'</a>':v.title;
+    var tr=document.createElement("tr");
+    tr.innerHTML="<td>"+(i+1)+"</td>"
+      +'<td><div class="vtitle-cell" title="'+v.title+'">'+titleContent+"</div></td>"
+      +'<td><span class="bc '+SC_CHIP[v.brand]+'">'+v.brand+"</span></td>"
+      +'<td style="font-size:10px;color:#94a3b8">'+v.date+"</td>"
+      +'<td>'+renderTags(v.tags)+"</td>"
+      +'<td class="num">'+v.complete_rate+"</td>"
+      +'<td class="num">'+fmtN(v.heated)+"</td>"
+      +'<td class="num">'+fmtN(v.natural)+"</td>"
+      +'<td class="num"><b>'+fmtN(v.total)+"</b></td>"
+      +'<td class="num">'+(v.a3==null?"-":v.a3.toFixed(2)+"%")+"</td>"
+      +'<td class="num">'+(v.search==null?"-":v.search.toFixed(2)+"%")+"</td>"
+      +'<td class="num">'+fmtN(v.interact)+"</td>"
+      +"<td>"+link+"</td>";
+    tbody.appendChild(tr);
+  }
+  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
+  var label=(!def||def.key==="all")?"全部":def.label;
+  document.getElementById("sc-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
+}
+
+// NB rendering
+var NB_SERIES_ORDER=["张拿铁系列","单身虎爸","西西贝贝","校园剧情","升学焦虑","母子日常","弗兰克家庭","父女/父亲系列","科学实验","其他原生剧情"];
+var NB_SERIES_COLORS=["#6366f1","#f59e0b","#10b981","#3b82f6","#ef4444","#8b5cf6","#06b6d4","#ec4899","#14b8a6","#94a3b8"];
+function calcSeriesStats(vids){
+  var res={};
+  vids.forEach(function(v){
+    var ser=v.series||"其他原生剧情";
+    if(!res[ser])res[ser]={count:0,tot:0,nat:0,a3s:0,a3e:0,ss:0,se:0,intr:0};
+    var s=res[ser];s.count++;s.tot+=v.total;s.nat+=v.natural;s.intr+=v.interact;
+    if(v.a3!=null){s.a3s+=v.a3*v.total;s.a3e+=v.total;}
+    if(v.search!=null){s.ss+=v.search*v.total;s.se+=v.total;}
+  });
+  return res;
+}
+function renderNBKPI(vids){
+  var s=calcTotStats(vids);
+  var cards=[
+    {v:s.count+"条",l:"入榜视频数（首投范围内）",sub:"",g:false},
+    {v:fmtW(s.tot),l:"总曝光",sub:"自然流占"+s.natPct+"%",g:false},
+    {v:s.a3w+"%",l:"加权A3率",sub:"行业强势水平",g:true},
+    {v:s.sw+"%",l:"加权看后搜",sub:"品牌搜索承接",g:false},
+    {v:fmtN(s.intr),l:"总互动量",sub:"均互动"+fmtN(s.avgIntr),g:false}
+  ];
+  document.getElementById("nb-kpi").innerHTML=cards.map(function(c){
+    return '<div class="kpi-card nb-card"><div class="kv" style="'+(c.g?"color:#10b981":"")+'">'+c.v+'</div><div class="kl">'+c.l+'</div><div class="ksub">'+c.sub+'</div></div>';
+  }).join("");
+}
+function renderNBSeg(vids){
+  var seg=[0,0,0,0,0,0];
+  vids.forEach(function(v){seg[calcSegNB(v.total)]++;});
+  var cells=seg.map(function(n,j){return "<td class='num seg-c "+(n>0?SEG_NB[j]:"")+"'>"+(n||0)+"</td>";}).join("");
+  var tot=calcTotStats(vids);
+  var label=(seg[0]+seg[1])>2?"头部集中":"多数中低曝光";
+  document.getElementById("nb-seg").innerHTML="<tr><td><span class='bc bc-b'>NOBOOK</span></td>"+cells+"<td class='num'><b>"+vids.length+"</b></td><td>"+label+"</td></tr>";
+  document.getElementById("nb-seg-ins").innerHTML="<b>本周期</b>："+vids.length+"条视频（首投04/28-05/27），总曝光 "+fmtW(tot.tot)+"，自然流占 "+tot.natPct+"%，加权A3 "+tot.a3w+"%，总互动 "+fmtN(tot.intr)+"。";
+}
+function renderNBSeriesAnalysis(vids){
+  var ser=calcSeriesStats(vids);
+  // Cards
+  var cardHtml="",tableHtml="";
+  var shown=0;
+  NB_SERIES_ORDER.forEach(function(name,idx){
+    var s=ser[name];if(!s||!s.count) return;
+    var a3=s.a3e>0?(s.a3s/s.a3e).toFixed(2)+"%":"-";
+    var sw=s.se>0?(s.ss/s.se).toFixed(3)+"%":"-";
+    var np=s.tot>0?(s.nat/s.tot*100).toFixed(0)+"%":"-";
+    var a3val=s.a3e>0?s.a3s/s.a3e:0;
+    if(shown<6){
+      cardHtml+='<div class="series-card"><div class="series-head" style="background:'+NB_SERIES_COLORS[idx]+'">'+name+' · '+s.count+'条</div>'
+        +'<div class="series-body">'
+        +'<div class="series-row"><span style="color:#94a3b8">总曝光</span><span class="series-v">'+fmtW(s.tot)+'</span></div>'
+        +'<div class="series-row"><span style="color:#94a3b8">自然占比</span><span class="series-v">'+np+'</span></div>'
+        +'<div class="series-row"><span style="color:#94a3b8">加权A3</span><span class="series-v" style="'+(a3val>=10?"color:#10b981":"")+'">'+a3+'</span></div>'
+        +'<div class="series-row"><span style="color:#94a3b8">看后搜</span><span class="series-v">'+sw+'</span></div>'
+        +'</div></div>';
+      shown++;
+    }
+    var rating=a3val>=15?"✅ 顶流":a3val>=10?"✅ 高效":a3val>=5?"⚠️ 中效":"❌ 低效";
+    var rc=a3val>=10?"perf-good":a3val>=5?"perf-warn":"perf-bad";
+    var note=name==="张拿铁系列"?"04/28后最大曝光，高完播高A3":name==="校园剧情"?"A3最高23.79%，话题性极强":name==="单身虎爸"?"看后搜最高0.38%":name==="西西贝贝"?"曝光大但A3偏低":name==="升学焦虑"?"A3极低，不适配":name==="科学实验"?"条数最多，整体A3约10%":"分散内容，需筛选";
+    tableHtml+="<tr><td>"+name+"</td><td class='num'>"+s.count+"</td><td class='num'>"+fmtW(s.tot)+"</td><td class='num'>"+np+"</td>"
+      +"<td class='num'><span class='"+rc+"'>"+a3+"</span></td><td class='num'>"+sw+"</td>"
+      +"<td class='num'>"+fmtN(s.intr)+"</td><td><span class='"+rc+"'>"+rating+"</span></td><td style='font-size:10px;color:#475569'>"+note+"</td></tr>";
+  });
+  document.getElementById("nb-series-cards").innerHTML=cardHtml;
+  document.getElementById("nb-series-table").innerHTML=tableHtml;
+}
+function renderNBVideos(vids){
+  var sorted=vids.slice().sort(function(a,b){return b.total-a.total;});
+  var tbody=document.getElementById("nb-videos");tbody.innerHTML="";
+  for(var i=0;i<sorted.length;i++){
+    var v=sorted[i];
+    var link=v.url?'<a class="vlink" href="'+v.url+'" target="_blank" style="color:#3b82f6;border-color:#93c5fd">▶</a>':'';
+    var titleContent=v.url?'<a style="color:#1a202c;text-decoration:none;border-bottom:1px dashed #93c5fd" href="'+v.url+'" target="_blank">'+v.title+'</a>':v.title;
+    var tr=document.createElement("tr");
+    tr.innerHTML="<td>"+(i+1)+"</td>"
+      +'<td><div class="vtitle-cell" title="'+v.title+'">'+titleContent+"</div></td>"
+      +'<td style="font-size:10px;color:#6366f1;white-space:nowrap">'+(v.series||"其他")+"</td>"
+      +'<td style="font-size:10px;color:#94a3b8">'+v.date+"</td>"
+      +'<td>'+renderTags(v.tags)+"</td>"
+      +'<td class="num">'+v.complete_rate+"</td>"
+      +'<td class="num">'+fmtN(v.heated)+"</td>"
+      +'<td class="num">'+fmtN(v.natural)+"</td>"
+      +'<td class="num"><b>'+fmtN(v.total)+"</b></td>"
+      +'<td class="num">'+(v.a3==null?"-":v.a3.toFixed(2)+"%")+"</td>"
+      +'<td class="num">'+(v.search==null?"-":v.search.toFixed(3)+"%")+"</td>"
+      +'<td class="num">'+fmtN(v.interact)+"</td>"
+      +"<td>"+link+"</td>";
+    tbody.appendChild(tr);
+  }
+  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
+  var label=(!def||def.key==="all")?"全部":def.label;
+  document.getElementById("nb-video-title").textContent="④ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
+}
+
+function updateHeader(scVids, nbVids){
+  var vids=currentBrand==="sc"?scVids:nbVids;
+  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
+  var label=(!def||def.key==="all")?"全部":def.label;
+  document.getElementById("headerInfo").textContent=label+" · "+vids.length+"条";
+  if(currentBrand==="sc"){
+    var bs={}; vids.forEach(function(v){bs[v.brand]=(bs[v.brand]||0)+1;});
+    document.getElementById("countBadge").textContent="📦 "+vids.length+"条视频 · "+Object.keys(bs).length+"个品牌";
+    document.getElementById("pageTitle").textContent="少儿编程 · 行业竞品洞察";
+    document.getElementById("pageSub").textContent="核桃编程 · 行业竞争格局 / 曝光结构 / 内容种草效率";
+  } else {
+    document.getElementById("countBadge").textContent="📦 NOBOOK "+vids.length+"条视频";
+    document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
+    document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
+  }
+}
+
+function renderAll(){
+  var scVids=getFiltered(SC_VIDEOS);
+  var nbVids=getFiltered(NB_VIDEOS);
+  updateHeader(scVids,nbVids);
+  if(currentBrand==="sc"){
+    renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCVideos(scVids);
+  } else {
+    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBVideos(nbVids);
+  }
+}
+
+function switchBrand(b){
+  currentBrand=b;
+  document.getElementById("sc-area").style.display=b==="sc"?"block":"none";
+  document.getElementById("nb-area").style.display=b==="nb"?"block":"none";
+  document.getElementById("tab-sc").className="brand-tab"+(b==="sc"?" active-sc":"");
+  document.getElementById("tab-nb").className="brand-tab"+(b==="nb"?" active-nb":"");
+  document.querySelectorAll(".wf-btn.active").forEach(function(el){el.classList.remove("sc","nb");el.classList.add(b);});
+  renderAll();
+}
+
+document.querySelectorAll(".wf-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    currentWeek=this.getAttribute("data-week");
+    document.querySelectorAll(".wf-btn").forEach(function(b){b.classList.remove("active","sc","nb");});
+    this.classList.add("active",currentBrand);
+    renderAll();
+  });
+});
+
+renderAll();
+</script>
+</body>
+</html>
