@@ -244,53 +244,15 @@ a.vlink:hover{color:#4f46e5}
 <div class="section">
   <h2 class="sc-h">④ 竞品内容方向分析 <span class="static-notice">📌 全周期</span></h2>
   <div style="font-size:11px;font-weight:700;color:#4a5568;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">A · 各品牌选题标签分布（条数 + 均A3）</div>
-  <div class="content-grid">
-    <div class="content-brand-card">
-      <div class="content-brand-head" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">核桃编程 · 23条</div>
-      <div class="content-brand-body">
-        <div class="content-tag-row"><span><span class="vtag vtag-drama">原生剧情</span></span><span><b>11</b><span style="color:#94a3b8;font-size:10px"> 48%</span><span class="tag-a3"> A3≈11%</span></span></div>
-        <div class="content-tag-row"><span><span class="vtag vtag-ai">AI话题</span></span><span><b>9</b><span style="color:#94a3b8;font-size:10px"> 39%</span><span class="tag-a3"> A3≈9%</span></span></div>
-        <div class="content-tag-row"><span><span class="vtag vtag-class">兴趣班</span></span><span><b>2</b><span style="color:#94a3b8;font-size:10px"> 9%</span><span class="tag-a3"> A3≈4%</span></span></div>
-        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#faf5ff;padding:6px 8px;border-radius:5px">原生剧情（翠花烧烤/青春期/段子手）是自然流主力，均A3最高；AI话题靠加热驱动；无兴趣班/焦虑类（已过滤出范围）</div>
-      </div>
-    </div>
-    <div class="content-brand-card">
-      <div class="content-brand-head" style="background:linear-gradient(135deg,#f59e0b,#d97706)">猿编程 · 9条</div>
-      <div class="content-brand-body">
-        <div class="content-tag-row"><span><span class="vtag vtag-product">产品种草</span></span><span><b>7</b><span style="color:#94a3b8;font-size:10px"> 78%</span><span class="tag-a3"> A3≈4%</span></span></div>
-        <div class="content-tag-row"><span><span class="vtag vtag-edu">编程教育</span></span><span><b>2</b><span style="color:#94a3b8;font-size:10px"> 22%</span><span class="tag-a3"> A3≈0.1%</span></span></div>
-        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#fffbeb;padding:6px 8px;border-radius:5px">机器狗小8种草占78%；头部2条（33万+加热）A3极低0.04-0.16%；紫薯萌宠A3 17.88%是异常高值</div>
-      </div>
-    </div>
-    <div class="content-brand-card">
-      <div class="content-brand-head" style="background:linear-gradient(135deg,#10b981,#059669)">西瓜创客 · 4条</div>
-      <div class="content-brand-body">
-        <div class="content-tag-row"><span><span class="vtag vtag-product">产品种草</span></span><span><b>3</b><span style="color:#94a3b8;font-size:10px"> 75%</span><span class="tag-a3"> A3≈5%</span></span></div>
-        <div class="content-tag-row"><span><span class="vtag vtag-ai">AI话题</span></span><span><b>1</b><span style="color:#94a3b8;font-size:10px"> 25%</span><span class="tag-a3"> A3≈1.3%</span></span></div>
-        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#f0fdf4;padding:6px 8px;border-radius:5px">Dou乐思桌游产品种草A3约5%；AI实践营12万自然流但A3仅1.3%</div>
-      </div>
-    </div>
-    <div class="content-brand-card">
-      <div class="content-brand-head" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">小码王 · 3条</div>
-      <div class="content-brand-body">
-        <div class="content-tag-row"><span><span class="vtag vtag-research">AI研学</span></span><span><b>3</b><span style="color:#94a3b8;font-size:10px"> 100%</span><span class="tag-a3"> A3≈6%</span></span></div>
-        <div style="margin-top:7px;font-size:10px;color:#6b7280;line-height:1.6;background:#ecfeff;padding:6px 8px;border-radius:5px">全押AI研学/大厂研学，声量极微；"低成本培养逻辑思维"A3高达11.65%，精准赛道有潜力</div>
-      </div>
-    </div>
-  </div>
+  <div class="content-grid" id="sc-content-cards"></div>
+</div>
 
-  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:16px 0 10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">B · 竞品达人内容表现评估</div>
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:16px 0 10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">B · 竞品达人内容表现评估 <span style="font-size:10px;font-weight:400;color:#94a3b8">（随筛选动态更新）</span></div>
   <table>
-    <thead><tr><th>评定</th><th>品牌</th><th>内容方向</th><th>代表视频</th><th class="num">曝光</th><th class="num">A3率</th><th class="num">看后搜</th><th>评估</th></tr></thead>
-    <tbody>
-      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="bc bc-w">核桃编程</span></td><td><span class="vtag vtag-drama">原生剧情</span></td><td style="font-size:10px">翠花烧烤/青春期/段子手小孩</td><td class="num">2-98万（自然）</td><td class="num perf-good">14-21%</td><td class="num">0.35-1.11%</td><td style="font-size:10px;color:#065f46">高A3+自然流双优，矩阵核心</td></tr>
-      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="bc bc-w">核桃编程</span></td><td><span class="vtag vtag-ai">AI话题</span></td><td style="font-size:10px">"坐不住"/AI搬运工/AI杀疯了</td><td class="num">4-20万（加热）</td><td class="num perf-good">9-18%</td><td class="num">0.05-0.37%</td><td style="font-size:10px;color:#065f46">高A3，加热ROI高</td></tr>
-      <tr style="background:#ecfdf5"><td><span class="perf-good">✅ 潜力</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-product">产品种草异常值</span></td><td style="font-size:10px">紫薯拼出来的电子萌宠（机器狗）</td><td class="num">0.2万（纯自然）</td><td class="num perf-good">17.88%</td><td class="num">0.04%</td><td style="font-size:10px;color:#065f46">反差钩子A3极高，建议加热放量</td></tr>
-      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-product">机器狗种草</span></td><td style="font-size:10px">机器狗小8系列（7条）</td><td class="num">&lt;1万（自然）</td><td class="num perf-warn">0.6-5%</td><td class="num">~0.1%</td><td style="font-size:10px;color:#92400e">内容可但自然流天花板极低</td></tr>
-      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="bc bc-y">猿编程</span></td><td><span class="vtag vtag-edu">编程教育叙事</span></td><td style="font-size:10px">"从小接触编程逻辑思维多强"</td><td class="num">33万（加热80%）</td><td class="num perf-bad">0.16%</td><td class="num">0.01%</td><td style="font-size:10px;color:#991b1b">大量加热预算打水漂，品牌承接断层</td></tr>
-      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="bc bc-g">西瓜创客</span></td><td><span class="vtag vtag-ai">AI实践营</span></td><td style="font-size:10px">"带娃AI实践营"（12万自然流）</td><td class="num">12万（自然87%）</td><td class="num perf-bad">1.30%</td><td class="num">-</td><td style="font-size:10px;color:#991b1b">自然流强但品牌种草转化极弱</td></tr>
-    </tbody>
+    <thead><tr><th>评定</th><th>品牌</th><th>内容方向</th><th>代表视频</th><th class="num">条数</th><th class="num">均曝光</th><th class="num">均A3</th><th class="num">均看后搜</th><th>评估</th></tr></thead>
+    <tbody id="sc-perf-body"></tbody>
   </table>
+
   <div style="margin-top:12px;background:#f8fafc;border-radius:8px;padding:12px 16px;font-size:11px;color:#475569;line-height:1.8">
     <b>核心洞察：</b>核桃「原生剧情×AI话题」双轨驱动，A3均超竞品5-20倍；猿编程最大问题是花大预算加热泛科普内容（A3极低），而其高A3潜力素材（紫薯萌宠）却停留在自然流。<b>建议</b>：继续加密原生剧情+AI叙事双轨，竞品在这一赛道几乎没有对手。
   </div>
@@ -351,18 +313,12 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
-  <h2 class="nb-h">③ 达人方向 & 效果评估 <span class="static-notice">📌 全周期</span></h2>
+  <h2 class="nb-h">③ 达人方向 & 效果评估 <span class="tip">随筛选动态更新</span></h2>
   <table>
-    <thead><tr><th>评定</th><th>内容方向</th><th>代表视频</th><th class="num">曝光</th><th class="num">A3率</th><th class="num">看后搜</th><th class="num">完播率</th><th>评估</th></tr></thead>
-    <tbody>
-      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 顶流</span></td><td><span class="vtag vtag-series">张拿铁系列</span></td><td style="font-size:10px">张拿铁对于父母爱情的困惑</td><td class="num perf-good">342万</td><td class="num perf-good">13.83%</td><td class="num">0.03%</td><td class="num">12.79%</td><td style="font-size:10px;color:#065f46">04-28后最高曝光，高完播+高A3，亲子成长叙事</td></tr>
-      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="vtag vtag-school">校园剧情</span></td><td style="font-size:10px">山东的课间真的连呼吸都相当困难</td><td class="num">100-200万</td><td class="num perf-good">23.79%</td><td class="num">0.08%</td><td class="num">6.50%</td><td style="font-size:10px;color:#065f46">A3率最高（23.79%），真实还原校园内容共鸣极强</td></tr>
-      <tr style="background:#f0fdf4"><td><span class="perf-good">✅ 高效</span></td><td><span class="vtag vtag-series">单身虎爸</span></td><td style="font-size:10px">我想给小虎请家教中考冲刺</td><td class="num">100-200万</td><td class="num perf-good">10.94%</td><td class="num">0.38%</td><td class="num">8.01%</td><td style="font-size:10px;color:#065f46">看后搜率全期最高（0.38%），父子+升学焦虑品牌植入好</td></tr>
-      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="vtag vtag-series">西西贝贝</span></td><td style="font-size:10px">大儿子又被弟弟忽悠了</td><td class="num">200-300万</td><td class="num perf-warn">6.56%</td><td class="num">0.02%</td><td class="num">12.04%</td><td style="font-size:10px;color:#92400e">曝光大但A3和看后搜偏低，品牌承接需加强</td></tr>
-      <tr style="background:#fffbeb"><td><span class="perf-warn">⚠️ 中效</span></td><td><span class="vtag vtag-science">其他原生剧情</span></td><td style="font-size:10px">47条各类原生剧情内容</td><td class="num">均1-30万</td><td class="num perf-warn">均A3≈10%</td><td class="num">0.20%</td><td class="num">-</td><td style="font-size:10px;color:#92400e">良莠不齐，整体A3尚可但部分曝光极低，需筛选</td></tr>
-      <tr style="background:#fee2e2"><td><span class="perf-bad">❌ 低效</span></td><td><span class="vtag vtag-anxiety">升学焦虑</span></td><td style="font-size:10px">升学类内容（1条，含04/28后）</td><td class="num">均&lt;1万</td><td class="num perf-bad">0.66%</td><td class="num">0.04%</td><td class="num">-</td><td style="font-size:10px;color:#991b1b">A3极低，升学焦虑切入不适配NOBOOK生态</td></tr>
-    </tbody>
+    <thead><tr><th>评定</th><th>内容系列</th><th class="num">条数</th><th class="num">均曝光</th><th class="num">自然占比</th><th class="num">均A3</th><th class="num">均看后搜</th><th class="num">均互动</th><th>评估</th></tr></thead>
+    <tbody id="nb-perf-body"></tbody>
   </table>
+
 </div>
 
 <div class="section">
@@ -1106,6 +1062,150 @@ function renderNBVideos(vids){
   document.getElementById("nb-video-title").textContent="④ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
 }
 
+
+// ── 标签CSS映射（用于动态渲染）
+var tagClsMap2 = {
+  "原生剧情":"vtag-drama","AI话题":"vtag-ai","编程教育":"vtag-edu",
+  "产品种草":"vtag-product","AI研学":"vtag-research","兴趣班":"vtag-class",
+  "教育焦虑":"vtag-anxiety","教育理念":"vtag-method","实践活动":"vtag-ai",
+  "升学托举":"vtag-research","科学实验":"vtag-science","校园剧情":"vtag-school",
+  "升学焦虑":"vtag-anxiety","小宝系列":"vtag-series","张拿铁系列":"vtag-series",
+  "单身虎爸":"vtag-series","西西贝贝":"vtag-series","其他原生剧情":"vtag-drama"
+};
+
+function renderSCContentAnalysis(vids) {
+  var cardsEl = document.getElementById("sc-content-cards");
+  var perfEl  = document.getElementById("sc-perf-body");
+  if (!cardsEl || !perfEl) return;
+
+  var GRAD = {
+    "核桃编程":"linear-gradient(135deg,#8b5cf6,#6d28d9)",
+    "猿编程":"linear-gradient(135deg,#f59e0b,#d97706)",
+    "西瓜创客":"linear-gradient(135deg,#10b981,#059669)",
+    "小码王":"linear-gradient(135deg,#06b6d4,#0891b2)"
+  };
+  var CHIP = {"核桃编程":"bc-w","猿编程":"bc-y","西瓜创客":"bc-g","小码王":"bc-c"};
+
+  // A. Brand content tag cards
+  var cardsHtml = "";
+  SC_BRANDS.forEach(function(brand) {
+    var bv = vids.filter(function(v){ return v.brand === brand; });
+    if (!bv.length) return;
+    var tagCnt = {}, tagA3S = {}, tagA3E = {};
+    bv.forEach(function(v) {
+      (v.tags||[]).forEach(function(t, ti) {
+        if (ti > 0) return; // primary tag only
+        tagCnt[t] = (tagCnt[t]||0) + 1;
+        if (v.a3 != null) { tagA3S[t] = (tagA3S[t]||0) + v.a3*v.total; tagA3E[t] = (tagA3E[t]||0) + v.total; }
+      });
+    });
+    var entries = Object.keys(tagCnt).map(function(t) {
+      return {tag:t, cnt:tagCnt[t], a3: tagA3E[t] ? (tagA3S[t]/tagA3E[t]).toFixed(1) : null};
+    }).sort(function(a,b){return b.cnt-a.cnt;});
+
+    cardsHtml += '<div class="content-brand-card">'
+      +'<div class="content-brand-head" style="background:'+GRAD[brand]+'">'+brand+' · '+bv.length+'条</div>'
+      +'<div class="content-brand-body">';
+    entries.slice(0,4).forEach(function(e) {
+      var pct = Math.round(e.cnt/bv.length*100);
+      var cls = tagClsMap2[e.tag]||"vtag-method";
+      cardsHtml += '<div class="content-tag-row">'
+        +'<span><span class="vtag '+cls+'">'+e.tag+'</span></span>'
+        +'<span><b>'+e.cnt+'</b><span style="color:#94a3b8;font-size:10px"> '+pct+'%</span>'
+        +(e.a3!==null?'<span class="tag-a3"> A3≈'+e.a3+'%</span>':'')+'</span></div>';
+    });
+    cardsHtml += '</div></div>';
+  });
+  cardsEl.innerHTML = cardsHtml;
+
+  // B. Performance table: per brand × tag breakdown
+  var perfHtml = "";
+  SC_BRANDS.forEach(function(brand) {
+    var bv = vids.filter(function(v){return v.brand===brand;});
+    if (!bv.length) return;
+    var chip = '<span class="bc '+CHIP[brand]+'">'+brand+'</span>';
+
+    // Group by primary tag
+    var tagGroups = {};
+    bv.forEach(function(v) {
+      var t = (v.tags&&v.tags[0])||"其他";
+      if (!tagGroups[t]) tagGroups[t] = [];
+      tagGroups[t].push(v);
+    });
+    var topTags = Object.keys(tagGroups).sort(function(a,b){return tagGroups[b].length-tagGroups[a].length;}).slice(0,3);
+
+    topTags.forEach(function(tag, ti) {
+      var tvids = tagGroups[tag];
+      var tot = tvids.reduce(function(s,v){return s+v.total;},0);
+      var avgExp = tot/tvids.length;
+      var a3v = tvids.filter(function(v){return v.a3!=null;});
+      var a3e = a3v.reduce(function(s,v){return s+v.total;},0);
+      var a3w = a3e>0 ? a3v.reduce(function(s,v){return s+v.a3*v.total;},0)/a3e : 0;
+      var sv = tvids.filter(function(v){return v.search!=null;});
+      var se = sv.reduce(function(s,v){return s+v.total;},0);
+      var sw = se>0 ? sv.reduce(function(s,v){return s+v.search*v.total;},0)/se : 0;
+      var tagCls = tagClsMap2[tag]||"vtag-method";
+
+      // Rating
+      var rating, ratingCls, note;
+      if (a3w >= 10) { rating="✅ 高效"; ratingCls="perf-good"; note="高A3，核心优质内容"; }
+      else if (a3w >= 4) { rating="⚠️ 中效"; ratingCls="perf-warn"; note="A3尚可，可优化投放"; }
+      else { rating="❌ 低效"; ratingCls="perf-bad"; note="A3偏低，谨慎加热"; }
+
+      // Representative video title
+      var repVid = tvids.sort(function(a,b){return b.total-a.total;})[0];
+      var repTitle = repVid ? repVid.title.slice(0,28)+"…" : "-";
+
+      var rowBg = a3w>=10?"background:#f0fdf4":a3w>=4?"background:#fffbeb":"background:#fee2e2";
+      perfHtml += '<tr style="'+rowBg+'">'
+        +(ti===0 ? '<td rowspan="'+topTags.length+'">'+chip+'</td>' : '')
+        +'<td><span class="vtag '+tagCls+'">'+tag+'</span></td>'
+        +'<td style="font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+repTitle+'</td>'
+        +'<td class="num">'+tvids.length+'</td>'
+        +'<td class="num">'+fmtW(avgExp)+'</td>'
+        +'<td class="num '+(a3w>=8?"perf-good":a3w>=4?"perf-warn":"perf-bad")+'">'+a3w.toFixed(2)+'%</td>'
+        +'<td class="num">'+(sw>0?sw.toFixed(3)+"%" : "-")+'</td>'
+        +'<td class="num">'+(sw>0?sw.toFixed(3)+"%" : "-")+'</td>'
+        +'<td><span class="'+ratingCls+'">'+rating+'</span><span style="font-size:10px;color:#6b7280;margin-left:5px">'+note+'</span></td>'
+        +'</tr>';
+    });
+  });
+  perfEl.innerHTML = perfHtml || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:12px">本周期无数据</td></tr>';
+}
+
+function renderNBPerfTable(vids) {
+  var el = document.getElementById("nb-perf-body");
+  if (!el) return;
+  var ser = calcSeriesStats(vids);
+  var ORDER = ["小宝系列","张拿铁系列","单身虎爸","西西贝贝","校园剧情","母子日常","弗兰克家庭","父女/父亲系列","升学焦虑","科学实验","其他原生剧情"];
+  var html = "";
+  ORDER.forEach(function(name) {
+    var s = ser[name]; if (!s||!s.count) return;
+    var avgExp = s.tot/s.count;
+    var a3w = s.a3e>0 ? s.a3s/s.a3e : 0;
+    var sw  = s.se>0  ? s.ss/s.se   : 0;
+    var np  = s.tot>0 ? (s.nat/s.tot*100).toFixed(0)+"%" : "-";
+    var rating, ratingCls, note;
+    if (a3w>=15) { rating="✅ 顶流"; ratingCls="perf-good"; note="A3极高，核心IP"; }
+    else if (a3w>=10) { rating="✅ 高效"; ratingCls="perf-good"; note="高A3，优质系列"; }
+    else if (a3w>=5)  { rating="⚠️ 中效"; ratingCls="perf-warn"; note="A3尚可"; }
+    else  { rating="❌ 低效"; ratingCls="perf-bad"; note="A3偏低，不建议加热"; }
+    var rowBg = a3w>=10?"background:#f0fdf4":a3w>=5?"background:#fffbeb":a3w>0?"background:#fee2e2":"";
+    html += '<tr style="'+rowBg+'">'
+      +'<td><span class="'+ratingCls+'">'+rating+'</span></td>'
+      +'<td><span class="vtag '+(tagClsMap2[name]||"vtag-drama")+'">'+name+'</span></td>'
+      +'<td class="num">'+s.count+'</td>'
+      +'<td class="num">'+fmtW(avgExp)+'</td>'
+      +'<td class="num">'+np+'</td>'
+      +'<td class="num '+(a3w>=10?"perf-good":a3w>=5?"perf-warn":"perf-bad")+'">'+a3w.toFixed(2)+'%</td>'
+      +'<td class="num">'+(sw>0?sw.toFixed(3)+"%" : "-")+'</td>'
+      +'<td class="num">'+fmtN(Math.round(s.intr/s.count))+'</td>'
+      +'<td style="font-size:10px;color:#475569">'+note+'</td>'
+      +'</tr>';
+  });
+  el.innerHTML = html || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:12px">本周期无数据</td></tr>';
+}
+
 function renderAll(){
   var scVids = currentBrand==="sc" ? getFiltered(SC_VIDEOS) : [];
   var nbVids = currentBrand==="nb" ? getFiltered(NB_VIDEOS) : [];
@@ -1114,11 +1214,11 @@ function renderAll(){
   if(currentBrand==="sc"){
     document.getElementById("pageTitle").textContent="少儿编程 · 行业竞品洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 行业竞争格局 / 曝光结构 / 内容种草效率";
-    renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCVideos(scVids);
+    renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCContentAnalysis(scVids);renderSCVideos(scVids);
   } else {
     document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
-    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBVideos(nbVids);
+    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBPerfTable(nbVids);renderNBVideos(nbVids);
   }
 }
 
