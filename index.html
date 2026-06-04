@@ -33,44 +33,27 @@
   document.getElementById("pw-inp").focus();
 })();
 </script>
-<script>
-(function(){
-  var P="walnut2026",K="dyx_auth";
-  if(sessionStorage.getItem(K)===P) return;
-  document.addEventListener("DOMContentLoaded",function(){document.body.style.display="none";});
-  var o=document.createElement("div");
-  o.innerHTML='<style>#dyx-lock{position:fixed;inset:0;background:linear-gradient(135deg,#1a202c,#2d3748);display:flex;align-items:center;justify-content:center;z-index:99999}.dyx-box{background:#fff;border-radius:20px;padding:44px 40px;width:340px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4)}.dyx-box h2{font-size:18px;font-weight:700;color:#1a202c;margin-bottom:6px}.dyx-box p{font-size:12px;color:#718096;margin-bottom:24px}.dyx-box input{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;box-sizing:border-box;letter-spacing:2px;text-align:center}.dyx-box input:focus{border-color:#6366f1}.dyx-box button{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}.dyx-box button:hover{opacity:.9}.dyx-err{color:#ef4444;font-size:12px;margin-top:8px;min-height:16px}.dyx-logo{font-size:11px;color:#94a3b8;margin-top:20px}</style>'
-    +'<div id="dyx-lock"><div class="dyx-box"><h2>🔒 抖音竞品洞察</h2><p>核桃编程内部数据，请输入访问密码</p><input type="password" id="dyx-inp" placeholder="请输入密码" autocomplete="off"/><div class="dyx-err" id="dyx-err"></div><button id="dyx-btn">进入看板</button><div class="dyx-logo">核桃编程 · 星推搜直项目组</div></div></div>';
-  document.documentElement.appendChild(o);
-  function go(){
-    var v=document.getElementById("dyx-inp").value;
-    if(v===P){sessionStorage.setItem(K,P);o.remove();document.body.style.display="";}
-    else{document.getElementById("dyx-err").textContent="密码错误，请重试";document.getElementById("dyx-inp").value="";}
-  }
-  document.getElementById("dyx-btn").addEventListener("click",go);
-  document.getElementById("dyx-inp").addEventListener("keydown",function(e){if(e.key==="Enter")go();});
-})();
-</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f5f7fa,#e8eef5);color:#1a202c;min-height:100vh}
-.top-bar{background:#1a202c;padding:14px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
-.top-bar .logo{font-size:16px;font-weight:700;color:#fff;white-space:nowrap}
+.top-bar{background:#1a202c;padding:12px 28px 10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.top-row1{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.top-bar .logo{font-size:15px;font-weight:700;color:#fff;white-space:nowrap}
 .top-bar .logo span{color:#818cf8}
-.brand-tabs{display:flex;gap:4px;margin-left:4px}
-.brand-tab{padding:7px 20px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.18s;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+.brand-tabs{display:flex;gap:3px}
+.brand-tab{padding:5px 16px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:600;transition:.15s;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
 .brand-tab:hover{background:rgba(255,255,255,.15)}
-.brand-tab.active-sc{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 3px 10px rgba(99,102,241,.4)}
-.brand-tab.active-nb{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;box-shadow:0 3px 10px rgba(29,78,216,.4)}
-.divider{width:1px;height:20px;background:rgba(255,255,255,.15)}
-.week-filter{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.wf-label{font-size:11px;color:rgba(255,255,255,.5);white-space:nowrap}
-.wf-btn{padding:4px 11px;border-radius:12px;border:none;cursor:pointer;font-size:11px;font-weight:500;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);transition:.15s;white-space:nowrap}
-.wf-btn:hover{background:rgba(255,255,255,.2)}
-.wf-btn.active{background:#fff;font-weight:700}
-.wf-btn.active.sc{color:#5b21b6}
-.wf-btn.active.nb{color:#1e40af}
+.brand-tab.active-sc{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 2px 8px rgba(99,102,241,.4)}
+.brand-tab.active-nb{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;box-shadow:0 2px 8px rgba(29,78,216,.4)}
+.filter-rows{display:flex;flex-direction:column;gap:5px}
+.filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.filter-label{font-size:11px;color:rgba(255,255,255,.5);white-space:nowrap;min-width:56px}
+.fbtn-group{display:flex;gap:4px;flex-wrap:wrap}
+.fbtn{padding:3px 11px;border-radius:10px;border:none;cursor:pointer;font-size:11px;font-weight:500;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);transition:.15s;white-space:nowrap}
+.fbtn:hover{background:rgba(255,255,255,.2)}
+.fbtn.active{background:#fff;font-weight:700;color:#1a202c}
 .page-header{padding:24px 32px 16px;display:flex;align-items:flex-start;justify-content:space-between}
 .page-header .ph-title{font-size:22px;font-weight:700;color:#1a202c}
 .page-header .ph-sub{font-size:12px;color:#718096;margin-top:4px}
@@ -170,21 +153,37 @@ a.vlink:hover{color:#4f46e5}
 
 <!-- 顶部固定导航 -->
 <div class="top-bar">
-  <div class="logo">抖音<span>竞品洞察</span></div>
-  <div class="brand-tabs">
-    <button class="brand-tab active-sc" id="tab-sc" onclick="switchBrand('sc')">少儿编程</button>
-    <button class="brand-tab" id="tab-nb" onclick="switchBrand('nb')">行业头部 · NOBOOK</button>
+  <div class="top-row1">
+    <div class="logo">抖音<span>竞品洞察</span></div>
+    <div class="brand-tabs">
+      <button class="brand-tab active-sc" id="tab-sc" onclick="switchBrand('sc')">少儿编程</button>
+      <button class="brand-tab" id="tab-nb" onclick="switchBrand('nb')">行业头部 · NOBOOK</button>
+    </div>
+    <div id="filter-status-badge" style="margin-left:auto;font-size:11px;background:rgba(255,255,255,.12);padding:4px 12px;border-radius:12px;color:rgba(255,255,255,.9);white-space:nowrap"></div>
   </div>
-  <div class="divider"></div>
-  <div class="week-filter">
-    <span class="wf-label">📆</span>
-    <button class="wf-btn active sc" data-week="all">全部</button>
-    <button class="wf-btn" data-week="W1">第1周 04/28-05/04</button>
-    <button class="wf-btn" data-week="W2">第2周 05/05-05/11</button>
-    <button class="wf-btn" data-week="W3">第3周 05/12-05/18</button>
-    <button class="wf-btn" data-week="W4">第4周 05/19-05/27</button>
+  <div class="filter-rows" id="filter-rows">
+    <div class="filter-row" id="brand-row">
+      <span class="filter-label">🏢 品牌</span>
+      <div class="fbtn-group" id="brand-filter"></div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">📅 时间周期</span>
+      <div class="fbtn-group">
+        <button class="fbtn" data-days="7">近7天</button>
+        <button class="fbtn active" data-days="30">近30天</button>
+        <button class="fbtn" data-days="90">近90天</button>
+        <button class="fbtn" data-days="180">近180天</button>
+        <button class="fbtn" data-days="0">全部</button>
+      </div>
+      <span class="filter-label" style="margin-left:14px">锚定日期</span>
+      <input type="date" id="anchor-date" value="2026-05-27" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;color:#fff;padding:3px 8px;font-size:11px;cursor:pointer">
+      <button onclick="resetAnchor()" style="background:rgba(255,255,255,.12);border:none;color:rgba(255,255,255,.8);padding:3px 10px;border-radius:8px;font-size:11px;cursor:pointer;margin-left:4px">↺ 重置最新</button>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">🏷️ 内容标签</span>
+      <div class="fbtn-group" id="tag-filter"></div>
+    </div>
   </div>
-  <div style="margin-left:auto;font-size:11px;color:rgba(255,255,255,.4)" id="headerInfo">04/28–05/27</div>
 </div>
 
 <div class="page-header">
@@ -367,6 +366,118 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
+  <h2 class="nb-h">③.5 头部达人素材深度拆解 <span class="static-notice">📌 手动标注 · 2026-04-27首投</span></h2>
+
+  <!-- 视频基础数据卡 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px">
+    <div style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8);border-radius:14px;padding:20px 22px;color:#fff">
+      <div style="font-size:11px;opacity:.7;margin-bottom:6px">📹 头部素材 · 董思玗（晓菲姐家的小宝）</div>
+      <div style="font-size:14px;font-weight:700;line-height:1.5;margin-bottom:14px">「小宝：甭管怎样，我还是达到目的了」<br><span style="font-size:11px;opacity:.7">董黛玉 · 戏精宝宝 · NOBOOK实验室</span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#60a5fa">1000万+</div><div style="font-size:10px;opacity:.7;margin-top:2px">总曝光</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#34d399">17.06%</div><div style="font-size:10px;opacity:.7;margin-top:2px">A3率</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#fbbf24">1,100</div><div style="font-size:10px;opacity:.7;margin-top:2px">A4（意向人数）</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#f87171">ROI 13</div><div style="font-size:10px;opacity:.7;margin-top:2px">投产比</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15);font-size:11px">
+        <div><span style="opacity:.6">自然占比</span><br><b>84.5%</b></div>
+        <div><span style="opacity:.6">看后搜率</span><br><b>0.56%</b></div>
+        <div><span style="opacity:.6">完播率</span><br><b>12.72%</b></div>
+        <div><span style="opacity:.6">互动量</span><br><b>24.3万</b></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:#f0fdf4;border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;font-weight:700;color:#065f46;margin-bottom:8px">✅ 核心亮点</div>
+        <div style="font-size:11px;color:#374151;line-height:1.7">
+          • A4=1100，ROI=13 是期间竞品最高<br>
+          • 84.5% 自然流 = 内容自传播强<br>
+          • 完播率12.72% 极高（均值约5%）<br>
+          • 看后搜率0.56% = 品牌植入深度好
+        </div>
+      </div>
+      <div style="background:#eff6ff;border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;font-weight:700;color:#1d4ed8;margin-bottom:8px">📊 与行业对比</div>
+        <div style="font-size:11px;color:#374151;line-height:1.7">
+          • ROI 13 vs 行业均值约 3-5<br>
+          • 核桃编程 A3 均 8.46%（此视频 17.06%）<br>
+          • 1000万曝光级别 A4 仍有 1100，转化率极强<br>
+          • 自然流比例远超行业（行业均35-55%）
+        </div>
+      </div>
+      <div style="background:#fef9c3;border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;font-weight:700;color:#854d0e;margin-bottom:8px">🎭 角色/IP分析</div>
+        <div style="font-size:11px;color:#374151;line-height:1.7">
+          • 小宝IP = 戏精宝宝，有稳定受众<br>
+          • "董黛玉" 角色名带文化梗，提升传播<br>
+          • 儿童戏精 + 家长共鸣是双向覆盖<br>
+          • NOBOOK实验室品牌植入已建立认知
+        </div>
+      </div>
+      <div style="background:#fce7f3;border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;font-weight:700;color:#9d174d;margin-bottom:8px">💡 对核桃的启示</div>
+        <div style="font-size:11px;color:#374151;line-height:1.7">
+          • 固定IP角色 + 持续内容 = 品牌认知复利<br>
+          • 「儿童目标达成」题材 A4 转化高<br>
+          • 核桃可试验孩子视角叙事（非家长视角）<br>
+          • 强完播 → 算法推流 → 自然流放大
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 脚本结构拆解 -->
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:4px 0 12px;padding-bottom:6px;border-bottom:2px solid #f0f2f5">🎬 脚本结构拆解（基于标题语义 + 品牌场景推断）</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">
+    <div style="background:#f8fafc;border-radius:10px;padding:12px;border-top:3px solid #6366f1">
+      <div style="font-size:10px;font-weight:700;color:#6366f1;margin-bottom:5px">① 开场悬念钩（0-3s）</div>
+      <div style="font-size:11px;color:#374151;line-height:1.6">小宝一句话甩出结论：「甭管怎样，我还是达到目的了」→ 强悬念：什么目的？怎么达到的？触发点击</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:6px">📌 完播率提升关键：前3s不交代背景，直接给结论+悬念</div>
+    </div>
+    <div style="background:#f8fafc;border-radius:10px;padding:12px;border-top:3px solid #f59e0b">
+      <div style="font-size:10px;font-weight:700;color:#f59e0b;margin-bottom:5px">② 冲突建立（3-15s）</div>
+      <div style="font-size:11px;color:#374151;line-height:1.6">大人/家长设置障碍，不同意小宝的"目的"。小宝开始戏精发作——夸张表情、委屈眼神、耍赖逻辑</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:6px">📌 儿童戏精反应是完播驱动力，家长都看过这种场景</div>
+    </div>
+    <div style="background:#f8fafc;border-radius:10px;padding:12px;border-top:3px solid #10b981">
+      <div style="font-size:10px;font-weight:700;color:#10b981;margin-bottom:5px">③ 爆发点（15-40s）</div>
+      <div style="font-size:11px;color:#374151;line-height:1.6">小宝用出人意料的理由/逻辑"赢"了。高光时刻：「我今天就要xxx，因为xxx」式儿童式逻辑，成人哭笑不得</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:6px">📌 「出乎意料的逻辑」= 分享/互动驱动点</div>
+    </div>
+    <div style="background:#f8fafc;border-radius:10px;padding:12px;border-top:3px solid #8b5cf6">
+      <div style="font-size:10px;font-weight:700;color:#8b5cf6;margin-bottom:5px">④ 品牌植入（40-55s）</div>
+      <div style="font-size:11px;color:#374151;line-height:1.6">小宝"目的"与 NOBOOK 产品/课程自然关联。例：想要 NOBOOK 课程/产品作为"奖励"，家长妥协时自然植入品牌</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:6px">📌 A3/A4/看后搜高 = 品牌植入时机和强度恰当</div>
+    </div>
+    <div style="background:#f8fafc;border-radius:10px;padding:12px;border-top:3px solid #06b6d4">
+      <div style="font-size:10px;font-weight:700;color:#06b6d4;margin-bottom:5px">⑤ 收尾+引导（55s-1.5min）</div>
+      <div style="font-size:11px;color:#374151;line-height:1.6">小宝欢天喜地"达到目的"的镜头，配 NOBOOK 品牌信息。简短的CTA引导：「感兴趣的点链接了解」</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:6px">📌 完播率高（12.72%）说明结尾不拖沓，节奏感强</div>
+    </div>
+  </div>
+
+  <!-- 公式提炼 -->
+  <div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);border-radius:12px;padding:16px 20px;color:#fff">
+    <div style="font-size:12px;font-weight:700;margin-bottom:10px">🔑 爆款公式提炼（可复用）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:11px;line-height:1.7">
+      <div>
+        <b style="color:#93c5fd">结构公式：</b><br>
+        结论悬念开场 → 冲突建立 → 出人意料的儿童逻辑 → 品牌自然植入 → 快节奏收尾<br>
+        <span style="color:#bfdbfe">完播率提升关键：前3s不铺垫，直接抛结论；结尾控制在30s内</span>
+      </div>
+      <div>
+        <b style="color:#93c5fd">对核桃的借鉴方向：</b><br>
+        ① 打造固定儿童角色IP（如"AI小宝""数字虎娃"）<br>
+        ② 用孩子视角讲"我要学AI"的戏剧性故事<br>
+        ③ 品牌植入方式：孩子主动要求 > 家长被动介绍<br>
+        <span style="color:#bfdbfe">预期效果：A4和ROI显著提升（参考小宝ROI=13 vs 行业3-5）</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
   <h2 class="nb-h" id="nb-video-title">④ 视频明细（共51条，按曝光降序）</h2>
   <table><thead><tr>
     <th style="width:24px">#</th><th>视频标题</th><th>内容系列</th><th>首投</th>
@@ -490,21 +601,125 @@ var NB_VIDEOS = [
 {title:"不用买一堆的科学材料包就能让孩子轻松做实验NB实验室 NOBOOK实验室 辅导作业不崩溃 物化生",url:"https://yuntu.oceanengine.com/yuntu_brand/ecom/content/shared/video_previewer?aadvid=1775739966084168&code=v1e00fgi0000d7uksrnog65v5kv3pqog",brand:"NOBOOK",date:"2026-05-08",heated:0,natural:204,total:204,a3:1.47,search:1.47,interact:21,tags:["原生剧情"],complete_rate:"3.62%",series:"科学实验"}
 ];
 
-var WEEK_DEFS = [
-  {key:"all",label:"全部",start:"2026-04-28",end:"2026-05-27"},
-  {key:"W1",label:"第1周",start:"2026-04-28",end:"2026-05-04"},
-  {key:"W2",label:"第2周",start:"2026-05-05",end:"2026-05-11"},
-  {key:"W3",label:"第3周",start:"2026-05-12",end:"2026-05-18"},
-  {key:"W4",label:"第4周",start:"2026-05-19",end:"2026-05-27"}
-];
-var currentWeek = "all";
-var currentBrand = "sc";
+// ─── 筛选状态 ─────────────────────────────────────────────────
+var currentBrand = "sc";     // "sc" | "nb"
+var currentDays = 30;        // 0=全部, 7/30/90/180
+var currentAnchor = "2026-05-27"; // 锚定日期（最新数据日期）
+var currentBrandFilter = "all";   // "all" or 具体品牌
+var currentTagFilter = "all";     // "all" or 具体标签
+
+// SC tags
+var SC_TAGS = ["原生剧情","AI话题","编程教育","产品种草","AI研学","兴趣班","教育焦虑","教育理念","实践活动","升学托举"];
+// NB tags
+var NB_TAGS = ["原生剧情","校园剧情","升学焦虑","科学实验"];
+// SC brand options
+var SC_BRAND_OPTIONS = ["核桃编程","猿编程","西瓜创客","小码王"];
 
 function getFiltered(vids) {
-  var def = null;
-  for(var i=0;i<WEEK_DEFS.length;i++){if(WEEK_DEFS[i].key===currentWeek){def=WEEK_DEFS[i];break;}}
-  if(!def) return vids;
-  return vids.filter(function(v){return v.date>=def.start&&v.date<=def.end;});
+  var result = vids;
+  // Date filter
+  if (currentDays > 0) {
+    var anchor = new Date(currentAnchor + "T00:00:00");
+    var start = new Date(anchor);
+    start.setDate(start.getDate() - currentDays + 1);
+    var startStr = start.toISOString().slice(0,10);
+    result = result.filter(function(v){ return v.date >= startStr && v.date <= currentAnchor; });
+  }
+  // Brand filter
+  if (currentBrandFilter !== "all") {
+    result = result.filter(function(v){ return v.brand === currentBrandFilter; });
+  }
+  // Tag filter
+  if (currentTagFilter !== "all") {
+    result = result.filter(function(v){ return v.tags && v.tags.indexOf(currentTagFilter) >= 0; });
+  }
+  return result;
+}
+
+function resetAnchor() {
+  currentAnchor = "2026-05-27";
+  document.getElementById("anchor-date").value = currentAnchor;
+  renderAll();
+}
+
+function buildFilterBtns() {
+  // Brand filter buttons
+  var brandEl = document.getElementById("brand-filter");
+  var brands = currentBrand === "sc" ? SC_BRAND_OPTIONS : [];
+  var html = "<button class='fbtn active' data-brand='all'>全部</button>";
+  brands.forEach(function(b){ html += "<button class='fbtn' data-brand='"+b+"'>" + b + "</button>"; });
+  brandEl.innerHTML = html;
+  // Hide brand row for NB (only one brand)
+  document.getElementById("brand-row").style.display = currentBrand === "nb" ? "none" : "";
+
+  // Tag filter buttons
+  var tagEl = document.getElementById("tag-filter");
+  var tags = currentBrand === "sc" ? SC_TAGS : NB_TAGS;
+  html = "<button class='fbtn active' data-tag='all'>全部</button>";
+  tags.forEach(function(t){ html += "<button class='fbtn' data-tag='"+t+"'>" + t + "</button>"; });
+  tagEl.innerHTML = html;
+
+  // Reset filter values when switching brand
+  currentBrandFilter = "all";
+  currentTagFilter = "all";
+  currentDays = 30;
+
+  // Re-attach events
+  attachFilterEvents();
+}
+
+function attachFilterEvents() {
+  // Brand buttons
+  document.querySelectorAll("#brand-filter .fbtn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      currentBrandFilter = this.getAttribute("data-brand");
+      document.querySelectorAll("#brand-filter .fbtn").forEach(function(b){b.classList.remove("active");});
+      this.classList.add("active");
+      renderAll();
+    });
+  });
+  // Days buttons
+  document.querySelectorAll(".fbtn[data-days]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      currentDays = parseInt(this.getAttribute("data-days"));
+      document.querySelectorAll(".fbtn[data-days]").forEach(function(b){b.classList.remove("active");});
+      this.classList.add("active");
+      renderAll();
+    });
+  });
+  // Tag buttons
+  document.querySelectorAll("#tag-filter .fbtn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      currentTagFilter = this.getAttribute("data-tag");
+      document.querySelectorAll("#tag-filter .fbtn").forEach(function(b){b.classList.remove("active");});
+      this.classList.add("active");
+      renderAll();
+    });
+  });
+  // Anchor date
+  var anchorInput = document.getElementById("anchor-date");
+  if (anchorInput) {
+    anchorInput.addEventListener("change", function(){
+      currentAnchor = this.value;
+      renderAll();
+    });
+  }
+}
+
+function updateFilterStatus(vids) {
+  var brandLabel = currentBrandFilter === "all" ? "全部品牌" : currentBrandFilter;
+  var dateLabel;
+  if (currentDays === 0) {
+    dateLabel = "全部日期";
+  } else {
+    var anchor = new Date(currentAnchor + "T00:00:00");
+    var start = new Date(anchor);
+    start.setDate(start.getDate() - currentDays + 1);
+    dateLabel = start.toISOString().slice(0,10) + " ~ " + currentAnchor + "（近"+currentDays+"天）";
+  }
+  var tagLabel = currentTagFilter === "all" ? "全部标签" : currentTagFilter;
+  document.getElementById("filter-status-badge").textContent = brandLabel + " | " + dateLabel + " | " + tagLabel;
+  document.getElementById("countBadge").textContent = "📦 " + vids.length + "条视频";
 }
 
 var SC_BRANDS = ["核桃编程","猿编程","西瓜创客","小码王"];
@@ -783,30 +998,18 @@ function renderNBVideos(vids){
   document.getElementById("nb-video-title").textContent="④ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
 }
 
-function updateHeader(scVids, nbVids){
-  var vids=currentBrand==="sc"?scVids:nbVids;
-  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
-  var label=(!def||def.key==="all")?"全部":def.label;
-  document.getElementById("headerInfo").textContent=label+" · "+vids.length+"条";
+function renderAll(){
+  var scVids = currentBrand==="sc" ? getFiltered(SC_VIDEOS) : [];
+  var nbVids = currentBrand==="nb" ? getFiltered(NB_VIDEOS) : [];
+  var vids = currentBrand==="sc" ? scVids : nbVids;
+  updateFilterStatus(vids);
   if(currentBrand==="sc"){
-    var bs={}; vids.forEach(function(v){bs[v.brand]=(bs[v.brand]||0)+1;});
-    document.getElementById("countBadge").textContent="📦 "+vids.length+"条视频 · "+Object.keys(bs).length+"个品牌";
     document.getElementById("pageTitle").textContent="少儿编程 · 行业竞品洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 行业竞争格局 / 曝光结构 / 内容种草效率";
-  } else {
-    document.getElementById("countBadge").textContent="📦 NOBOOK "+vids.length+"条视频";
-    document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
-    document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
-  }
-}
-
-function renderAll(){
-  var scVids=getFiltered(SC_VIDEOS);
-  var nbVids=getFiltered(NB_VIDEOS);
-  updateHeader(scVids,nbVids);
-  if(currentBrand==="sc"){
     renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCVideos(scVids);
   } else {
+    document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
+    document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
     renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBVideos(nbVids);
   }
 }
@@ -817,19 +1020,12 @@ function switchBrand(b){
   document.getElementById("nb-area").style.display=b==="nb"?"block":"none";
   document.getElementById("tab-sc").className="brand-tab"+(b==="sc"?" active-sc":"");
   document.getElementById("tab-nb").className="brand-tab"+(b==="nb"?" active-nb":"");
-  document.querySelectorAll(".wf-btn.active").forEach(function(el){el.classList.remove("sc","nb");el.classList.add(b);});
+  buildFilterBtns();
   renderAll();
 }
 
-document.querySelectorAll(".wf-btn").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    currentWeek=this.getAttribute("data-week");
-    document.querySelectorAll(".wf-btn").forEach(function(b){b.classList.remove("active","sc","nb");});
-    this.classList.add("active",currentBrand);
-    renderAll();
-  });
-});
-
+// 初始化
+buildFilterBtns();
 renderAll();
 </script>
 </body>
