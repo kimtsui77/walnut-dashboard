@@ -300,7 +300,7 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
-  <h2 class="nb-h">② 内容系列分析 <span class="static-notice">📌 全周期（04/28-05/27首投）</span></h2>
+  <h2 class="nb-h">② 内容系列分析 <span class="static-notice">📌 全周期数据，随筛选更新</span></h2>
   <div class="series-grid" id="nb-series-cards"></div>
   <table>
     <thead><tr>
@@ -322,7 +322,7 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
-  <h2 class="nb-h">③.5 头部达人素材深度拆解 <span class="static-notice">📌 手动标注 · 2026-04-27首投</span></h2>
+  <h2 class="nb-h">④ 头部达人素材深度拆解 <span class="static-notice">📌 手动标注 · 2026-04-27首投</span></h2>
 
   <!-- 视频基础数据卡 -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px">
@@ -434,7 +434,7 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
-  <h2 class="nb-h" id="nb-video-title">④ 视频明细（共51条，按曝光降序）</h2>
+  <h2 class="nb-h" id="nb-video-title">⑤ 视频明细（共51条，按曝光降序）</h2>
   <table><thead><tr>
     <th style="width:24px">#</th><th>视频标题</th><th>内容系列</th><th>首投</th>
     <th>标签</th><th class="num">完播率</th>
@@ -445,7 +445,7 @@ a.vlink:hover{color:#4f46e5}
 </table></div>
 
 <div class="section">
-  <h2 class="nb-h">⑤ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
+  <h2 class="nb-h">⑥ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
   <div class="insight-grid">
     <div class="ins-card good"><h4>✅ 04/28后NOBOOK整体仍强势</h4><p>51条首投视频（过滤后），总曝光约2036万，自然流占89.4%。张拿铁系列（342万）、校园剧情（A3 23.79%）是期间高光素材。</p></div>
     <div class="ins-card good"><h4>✅ 校园剧情是顶级A3题材</h4><p>「山东课间」A3高达23.79%，真实还原校园场景+强话题性，对家长/学生群体种草力极强。建议加密这一内容方向。</p></div>
@@ -968,8 +968,8 @@ function renderSCVideos(vids){
 }
 
 // NB rendering
-var NB_SERIES_ORDER=["张拿铁系列","单身虎爸","西西贝贝","校园剧情","升学焦虑","母子日常","弗兰克家庭","父女/父亲系列","科学实验","其他原生剧情"];
-var NB_SERIES_COLORS=["#6366f1","#f59e0b","#10b981","#3b82f6","#ef4444","#8b5cf6","#06b6d4","#ec4899","#14b8a6","#94a3b8"];
+var NB_SERIES_ORDER=["小宝系列","张拿铁系列","单身虎爸","西西贝贝","校园剧情","升学焦虑","母子日常","弗兰克家庭","父女/父亲系列","科学实验","其他原生剧情"];
+var NB_SERIES_COLORS=["#f59e0b","#6366f1","#f59e0b","#10b981","#3b82f6","#ef4444","#8b5cf6","#06b6d4","#ec4899","#14b8a6","#94a3b8"];
 function calcSeriesStats(vids){
   var res={};
   vids.forEach(function(v){
@@ -1059,7 +1059,7 @@ function renderNBVideos(vids){
   }
   var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
   var label=(!def||def.key==="all")?"全部":def.label;
-  document.getElementById("nb-video-title").textContent="④ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
+  document.getElementById("nb-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
 }
 
 
