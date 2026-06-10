@@ -237,6 +237,7 @@ a.vlink:hover{color:#4f46e5}
     <div class="chart-box">
       <h3>种草效率矩阵：A3率 × 看后搜率（气泡=曝光）</h3>
       <canvas id="sc-bubble"></canvas>
+  <canvas id="sc-trend" style="margin:16px 0 0;display:block"></canvas>
     </div>
   </div>
 </div>
@@ -300,7 +301,7 @@ a.vlink:hover{color:#4f46e5}
 
 <div class="section">
   <h2 class="nb-h">② 内容系列分析 <span class="static-notice">📌 全周期数据，随筛选更新</span></h2>
-  <div class="series-grid" id="nb-series-cards"></div>
+  <canvas id="nb-series-bubble" height="280" style="margin:0 0 16px;display:block"></canvas>
   <table>
     <thead><tr>
       <th>内容系列</th><th class="num">条数</th><th class="num">总曝光</th>
@@ -322,6 +323,9 @@ a.vlink:hover{color:#4f46e5}
 
 <div class="section">
   <h2 class="nb-h">&#x2463; Q2 NOBOOK 达人投放分析&#xFF084;4-5&#x6708;&#xFF09; <span class="static-notice">&#x1F4CC; &#x624B;&#x52A8;&#x6807;&#x6CE8;</span></h2>
+
+  <!-- 月度趋势图 -->
+  <canvas id="nb-monthly-chart" height="180" style="margin:0 0 20px;max-width:520px;display:block"></canvas>
 
   <!-- 月度数据对比表 -->
   <div style="margin:0 0 20px">
@@ -869,6 +873,7 @@ function resetAnchor() {
   currentAnchor = "2026-05-27";
   document.getElementById("anchor-date").value = currentAnchor;
   renderAll();
+  renderNBMonthlyChart();
 }
 
 function buildFilterBtns() {
@@ -1084,7 +1089,7 @@ function renderSCSeg(vids){
   document.getElementById("sc-seg-ins").innerHTML=ins;
 }
 
-var scStackChart=null,scBubbleChart=null;
+var scStackChart=null,scBubbleChart=null,scTrendChart=null,nbBubbleChart=null,nbMonthlyChart=null;
 function renderSCCharts(vids){
   var s=calcBrandStats(vids,SC_BRANDS);
   if(scStackChart){scStackChart.destroy();scStackChart=null;}
@@ -1103,6 +1108,7 @@ function renderSCCharts(vids){
     options:{responsive:true,plugins:{legend:{position:"top",labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": A3 "+c.parsed.x+"% / 搜 "+c.parsed.y+"%";}}}},
       scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true}}}
   });
+  renderSCTrend(vids);
 }
 function renderSCVideos(vids){
   var sorted=vids.slice().sort(function(a,b){return b.total-a.total;});
@@ -1196,7 +1202,7 @@ function renderNBSeriesAnalysis(vids){
       +"<td class='num'><span class='"+rc+"'>"+a3+"</span></td><td class='num'>"+sw+"</td>"
       +"<td class='num'>"+fmtN(s.intr)+"</td><td><span class='"+rc+"'>"+rating+"</span></td><td style='font-size:10px;color:#475569'>"+note+"</td></tr>";
   });
-  document.getElementById("nb-series-cards").innerHTML=cardHtml;
+  renderNBBubble(ser);
   document.getElementById("nb-series-table").innerHTML=tableHtml;
 }
 function renderNBVideos(vids){
@@ -1369,6 +1375,39 @@ function renderNBPerfTable(vids) {
       +'</tr>';
   });
   el.innerHTML = html || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:12px">本周期无数据</td></tr>';
+}
+
+
+function renderNBBubble(ser){
+  var colors=["#6366f1","#10b981","#f59e0b","#ec4899","#06b6d4"];
+  var maxC=Math.max.apply(null,NB_SERIES_ORDER.map(function(n){return ser[n]?ser[n].count:0;}).concat([1]));
+  var ds=[];
+  NB_SERIES_ORDER.forEach(function(name,i){
+    var s=ser[name];if(!s||!s.count)return;
+    var a3=s.a3e>0?s.a3s/s.a3e:0;
+    var sw=s.se>0?s.ss/s.se:0;
+    var r=Math.max(8,Math.round(Math.sqrt(s.count/maxC)*32));
+    ds.push({label:name+"("+s.count+"条)",backgroundColor:colors[i%colors.length]+"bb",borderColor:colors[i%colors.length],data:[{x:parseFloat(a3.toFixed(2)),y:parseFloat(sw.toFixed(3)),r:r}]});
+  });
+  if(nbBubbleChart){nbBubbleChart.destroy();nbBubbleChart=null;}
+  nbBubbleChart=new Chart(document.getElementById("nb-series-bubble").getContext("2d"),{type:"bubble",data:{datasets:ds},options:{responsive:true,plugins:{title:{display:true,text:"内容系列：A3率 vs 看后搜率（气泡=视频量）",font:{size:11}},legend:{position:"right",labels:{boxWidth:9,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": A3 "+c.parsed.x+"% / 搜 "+c.parsed.y+"%";}}}},scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}}}}});
+}
+
+function renderNBMonthlyChart(){
+  if(nbMonthlyChart){nbMonthlyChart.destroy();nbMonthlyChart=null;}
+  var el=document.getElementById("nb-monthly-chart");if(!el)return;
+  nbMonthlyChart=new Chart(el.getContext("2d"),{type:"bar",data:{labels:["4月","5月"],datasets:[{label:"星图花费（万）",data:[80,100],backgroundColor:["rgba(99,102,241,0.65)","rgba(239,68,68,0.55)"],borderColor:["#6366f1","#ef4444"],borderWidth:1,yAxisID:"yS",order:2},{label:"ROI",data:[2.55,0.40],type:"line",borderColor:"#f97316",backgroundColor:"#f97316",pointRadius:7,pointBackgroundColor:"#f97316",borderWidth:2,yAxisID:"yR",order:1}]},options:{responsive:true,interaction:{mode:"index",intersect:false},plugins:{legend:{position:"top",labels:{boxWidth:10,font:{size:10}}}},scales:{yS:{type:"linear",position:"left",title:{display:true,text:"花费（万）",font:{size:10}},min:0,max:130,grid:{color:"#f1f5f9"}},yR:{type:"linear",position:"right",title:{display:true,text:"ROI",font:{size:10}},min:0,max:3.5,grid:{drawOnChartArea:false}}}}});
+}
+
+function renderSCTrend(vids){
+  var months={};
+  vids.forEach(function(v){var ym=v.date?v.date.substring(0,7):null;if(!ym)return;if(!months[ym])months[ym]={};if(!months[ym][v.brand])months[ym][v.brand]={a3s:0,cnt:0};months[ym][v.brand].a3s+=v.a3;months[ym][v.brand].cnt++;});
+  var ymList=Object.keys(months).sort();
+  var bColors={"核桃编程":"#6366f1","猿编程":"#f59e0b","小码王":"#10b981","西瓜创客":"#94a3b8"};
+  var active=SC_BRANDS.filter(function(b){return ymList.some(function(ym){return months[ym]&&months[ym][b]&&months[ym][b].cnt;});});
+  var ds=active.map(function(b){return{label:b,borderColor:bColors[b]||"#64748b",backgroundColor:bColors[b]||"#64748b",pointRadius:5,tension:0.3,spanGaps:false,data:ymList.map(function(ym){var d=months[ym]&&months[ym][b];return d&&d.cnt?parseFloat((d.a3s/d.cnt).toFixed(2)):null;})};});
+  if(scTrendChart){scTrendChart.destroy();scTrendChart=null;}
+  scTrendChart=new Chart(document.getElementById("sc-trend").getContext("2d"),{type:"line",data:{labels:ymList.map(function(ym){return ym.substring(5)+"月";}),datasets:ds},options:{responsive:true,plugins:{title:{display:true,text:"各品牌 A3率月度走势",font:{size:11}},legend:{position:"top",labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": "+c.raw+"%";}}}},scales:{x:{grid:{display:false}},y:{title:{display:true,text:"A3率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}}}}});
 }
 
 function renderAll(){
