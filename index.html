@@ -301,7 +301,7 @@ a.vlink:hover{color:#4f46e5}
 
 <div class="section">
   <h2 class="nb-h">② 内容系列分析 <span class="static-notice">📌 全周期数据，随筛选更新</span></h2>
-  <canvas id="nb-series-bubble" height="280" style="margin:0 0 16px;display:block"></canvas>
+  <div style="position:relative;height:320px;margin:0 0 16px"><canvas id="nb-series-bubble"></canvas></div>
   <table>
     <thead><tr>
       <th>内容系列</th><th class="num">条数</th><th class="num">总曝光</th>
@@ -325,7 +325,7 @@ a.vlink:hover{color:#4f46e5}
   <h2 class="nb-h">&#x2463; Q2 NOBOOK 达人投放分析&#xFF084;4-5&#x6708;&#xFF09; <span class="static-notice">&#x1F4CC; &#x624B;&#x52A8;&#x6807;&#x6CE8;</span></h2>
 
   <!-- 月度趋势图 -->
-  <canvas id="nb-monthly-chart" height="180" style="margin:0 0 20px;max-width:520px;display:block"></canvas>
+  <div style="position:relative;height:200px;max-width:540px;margin:0 0 20px"><canvas id="nb-monthly-chart"></canvas></div>
 
   <!-- 月度数据对比表 -->
   <div style="margin:0 0 20px">
@@ -1390,7 +1390,7 @@ function renderNBBubble(ser){
     ds.push({label:name+"("+s.count+"条)",backgroundColor:colors[i%colors.length]+"bb",borderColor:colors[i%colors.length],data:[{x:parseFloat(a3.toFixed(2)),y:parseFloat(sw.toFixed(3)),r:r}]});
   });
   if(nbBubbleChart){nbBubbleChart.destroy();nbBubbleChart=null;}
-  nbBubbleChart=new Chart(document.getElementById("nb-series-bubble").getContext("2d"),{type:"bubble",data:{datasets:ds},options:{responsive:true,plugins:{title:{display:true,text:"内容系列：A3率 vs 看后搜率（气泡=视频量）",font:{size:11}},legend:{position:"right",labels:{boxWidth:9,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": A3 "+c.parsed.x+"% / 搜 "+c.parsed.y+"%";}}}},scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}}}}});
+  nbBubbleChart=new Chart(document.getElementById("nb-series-bubble").getContext("2d"),{type:"bubble",data:{datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"内容系列：A3率 vs 看后搜率（气泡大小=视频量）",font:{size:11}},legend:{position:"bottom",labels:{boxWidth:9,font:{size:10},padding:8}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": A3 "+c.parsed.x+"% / 搜 "+c.parsed.y+"%";}}}},scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true,suggestedMax:15,grid:{color:"#f1f5f9"}},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true,grid:{color:"#f1f5f9"}}}}});
 }
 
 function renderNBMonthlyChart(){
@@ -1422,7 +1422,7 @@ function renderAll(){
   } else {
     document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
-    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBPerfTable(nbVids);renderNBVideos(nbVids);
+    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBPerfTable(nbVids);renderNBVideos(nbVids);renderNBMonthlyChart();
   }
 }
 
