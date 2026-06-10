@@ -144,6 +144,16 @@ a.vlink:hover{color:#4f46e5}
 .ins-card h4{font-size:12px;margin-bottom:6px;color:#2d3748}
 .ins-card p{font-size:11px;line-height:1.7;color:#4a5568}
 .ins-card .hl{font-weight:700}
+.vrow-hidden{display:none}
+.more-btn{display:inline-block;margin-top:12px;padding:7px 22px;background:#fff;border:1px solid #cbd5e1;border-radius:20px;font-size:12px;color:#475569;cursor:pointer;transition:.15s}
+.more-btn:hover{background:#f1f5f9;border-color:#94a3b8}
+.tbl-fold{margin-top:10px}
+.tbl-fold>summary{cursor:pointer;font-size:12px;color:#64748b;list-style:none;padding:6px 0;user-select:none}
+.tbl-fold>summary::-webkit-details-marker{display:none}
+.tbl-fold>summary::before{content:"▸ ";color:#94a3b8}
+.tbl-fold[open]>summary::before{content:"▾ "}
+.insight-top{background:linear-gradient(180deg,#f8fafc,#fff);border:1px solid #eef2f7;border-radius:12px;padding:16px 18px;margin:0 0 18px}
+.insight-top>.it-h{font-size:14px;font-weight:700;color:#1e293b;margin:0 0 12px;display:flex;align-items:center;gap:6px}
 /* visibility */
 .sc-only,.nb-only{display:none}
 .footer{text-align:center;color:#94a3b8;font-size:11px;padding:16px 32px}
@@ -202,8 +212,25 @@ a.vlink:hover{color:#4f46e5}
 
 <div class="kpi-grid kpi-grid-4" id="sc-kpi"></div>
 
+<div class="insight-top">
+  <div class="it-h">🔍 核心洞察 & 策略建议 <span style="font-size:11px;font-weight:400;color:#94a3b8">先看结论，再看数据</span></div>
+  <div class="insight-grid">
+    <div class="ins-card good"><h4>✅ 核桃编程矩阵化领先</h4><p>55条视频（全周期在榜），原生剧情均A3 11%+，翠花烧烤（14.61%）、段子手小孩（21.37%）、青春期儿子（18.37%）是旗舰素材，自然流驱动。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 猿编程「高曝低转」</h4><p>头部2条加热视频（33万+曝光）A3分别仅0.16%和0.04%。机器狗种草A3尚可（≈4%）但自然流天花板极低，紫薯萌宠（A3 17.88%）是未被放量的潜力素材。</p></div>
+    <div class="ins-card sc-col"><h4>💡 竞品原生剧情赛道空白</h4><p>猿编程/西瓜/小码王在「原生剧情」方向几乎为零。核桃翠花/青春期/段子手系列完全无对手，是持续加密的差异化壁垒。</p></div>
+    <div class="ins-card good"><h4>✅ 自然爆款规律</h4><p>核桃高A3自然爆款共性：强叙事钩子 + 低品牌侵入感 + 家庭代际共鸣。「青春期/翠花/段子手」三类选题可继续复刻扩量。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 西瓜/小码王声量极微</h4><p>西瓜创客4条总曝光约15万，小码王3条仅约1.5万。属于声量不足以构成威胁的对手，但小码王AI研学赛道的精准人群值得关注。</p></div>
+    <div class="ins-card sc-col"><h4>🔑 优化建议</h4><p>① 原生剧情加密「代际冲突+AI」题材；② AI话题持续加热，聚焦「不卷成绩/AI不替代努力」角度；③ 规避编程教育叙事（竞品验证A3极低）。</p></div>
+  </div>
+</div>
+
 <div class="section">
-  <h2 class="sc-h">① 品牌竞争格局 · 核心指标对比 <span class="tip">随周期筛选动态更新</span></h2>
+  <h2 class="sc-h">① 品牌竞争格局 <span class="tip">随周期筛选动态更新</span></h2>
+  <div class="chart-box" style="margin-bottom:14px">
+    <h3>各品牌总曝光（万） vs 加权A3率</h3>
+    <div style="position:relative;height:260px"><canvas id="sc-overview-chart"></canvas></div>
+  </div>
+  <details class="tbl-fold"><summary>展开各品牌完整指标明细表</summary>
   <table><thead><tr>
     <th>品牌</th><th class="num">条数</th><th class="num">条数占比</th>
     <th class="num">总曝光</th><th class="num">曝光占比</th>
@@ -213,7 +240,7 @@ a.vlink:hover{color:#4f46e5}
     <th class="num">看后搜（加权）</th><th class="num">互动量</th><th class="num">均互动</th>
   </tr></thead>
   <tbody id="sc-overview"></tbody>
-</table></div>
+</table></details></div>
 
 <div class="section">
   <h2 class="sc-h">② 曝光分段分布 <span class="tip">随周期筛选更新</span></h2>
@@ -267,18 +294,8 @@ a.vlink:hover{color:#4f46e5}
     <th class="num">A3率</th><th class="num">看后搜</th><th class="num">互动量</th><th>链接</th>
   </tr></thead>
   <tbody id="sc-videos"></tbody>
-</table></div>
-
-<div class="section">
-  <h2 class="sc-h">⑥ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
-  <div class="insight-grid">
-    <div class="ins-card good"><h4>✅ 核桃编程矩阵化领先</h4><p>55条视频（全周期在榜），原生剧情均A3 11%+，翠花烧烤（14.61%）、段子手小孩（21.37%）、青春期儿子（18.37%）是旗舰素材，自然流驱动。</p></div>
-    <div class="ins-card warn"><h4>⚠️ 猿编程「高曝低转」</h4><p>头部2条加热视频（33万+曝光）A3分别仅0.16%和0.04%。机器狗种草A3尚可（≈4%）但自然流天花板极低，紫薯萌宠（A3 17.88%）是未被放量的潜力素材。</p></div>
-    <div class="ins-card sc-col"><h4>💡 竞品原生剧情赛道空白</h4><p>猿编程/西瓜/小码王在「原生剧情」方向几乎为零。核桃翠花/青春期/段子手系列完全无对手，是持续加密的差异化壁垒。</p></div>
-    <div class="ins-card good"><h4>✅ 自然爆款规律</h4><p>核桃高A3自然爆款共性：强叙事钩子 + 低品牌侵入感 + 家庭代际共鸣。「青春期/翠花/段子手」三类选题可继续复刻扩量。</p></div>
-    <div class="ins-card warn"><h4>⚠️ 西瓜/小码王声量极微</h4><p>西瓜创客4条总曝光约15万，小码王3条仅约1.5万。属于声量不足以构成威胁的对手，但小码王AI研学赛道的精准人群值得关注。</p></div>
-    <div class="ins-card sc-col"><h4>🔑 优化建议</h4><p>① 原生剧情加密「代际冲突+AI」题材；② AI话题持续加热，聚焦「不卷成绩/AI不替代努力」角度；③ 规避编程教育叙事（竞品验证A3极低）。</p></div>
-  </div>
+</table>
+<div id="sc-videos-more" style="text-align:center"></div>
 </div>
 
 </div><!-- end sc-area -->
@@ -287,6 +304,18 @@ a.vlink:hover{color:#4f46e5}
 <div id="nb-area" style="display:none">
 
 <div class="kpi-grid kpi-grid-5" id="nb-kpi"></div>
+
+<div class="insight-top">
+  <div class="it-h">🔍 核心洞察 & 策略建议 <span style="font-size:11px;font-weight:400;color:#94a3b8">先看结论，再看数据</span></div>
+  <div class="insight-grid">
+    <div class="ins-card good"><h4>✅ 趣味剧情是高A3种草公式</h4><p>亲子/校园内容 A3 率达 15–24%，远超产品讲解型。核桃可借用「儿童视角叙述 AI 学习日常」剧情结构，将产品轻植入日常家庭场景，种草效率更高。</p></div>
+    <div class="ins-card good"><h4>✅ 学科痛点内容驱动看后搜</h4><p>看后搜率 &gt;0.5% 的视频全部聚焦具体学科痛点（物理电路、化学实验、选科焦虑）。核桃应制作「AI 辅导 + 编程思维 + 具体学科」结合的内容，用痛点标题触发搜索。</p></div>
+    <div class="ins-card nb-col"><h4>🔑 先验证爆款再扩量</h4><p>NOBOOK 5 月花费 ▲25% 但 ROI ▼84%，根本原因是无爆款支撑就扩量。核桃应用小预算测试 3–5 条不同脚本→找到 ROI&gt;2 的单条→再复制投放，避免同类踩坑。</p></div>
+    <div class="ins-card nb-col"><h4>🔑 IP 系列化积累品牌认知</h4><p>固定 IP 角色（校园剧情、小宝系列）带来认知复利——粉丝主动搜索追更，单次投放效益随序列积累。核桃可以打造「AI 时代编程娃」固定 IP，系列化降低边际获客成本。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 避免单一头部达人依赖</h4><p>NOBOOK 4 月 ROI=2.55 主要由董思玗（ROI=13）拉升，其余达人 ROI&lt;1。核桃应建立多层次投放矩阵：头部爆量 + 腰部稳量 + 尾部测试，降低单一达人风险。</p></div>
+    <div class="ins-card warn"><h4>⚠️ 强化品牌词露出提升看后搜</h4><p>NOBOOK 整体看后搜率 &lt;0.1%，根源是品牌词植入弱、搜索承接不足。核桃应在脚本前 5 秒、结尾 CTA、字幕中明确出现「核桃编程」，配合搜索词投放形成闭环。</p></div>
+  </div>
+</div>
 
 <div class="section">
   <h2 class="nb-h">① 曝光分段分布 <span class="tip">随周期筛选更新</span></h2>
@@ -589,18 +618,8 @@ a.vlink:hover{color:#4f46e5}
     <th class="num">A3率</th><th class="num">看后搜</th><th class="num">互动量</th><th>链接</th>
   </tr></thead>
   <tbody id="nb-videos"></tbody>
-</table></div>
-
-<div class="section">
-  <h2 class="nb-h">⑥ 核心洞察 <span class="static-notice">📌 全周期</span></h2>
-  <div class="insight-grid">
-    <div class="ins-card good"><h4>✅ 趣味剧情是高A3种草公式</h4><p>亲子/校园内容 A3 率达 15–24%，远超产品讲解型。核桃可借用「儿童视角叙述 AI 学习日常」剧情结构，将产品轻植入日常家庭场景，种草效率更高。</p></div>
-    <div class="ins-card good"><h4>✅ 学科痛点内容驱动看后搜</h4><p>看后搜率 &gt;0.5% 的视频全部聚焦具体学科痛点（物理电路、化学实验、选科焦虑）。核桃应制作「AI 辅导 + 编程思维 + 具体学科」结合的内容，用痛点标题触发搜索。</p></div>
-    <div class="ins-card nb-col"><h4>🔑 先验证爆款再扩量</h4><p>NOBOOK 5 月花费 ▲25% 但 ROI ▼84%，根本原因是无爆款支撑就扩量。核桃应用小预算测试 3–5 条不同脚本→找到 ROI&gt;2 的单条→再复制投放，避免同类踩坑。</p></div>
-    <div class="ins-card nb-col"><h4>🔑 IP 系列化积累品牌认知</h4><p>固定 IP 角色（校园剧情、小宝系列）带来认知复利——粉丝主动搜索追更，单次投放效益随序列积累。核桃可以打造「AI 时代编程娃」固定 IP，系列化降低边际获客成本。</p></div>
-    <div class="ins-card warn"><h4>⚠️ 避免单一头部达人依赖</h4><p>NOBOOK 4 月 ROI=2.55 主要由董思玗（ROI=13）拉升，其余达人 ROI&lt;1。核桃应建立多层次投放矩阵：头部爆量 + 腰部稳量 + 尾部测试，降低单一达人风险。</p></div>
-    <div class="ins-card warn"><h4>⚠️ 强化品牌词露出提升看后搜</h4><p>NOBOOK 整体看后搜率 &lt;0.1%，根源是品牌词植入弱、搜索承接不足。核桃应在脚本前 5 秒、结尾 CTA、字幕中明确出现「核桃编程」，配合搜索词投放形成闭环。</p></div>
-  </div>
+</table>
+<div id="nb-videos-more" style="text-align:center"></div>
 </div>
 
 </div><!-- end nb-area -->
@@ -968,6 +987,23 @@ var SEG_NB = ["seg-c-nb-0","seg-c-nb-1","seg-c-nb-2","seg-c-nb-3","seg-c-nb-4","
 function fmtN(n){if(n==null||isNaN(n))return"-";return Math.round(n).toLocaleString("zh-CN");}
 function fmtW(n){if(n==null||isNaN(n))return"-";if(n>=10000000)return(n/10000000).toFixed(1)+"千万";if(n>=10000)return(n/10000).toFixed(1)+"万";return Math.round(n).toLocaleString();}
 function fmtP(n,d){if(n==null)return"-";return n.toFixed(d||2)+"%";}
+var VIDEO_LIMIT=12;
+function applyVideoFold(tbodyId,moreId,total){
+  var tbody=document.getElementById(tbodyId);
+  var rows=tbody.getElementsByTagName("tr");
+  var moreBox=document.getElementById(moreId);
+  if(!moreBox)return;
+  if(total<=VIDEO_LIMIT){moreBox.innerHTML="";return;}
+  for(var i=VIDEO_LIMIT;i<rows.length;i++){rows[i].style.display="none";}
+  moreBox.innerHTML='<button class="more-btn" data-open="0">展开全部 '+total+' 条 ↓</button>';
+  var btn=moreBox.firstChild;
+  btn.onclick=function(){
+    var open=btn.getAttribute("data-open")==="1";
+    for(var j=VIDEO_LIMIT;j<rows.length;j++){rows[j].style.display=open?"none":"";}
+    btn.setAttribute("data-open",open?"0":"1");
+    btn.textContent=open?("展开全部 "+total+" 条 ↓"):("收起，仅看 Top"+VIDEO_LIMIT+" ↑");
+  };
+}
 function renderTags(tags){
   if(!tags||!tags.length) return "";
   return tags.slice(0,2).map(function(t){return '<span class="vtag '+(tagCls[t]||"vtag-method")+'">'+t+"</span>";}).join("");
@@ -1089,7 +1125,24 @@ function renderSCSeg(vids){
   document.getElementById("sc-seg-ins").innerHTML=ins;
 }
 
-var scStackChart=null,scBubbleChart=null,scTrendChart=null,nbBubbleChart=null,nbMonthlyChart=null;
+var scStackChart=null,scBubbleChart=null,scTrendChart=null,nbBubbleChart=null,nbMonthlyChart=null,scOverviewChart=null;
+function renderSCOverviewChart(vids){
+  var s=calcBrandStats(vids,SC_BRANDS);
+  var brands=SC_BRANDS.filter(function(b){return s[b]&&s[b].count;});
+  var el=document.getElementById("sc-overview-chart");if(!el)return;
+  if(scOverviewChart){scOverviewChart.destroy();scOverviewChart=null;}
+  scOverviewChart=new Chart(el.getContext("2d"),{
+    data:{labels:brands,datasets:[
+      {type:"bar",label:"总曝光（万）",data:brands.map(function(b){return Math.round(s[b].tot/10000);}),backgroundColor:brands.map(function(b){return b==="核桃编程"?"#6366f1":"#c7d2fe";}),yAxisID:"yE",order:2,borderRadius:4},
+      {type:"line",label:"加权A3率(%)",data:brands.map(function(b){return parseFloat(s[b].a3w);}),borderColor:"#10b981",backgroundColor:"#10b981",pointRadius:5,pointBackgroundColor:"#10b981",borderWidth:2,yAxisID:"yA",order:1}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+      plugins:{legend:{position:"top",labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+": "+c.raw+(c.dataset.yAxisID==="yA"?"%":"万");}}}},
+      scales:{yE:{type:"linear",position:"left",title:{display:true,text:"总曝光（万）",font:{size:10}},beginAtZero:true,grid:{color:"#f1f5f9"}},
+        yA:{type:"linear",position:"right",title:{display:true,text:"A3率(%)",font:{size:10}},beginAtZero:true,grid:{drawOnChartArea:false}},
+        x:{grid:{display:false}}}}
+  });
+}
 function renderSCCharts(vids){
   var s=calcBrandStats(vids,SC_BRANDS);
   if(scStackChart){scStackChart.destroy();scStackChart=null;}
@@ -1109,6 +1162,7 @@ function renderSCCharts(vids){
       scales:{x:{title:{display:true,text:"A3率(%)"},beginAtZero:true},y:{title:{display:true,text:"看后搜率(%)"},beginAtZero:true}}}
   });
   renderSCTrend(vids);
+  renderSCOverviewChart(vids);
 }
 function renderSCVideos(vids){
   var sorted=vids.slice().sort(function(a,b){return b.total-a.total;});
@@ -1133,9 +1187,9 @@ function renderSCVideos(vids){
       +"<td>"+link+"</td>";
     tbody.appendChild(tr);
   }
-  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
-  var label=(!def||def.key==="all")?"全部":def.label;
-  document.getElementById("sc-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
+  applyVideoFold("sc-videos","sc-videos-more",sorted.length);
+  var label=(currentDays===0)?"全部":("近"+currentDays+"天");
+  document.getElementById("sc-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，默认显示曝光 Top"+VIDEO_LIMIT+"）";
 }
 
 // NB rendering
@@ -1228,9 +1282,9 @@ function renderNBVideos(vids){
       +"<td>"+link+"</td>";
     tbody.appendChild(tr);
   }
-  var def=null;for(var k=0;k<WEEK_DEFS.length;k++){if(WEEK_DEFS[k].key===currentWeek){def=WEEK_DEFS[k];break;}}
-  var label=(!def||def.key==="all")?"全部":def.label;
-  document.getElementById("nb-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，按曝光降序）";
+  applyVideoFold("nb-videos","nb-videos-more",sorted.length);
+  var label=(currentDays===0)?"全部":("近"+currentDays+"天");
+  document.getElementById("nb-video-title").textContent="⑤ 视频明细（"+label+"，共"+vids.length+"条，默认显示曝光 Top"+VIDEO_LIMIT+"）";
 }
 
 
