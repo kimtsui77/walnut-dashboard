@@ -270,7 +270,7 @@ a.vlink:hover{color:#4f46e5}
 </div>
 
 <div class="section">
-  <h2 class="sc-h">④ 竞品内容方向分析 <span class="static-notice">📌 全周期</span></h2>
+  <h2 class="sc-h">④ 竞品内容方向分析 <span class="static-notice">随筛选动态更新</span></h2>
   <div style="font-size:11px;font-weight:700;color:#4a5568;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">A · 各品牌选题标签分布（条数 + 均A3）</div>
   <div class="content-grid" id="sc-content-cards"></div>
 
@@ -279,6 +279,9 @@ a.vlink:hover{color:#4f46e5}
     <thead><tr><th>评定</th><th>品牌</th><th>内容方向</th><th>代表视频</th><th class="num">条数</th><th class="num">均曝光</th><th class="num">均A3</th><th class="num">均看后搜</th><th>评估</th></tr></thead>
     <tbody id="sc-perf-body"></tbody>
   </table>
+
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:16px 0 10px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">C · 爆款脚本拆解 &amp; 内容分析 <span style="font-size:10px;font-weight:400;color:#94a3b8">（随筛选动态更新 · 无爆款则拆视频数据与内容）</span></div>
+  <div id="sc-script-analysis"></div>
 
   <div style="margin-top:12px;background:#f8fafc;border-radius:8px;padding:12px 16px;font-size:11px;color:#475569;line-height:1.8">
     <b>核心洞察：</b>核桃「原生剧情×AI话题」双轨驱动，A3均超竞品5-20倍；猿编程最大问题是花大预算加热泛科普内容（A3极低），而其高A3潜力素材（紫薯萌宠）却停留在自然流。<b>建议</b>：继续加密原生剧情+AI叙事双轨，竞品在这一赛道几乎没有对手。
@@ -392,221 +395,9 @@ a.vlink:hover{color:#4f46e5}
   <div style="font-size:10px;color:#94a3b8;margin-top:5px">* 花费与ROI为手动标注；视频数/A3率/看后搜率根据巨量云图在榜数据加权计算</div>
   </div>
 
-    <!-- B. TOP3达人内容分析 -->
-  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:4px 0 12px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">B · TOP3 达人内容分析</div>
-
-  <!-- TOP3对比表 -->
-  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:16px">
-    <thead>
-      <tr style="background:#f1f5f9;text-align:left">
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:12%">达人</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:14%">内容类型</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:8%">曝光</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:8%">A3率</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:9%">看后搜率</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0;width:8%">ROI</th>
-        <th style="padding:8px 12px;color:#475569;font-weight:600;border-bottom:2px solid #e2e8f0">内容诊断</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom:1px solid #f1f5f9;background:#f0fdf4">
-        <td style="padding:9px 12px;font-weight:700;color:#065f46">董思玗<br><span style="font-size:9px;font-weight:400;color:#6b7280">548w粉 · 04/27</span></td>
-        <td style="padding:9px 12px;color:#374151">戏精宝宝剧情<br>小宝IP系列</td>
-        <td style="padding:9px 12px;font-weight:700;color:#1d4ed8">1000万+</td>
-        <td style="padding:9px 12px;font-weight:700;color:#16a34a">17.06%</td>
-        <td style="padding:9px 12px;font-weight:700;color:#16a34a">0.56%</td>
-        <td style="padding:9px 12px;font-weight:700;color:#16a34a;font-size:14px">13</td>
-        <td style="padding:9px 12px;color:#374151">✅ 品牌植入极轻，IP信任驱动搜索；完播率12.72%，内容自传播强；A4=1100 是Q2竞品最高</td>
-      </tr>
-      <tr style="border-bottom:1px solid #f1f5f9;background:#fef9f0">
-        <td style="padding:9px 12px;font-weight:700;color:#92400e">张拿铁<br><span style="font-size:9px;font-weight:400;color:#6b7280">05/24首投</span></td>
-        <td style="padding:9px 12px;color:#374151">原生姐弟情感剧情<br>与品牌无关联</td>
-        <td style="padding:9px 12px;color:#374151">342万</td>
-        <td style="padding:9px 12px;color:#374151">13.83%</td>
-        <td style="padding:9px 12px;font-weight:700;color:#dc2626">0.03%</td>
-        <td style="padding:9px 12px;font-weight:700;color:#dc2626">&lt;0.1</td>
-        <td style="padding:9px 12px;color:#374151">❌ 内容主题：「拿铁对父母爱情的困惑」—品牌仅出现在标题末尾（缝合型植入）。受众关注姐弟情感剧情，与NOBOOK目标用户（初中物化生家长）完全错位。曝光真实、A3尚可，但用户心智不相关，无搜索意向</td>
-      </tr>
-      <tr style="background:#fef6f6">
-        <td style="padding:9px 12px;font-weight:700;color:#991b1b">OK<br><span style="font-size:9px;font-weight:400;color:#6b7280">未进入在榜数据</span></td>
-        <td style="padding:9px 12px;color:#9ca3af">暂无视频在榜数据</td>
-        <td style="padding:9px 12px;color:#9ca3af">—</td>
-        <td style="padding:9px 12px;color:#9ca3af">—</td>
-        <td style="padding:9px 12px;color:#9ca3af">—</td>
-        <td style="padding:9px 12px;font-weight:700;color:#dc2626">&lt;0.1</td>
-        <td style="padding:9px 12px;color:#374151">❌ 未出现在巨量云图在榜数据中，说明内容自传播极弱——依赖加热维持曝光，投放停止即失效。高粉丝量带来的是粉丝圈层流量，而非对NOBOOK产品有购买意向的受众</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 小宝脚本拆解 -->
-  <div style="font-size:10px;font-weight:700;color:#4a5568;margin:0 0 8px;padding-left:8px;border-left:3px solid #1d4ed8">🎬 爆款脚本结构拆解（董思玗·小宝 ROI=13）</div>
-  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:14px">
-    <thead>
-      <tr style="background:#f1f5f9;text-align:left">
-        <th style="padding:7px 10px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0;width:18%">段落</th>
-        <th style="padding:7px 10px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0;width:20%">时长</th>
-        <th style="padding:7px 10px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0">内容设计</th>
-        <th style="padding:7px 10px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0;width:28%">转化作用</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom:1px solid #f5f5f5">
-        <td style="padding:7px 10px;font-weight:600;color:#6366f1">① 悬念开场</td>
-        <td style="padding:7px 10px;color:#6b7280">0–3s</td>
-        <td style="padding:7px 10px;color:#374151">小宝抛出结论「甭管怎样，我还是达到目的了」，不铺垫背景</td>
-        <td style="padding:7px 10px;color:#6b7280">前3s完播率高，触发算法推流</td>
-      </tr>
-      <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa">
-        <td style="padding:7px 10px;font-weight:600;color:#f59e0b">② 冲突建立</td>
-        <td style="padding:7px 10px;color:#6b7280">3–15s</td>
-        <td style="padding:7px 10px;color:#374151">大人设置障碍，小宝戏精发作—夸张表情、耍赖逻辑</td>
-        <td style="padding:7px 10px;color:#6b7280">家长共鸣强，完播驱动力</td>
-      </tr>
-      <tr style="border-bottom:1px solid #f5f5f5">
-        <td style="padding:7px 10px;font-weight:600;color:#10b981">③ 爆发高光</td>
-        <td style="padding:7px 10px;color:#6b7280">15–40s</td>
-        <td style="padding:7px 10px;color:#374151">小宝用儿童式逻辑「赢了」，成人哭笑不得</td>
-        <td style="padding:7px 10px;color:#6b7280">出人意料=分享/互动驱动点，A3率17%来源</td>
-      </tr>
-      <tr style="border-bottom:1px solid #f5f5f5;background:#fafafa">
-        <td style="padding:7px 10px;font-weight:600;color:#8b5cf6">④ 品牌植入</td>
-        <td style="padding:7px 10px;color:#6b7280">40–55s</td>
-        <td style="padding:7px 10px;color:#374151">小宝「目的」=获得NOBOOK，孩子主动要求而非家长介绍</td>
-        <td style="padding:7px 10px;color:#6b7280">看后搜0.56%、A4=1100 来源；植入时机和强度最关键</td>
-      </tr>
-      <tr>
-        <td style="padding:7px 10px;font-weight:600;color:#06b6d4">⑤ 收尾CTA</td>
-        <td style="padding:7px 10px;color:#6b7280">55s–1.5min</td>
-        <td style="padding:7px 10px;color:#374151">快节奏收尾，不拖沓；品牌信息+简短引导</td>
-        <td style="padding:7px 10px;color:#6b7280">完播率12.72%，结尾控制在30s内是关键</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 爆款公式总结行 -->
-  <div style="background:#1e3a5f;border-radius:8px;padding:12px 16px;color:#fff;font-size:11px;margin-bottom:20px">
-    <span style="color:#93c5fd;font-weight:700">爆款公式：</span>
-    悬念开场 → 亲子冲突 → 儿童式反转 → 孩子主动要产品（植入）→ 快节奏收尾
-    <span style="margin-left:16px;color:#bfdbfe">▸ 核心启示：孩子主动要求 &gt; 家长被动介绍；IP系列化 &gt; 单次合作</span>
-  </div>
-
-  <!-- C. 高看后搜内容分析 -->
-    <!-- C. 高看后搜内容分析 -->
-  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:4px 0 12px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">C · 高看后搜内容规律拆解（看后搜率&gt;0.5%，共6条）</div>
-
-  <!-- 4月 3条 -->
-  <div style="font-size:10px;font-weight:700;color:#1d4ed8;margin-bottom:8px;padding:4px 10px;background:#eff6ff;border-radius:6px;display:inline-block">📅 4月发布（3条）· 首投 04/14–04/27</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
-    <div style="background:#f8fafc;border-radius:10px;padding:14px;border-left:3px solid #6366f1">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">董思玗（小宝）</div>
-        <div style="background:#6366f1;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">0.74%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">548w粉 · 报价15w · 曝光315万 · 04/27</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid #e2e8f0;padding-top:6px">
-        内容型：戏精宝宝剧情，品牌极轻植入<br>
-        看后搜驱动：小宝IP粉丝信任度高，广告感弱，内容出圈后主动搜索品牌<br>
-        <span style="color:#6366f1;font-weight:600">公式：IP信任 → 自发搜索</span>
-      </div>
-    </div>
-    <div style="background:#f8fafc;border-radius:10px;padding:14px;border-left:3px solid #059669">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">小敏家</div>
-        <div style="background:#059669;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">0.64%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">47.6w粉 · 报价3.3w · 曝光6.7万 · 04/14</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid #e2e8f0;padding-top:6px">
-        内容型：孩子期中前自发备考，数学满分<br>
-        看后搜驱动：<b>正面情绪触发</b>—家长看到孩子主动备考和扩科要片，想查看如何实现<br>
-        <span style="color:#059669;font-weight:600">公式：期望结果展示 → 家长搜索路径</span>
-      </div>
-    </div>
-    <div style="background:#f8fafc;border-radius:10px;padding:14px;border-left:3px solid #7c3aed">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">小张老师（大公鸡版）</div>
-        <div style="background:#7c3aed;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">0.81%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">21.8w粉 · 报价3300 · 曝光1.1万 · 04/22</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid #e2e8f0;padding-top:6px">
-        内容型：老师视角，男孩爱搞破坏，虚拟实验正当化<br>
-        看后搜驱动：<b>权威背书+新奇角度</b>—「浓硫酸腐蚀」等具体实验召唤好奇心<br>
-        <span style="color:#7c3aed;font-weight:600">公式：教师专业背书 + 独特场景 → 搜索驱动</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5月 3条 -->
-  <div style="font-size:10px;font-weight:700;color:#b45309;margin-bottom:8px;padding:4px 10px;background:#fef3c7;border-radius:6px;display:inline-block">📅 5月发布（3条）· 首投 05/03–05/29</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
-    <div style="background:#f8fafc;border-radius:10px;padding:14px;border-left:3px solid #0891b2">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">丹丹要努力</div>
-        <div style="background:#0891b2;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">0.76%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">37w粉 · 报价1.29w · 曝光10.4万 · 05/11</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid #e2e8f0;padding-top:6px">
-        内容型：妈妈视角，初二物理实验题失分痛点<br>
-        看后搜驱动：<b>具体痛点命中</b>—「换个题型就懵」，初中家长高度共鸣，看完想搜解决方案<br>
-        <span style="color:#0891b2;font-weight:600">公式：学科痛点具体化 → 搜索验证</span>
-      </div>
-    </div>
-    <div style="background:#f8fafc;border-radius:10px;padding:14px;border-left:3px solid #d97706">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">饭桶妹</div>
-        <div style="background:#d97706;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">0.65%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">3.5w粉 · 报价6500 · 曝光4.7万 · 05/03</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid #e2e8f0;padding-top:6px">
-        内容型：生活日记vlog，孩子用平板做虚拟实验<br>
-        看后搜驱动：<b>强真实感</b>—「2000+虚拟实验」具体数字引发好奇，非广告调性强<br>
-        <span style="color:#d97706;font-weight:600">公式：真实生活场景 + 数字锚点 → 好奇搜索</span>
-      </div>
-    </div>
-    <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:10px;padding:14px;border-left:3px solid #f59e0b;position:relative">
-      <div style="position:absolute;top:8px;right:8px;background:#f59e0b;color:#fff;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700">看后搜最高</div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#1e293b">刘老师巡洛杉矶</div>
-        <div style="background:#b45309;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">1.09%</div>
-      </div>
-      <div style="font-size:10px;color:#64748b;margin-bottom:6px">14w粉 · 报价4700 · 曝光1.6万 · 05/29</div>
-      <div style="font-size:10px;color:#374151;line-height:1.7;border-top:1px solid rgba(0,0,0,.1);padding-top:6px">
-        内容型：美国华人妈妈，买不到实验材料，国内朋友推荐NOBOOK<br>
-        看后搜驱动：<b>信息差+从众心理</b>—「国内家长圈早就有了」，激发搜索验证<br>
-        <span style="color:#b45309;font-weight:600">公式：海外视角信息差 + 从众导向 → 搜索量最高</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 规律总结 -->
-  <div style="background:#1e293b;border-radius:12px;padding:16px 20px;color:#fff">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px">💡 看后搜高的内容公式总结</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:11px">
-      <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px">
-        <div style="font-weight:700;color:#93c5fd;margin-bottom:6px">① 学科关键词具体化</div>
-        <div style="color:#cbd5e1;line-height:1.7">标题/文案将「物理实验题」「化学元素」等具体学科问题嵌入文案，触发用户主动搜索意对</div>
-      </div>
-      <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px">
-        <div style="font-weight:700;color:#6ee7b7;margin-bottom:6px">② 非常规视角优先</div>
-        <div style="color:#cbd5e1;line-height:1.7">海外华人1.09% &gt; 老师0.81% &gt; 妈妈0.64-0.76%。越新鲜的视角，看后搜越高</div>
-      </div>
-      <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px">
-        <div style="font-weight:700;color:#fcd34d;margin-bottom:6px">③ 具体痛点 vs 泛化好处</div>
-        <div style="color:#cbd5e1;line-height:1.7">「换个题型就懵」&gt;「帮助学习物理」。越具体的场景描述，搜索意对越高</div>
-      </div>
-      <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px">
-        <div style="font-weight:700;color:#f9a8d4;margin-bottom:6px">④ 数字锚点引发好奇</div>
-        <div style="color:#cbd5e1;line-height:1.7">「2000+虚拟实验」「从小学到高中全部有」等具体产品信息，触发用户搜索验证</div>
-      </div>
-    </div>
-    <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;color:#94a3b8;line-height:1.8">
-      <b style="color:#f8fafc">对 NOBOOK 的建议：</b>
-      降低对拿铁/OK 等大号流量达人的依赖—明星效应 ≠ 转化。重点投资：
-      ① 具体学科痛点型（初高中物化生家长圈）；
-      ② 非常规视角（海外华人/老师）；
-      ③ 复制小宝系列IP策略—单条爆款参考价值有限，需要系列化命名带来认知复利
-    </div>
-  </div>
+    <!-- B. 爆款脚本拆解 & 内容分析（动态，随筛选） -->
+  <div style="font-size:11px;font-weight:700;color:#4a5568;margin:4px 0 12px;padding-bottom:5px;border-bottom:2px solid #f0f2f5">B · 爆款脚本拆解 &amp; 内容分析 <span style="font-size:10px;font-weight:400;color:#94a3b8">（随筛选动态更新 · 无爆款则拆视频数据与内容）</span></div>
+  <div id="nb-script-analysis"></div>
 </div>
 
 <div class="section">
@@ -1418,6 +1209,48 @@ function renderSCContentAnalysis(vids) {
   perfEl.innerHTML = perfHtml || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:12px">本周期无数据</td></tr>';
 }
 
+function scriptContentNote(v,isNB){
+  var s=(v.series)||(v.tags&&v.tags[0])||"原生内容";
+  var nbBase={"趣味剧情":"家庭/日常剧情叙事，品牌轻植入，靠剧情张力拉完播","科学实验":"理科实验演示，直观展示产品功能卖点","学科物理":"高中物理痛点切入，精准触达理科家长","学科化学":"化学实验/痛点切入，话题性强","升学焦虑":"升学/选科焦虑角度，需谨慎承接"};
+  var scBase={"原生剧情":"家庭代际剧情，强叙事钩子、低品牌侵入","AI话题":"AI时代教育话题切入，观点驱动","编程教育":"直接讲编程课/启蒙，偏产品教育","教育焦虑":"升学/报课焦虑切入，痛点驱动","产品种草":"产品功能展示型","AI研学":"AI/信奥研学赛道，精准人群","兴趣班":"兴趣班场景切入"};
+  var base=(isNB?nbBase:scBase)[s]||"原生内容，结合数据判断";
+  var mods=[];
+  var natPct=v.total>0?v.natural/v.total*100:0;
+  if(natPct>=80)mods.push("自然流驱动");else if(v.total>0&&v.heated/v.total>=0.5)mods.push("加热投放驱动");
+  var cr=parseFloat(v.complete_rate)||0;
+  if(cr>=10)mods.push("完播强("+v.complete_rate+")");
+  if(v.a3!=null&&v.a3>=15)mods.push("A3高("+v.a3+"%)·种草效率强");
+  if(v.search!=null&&v.search>=0.5)mods.push("看后搜好("+v.search+"%)·搜索承接强");
+  else if(v.search!=null&&v.search<0.1)mods.push("看后搜弱·承接不足");
+  return base+(mods.length?"；"+mods.join("、"):"");
+}
+function renderScriptAnalysis(vids,elId,isNB){
+  var el=document.getElementById(elId);if(!el)return;
+  var sorted=vids.slice().sort(function(a,b){return b.total-a.total;});
+  var HOT=1000000;
+  function isHot(v){return v.total>=HOT||(v.a3!=null&&v.a3>=15);}
+  var hot=sorted.filter(isHot),list,head;
+  if(hot.length){list=hot.slice(0,6);head='<div style="font-size:11px;color:#475569;margin:0 0 10px">本周期爆款 <b style="color:#16a34a">'+hot.length+'</b> 条（曝光≥100万 或 A3≥15%），拆解 Top'+list.length+'：</div>';}
+  else{list=sorted.slice(0,6);head='<div style="font-size:11px;color:#b45309;background:#fffbeb;border-radius:6px;padding:8px 12px;margin:0 0 10px">本周期无爆款（曝光均&lt;100万），以下按曝光 Top'+list.length+' 拆视频数据 &amp; 内容：</div>';}
+  if(!list.length){el.innerHTML='<div style="font-size:11px;color:#94a3b8;padding:8px 0">本周期无视频数据</div>';return;}
+  var cards=list.map(function(v,i){
+    var hotv=isHot(v),ser=v.series||(v.tags&&v.tags[0])||"原生";
+    var link=v.url?'<a href="'+v.url+'" target="_blank" style="color:#3b82f6;text-decoration:none;font-weight:600">▶ 看原视频</a>':'';
+    return '<div style="background:#f8fafc;border-radius:10px;padding:13px 15px;border-left:3px solid '+(hotv?"#16a34a":"#94a3b8")+';margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:6px">'
+      +'<div style="font-size:12px;font-weight:700;color:#1e293b;line-height:1.5">'+(i+1)+'. '+v.title+(hotv?' <span style="background:#16a34a;color:#fff;border-radius:4px;padding:1px 6px;font-size:9px">爆款</span>':"")+'</div>'
+      +'<div style="white-space:nowrap;font-size:11px">'+link+'</div></div>'
+      +'<div style="font-size:10px;color:#64748b;margin-bottom:6px">'+(isNB?"系列":"方向")+'：'+ser+' · 首投 '+v.date+'</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:10px;color:#475569;border-top:1px solid #e2e8f0;padding-top:7px">'
+      +'<span>曝光 <b>'+fmtW(v.total)+'</b>（加热'+fmtW(v.heated)+'/自然'+fmtW(v.natural)+'）</span>'
+      +'<span>A3 <b style="color:#16a34a">'+(v.a3==null?"-":v.a3+"%")+'</b></span>'
+      +'<span>看后搜 <b>'+(v.search==null?"-":v.search+"%")+'</b></span>'
+      +'<span>完播 <b>'+v.complete_rate+'</b></span>'
+      +'<span>互动 <b>'+fmtN(v.interact)+'</b></span></div>'
+      +'<div style="font-size:10px;color:#374151;line-height:1.7;margin-top:7px">🧩 内容拆解：'+scriptContentNote(v,isNB)+'</div></div>';
+  }).join("");
+  el.innerHTML=head+cards;
+}
 function renderNBPerfTable(vids) {
   var el = document.getElementById("nb-perf-body");
   if (!el) return;
@@ -1492,11 +1325,11 @@ function renderAll(){
   if(currentBrand==="sc"){
     document.getElementById("pageTitle").textContent="少儿编程 · 行业竞品洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 行业竞争格局 / 曝光结构 / 内容种草效率";
-    renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCContentAnalysis(scVids);renderSCVideos(scVids);
+    renderSCKPI(scVids);renderSCOverview(scVids);renderSCSeg(scVids);renderSCCharts(scVids);renderSCContentAnalysis(scVids);renderScriptAnalysis(scVids,"sc-script-analysis",false);renderSCVideos(scVids);
   } else {
     document.getElementById("pageTitle").textContent="行业头部 NOBOOK · 内容洞察";
     document.getElementById("pageSub").textContent="核桃编程 · 竞品监测 / 内容系列分析 / 达人效果评估";
-    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBPerfTable(nbVids);renderNBVideos(nbVids);renderNBMonthlyChart();
+    renderNBKPI(nbVids);renderNBSeg(nbVids);renderNBSeriesAnalysis(nbVids);renderNBPerfTable(nbVids);renderScriptAnalysis(nbVids,"nb-script-analysis",true);renderNBVideos(nbVids);renderNBMonthlyChart();
   }
 }
 
