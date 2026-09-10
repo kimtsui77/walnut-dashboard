@@ -107,10 +107,15 @@ b,strong{color:var(--accent-deep);font-weight:700}
 .stage-hd .lb{font-family:var(--lat);font-size:10.5px;font-weight:700;letter-spacing:.2em;
               text-transform:uppercase;color:var(--stage-hi)}
 .stage-hd .cue{font-size:13px;font-weight:700;color:var(--stage-ink)}
-.tiles{display:grid;gap:10px;align-items:start;justify-content:center;
-       grid-template-columns:repeat(auto-fit,minmax(150px,215px))}
+.tiles{--ar:4/3; --tmin:150px; --tmax:230px;
+       display:grid;gap:10px;align-items:start;justify-content:center;
+       grid-template-columns:repeat(auto-fit,minmax(var(--tmin),var(--tmax)))}
+.tiles.port{--ar:9/16; --tmin:150px; --tmax:258px}
+.tiles.wide{--ar:12/7; --tmin:280px; --tmax:452px}
+.tiles.live{--ar:8/5;  --tmin:280px; --tmax:640px}
+.tiles.mid {--ar:3/4;  --tmin:170px; --tmax:322px}
 .clip{margin:0;min-width:0}
-.vw{position:relative;border-radius:10px;overflow:hidden;background:#120D0B;aspect-ratio:4/3}
+.vw{position:relative;border-radius:10px;overflow:hidden;background:#120D0B;aspect-ratio:var(--ar)}
 .vw video,.vw img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#120D0B}
 .vw .pb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
         background:rgba(20,14,11,.28);cursor:pointer;transition:opacity .2s}
@@ -270,7 +275,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">真实课堂录屏：软编怎么学 → 同一套逻辑怎么用到机器人上</span></div>
-  <div class="tiles">
+  <div class="tiles wide">
     <figure class="clip"><div class="vw"><video data-src="a/v1d.mp4" poster="a/v1d_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 软编 · 蜗牛爬井</b>孩子改代码和参数，蜗牛爬出井口——学的是<b>条件判断 + 循环</b></figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v1e.mp4" poster="a/v1e_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -282,7 +287,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">从写代码到作品站起来（13 秒，循环播）</span></div>
-  <div class="tiles">
+  <div class="tiles port">
     <figure class="clip"><div class="vw"><video data-src="a/v1a.mp4" poster="a/v1a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 写代码</b>平板上拖图形化积木</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v1b.mp4" poster="a/v1b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -313,7 +318,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">拆箱 → 全家福平铺（10 秒）</span></div>
-  <div class="tiles">
+  <div class="tiles port">
     <figure class="clip"><div class="vw"><video data-src="a/v2.mp4" poster="a/v2_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>拆箱实拍</b>孩子自己开红盒子，全套零件铺满桌</figcaption></figure>
   </div>
@@ -339,7 +344,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">会认人 → 会互动 → 会跟随（15 秒，重点是「跟随」）</span></div>
-  <div class="tiles">
+  <div class="tiles port">
     <figure class="clip"><div class="vw"><video data-src="a/v3a.mp4" poster="a/v3a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 会认人</b>孩子对着主控屏，机器人有反应</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v3b.mp4" poster="a/v3b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -369,7 +374,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">孩子举作品 + 在家真的玩起来（9 秒）</span></div>
-  <div class="tiles">
+  <div class="tiles port">
     <figure class="clip"><div class="vw"><video data-src="a/v4a.mp4" poster="a/v4a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>能展示</b>孩子举着魔法吉他给镜头看</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v4b.mp4" poster="a/v4b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -396,9 +401,11 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">真实直播课录屏 · 20 秒（老师讲解 + 引导孩子回答）</span></div>
-  <div class="tiles">
+  <div class="tiles live">
     <figure class="clip"><div class="vw"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>Python 线 L4-1 实录</b>老师直播讲解，引导孩子主动回答问题。摄像头画面<b>已打码</b>、昵称已模糊，可直接播。<b>点开可全屏</b></figcaption></figure>
+  </div>
+  <div class="tiles port" style="margin-top:10px">
     <figure class="clip"><div class="vw"><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy"></div>
       <figcaption><b>官方直播间实拍</b>贴片与场景参考</figcaption></figure>
   </div>
@@ -423,7 +430,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">左右对照：低年级拖积木 vs 高年级敲代码</span></div>
-  <div class="tiles">
+  <div class="tiles mid">
     <figure class="clip"><div class="vw"><video data-src="a/v6a.mp4" poster="a/v6a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>大班–三年级 · 图形化</b>平板上拖积木，不用打字</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v6b.mp4" poster="a/v6b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
