@@ -7,7 +7,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#FC4F00">
-<title>299 直播间卖点手册</title>
+<title>299 机器人科创营 · 达播卖点手册</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
@@ -64,7 +64,7 @@ a{color:var(--accent-deep)}
 h1{font-size:29px;line-height:1.28;font-weight:900;margin:9px 0 12px;text-wrap:balance;letter-spacing:-.01em}
 .sub{color:var(--ink2);font-size:15px;margin:0 0 16px}
 .sub b{color:var(--accent-deep)}
-.heroimg{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--surface);
+.heroimg{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:420px;background:var(--surface);
          border:1px solid var(--line);border-radius:16px;padding:10px}
 .heroimg img{border-radius:10px;background:#fff}
 .jump{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}
@@ -107,27 +107,20 @@ b,strong{color:var(--accent-deep);font-weight:700}
 .stage-hd .lb{font-family:var(--lat);font-size:10.5px;font-weight:700;letter-spacing:.2em;
               text-transform:uppercase;color:var(--stage-hi)}
 .stage-hd .cue{font-size:13px;font-weight:700;color:var(--stage-ink)}
-.rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
-.rail::-webkit-scrollbar{height:5px}
-.rail::-webkit-scrollbar-thumb{background:var(--stage-line);border-radius:99px}
-.clip{flex:none;width:180px;margin:0}
-.clip.wide{width:100%;flex:1 1 auto;min-width:0}
-.vw{position:relative;border-radius:10px;overflow:hidden;background:#000;line-height:0}
-.vw video{width:100%;background:#000}
+.tiles{display:grid;gap:10px;align-items:start;justify-content:center;
+       grid-template-columns:repeat(auto-fit,minmax(150px,215px))}
+.clip{margin:0;min-width:0}
+.vw{position:relative;border-radius:10px;overflow:hidden;background:#120D0B;aspect-ratio:4/3}
+.vw video,.vw img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#120D0B}
 .vw .pb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
         background:rgba(20,14,11,.28);cursor:pointer;transition:opacity .2s}
-.vw .pb svg{width:46px;height:46px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
+.vw .pb svg{width:44px;height:44px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
 .vw.on .pb{opacity:0;pointer-events:none}
 .clip figcaption{font-size:11.5px;color:var(--stage-mut);padding-top:6px;line-height:1.5}
 .clip figcaption b{color:var(--stage-hi)}
 .stage-ft{font-size:12.5px;color:var(--stage-mut);padding:9px 2px 0;line-height:1.6;
           border-top:1px solid var(--stage-line);margin-top:10px}
 .stage-ft b{color:var(--stage-hi)}
-.sheet{display:grid;gap:10px;margin-top:10px}
-@media (min-width:720px){.sheet.two{grid-template-columns:1fr 1fr}}
-.sheet figure{margin:0}
-.sheet img{border-radius:10px;background:#fff}
-.sheet figcaption{font-size:11.5px;color:var(--stage-mut);padding-top:6px}
 
 /* 三位一体链路 */
 .chain{display:grid;gap:0;margin-top:4px}
@@ -200,7 +193,6 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
   h2{font-size:27px}
   .hero{padding:44px 16px 12px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
   .heroimg{margin-top:0}
-  .clip{width:210px}
   .chain{grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
   .down{height:auto;width:30px}
   .down svg{transform:rotate(-90deg)}
@@ -230,8 +222,8 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 
 <header class="hero">
   <div>
-    <div class="kicker">直播间达人卖点手册 · 2026</div>
-    <h1>六条核心卖点<br>每条都配好了展示画面</h1>
+    <div class="kicker">达播物料 · 2026</div>
+    <h1>299 机器人科创营<br>达播卖点手册</h1>
     <p class="sub">¥299 含<b>整套 AI 机器人套装</b> + <b>16 节正课</b>，接待周 + 6 周行课完成闭环。<br>
       <b>大班–三年级 图形化</b>　|　<b>四年级–初一 Python</b></p>
     <div class="jump">
@@ -278,10 +270,10 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">真实课堂录屏：软编怎么学 → 同一套逻辑怎么用到机器人上</span></div>
-  <div class="rail">
-    <figure class="clip wide"><div class="vw"><video data-src="a/v1d.mp4" poster="a/v1d_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+  <div class="tiles">
+    <figure class="clip"><div class="vw"><video data-src="a/v1d.mp4" poster="a/v1d_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 软编 · 蜗牛爬井</b>孩子改代码和参数，蜗牛爬出井口——学的是<b>条件判断 + 循环</b></figcaption></figure>
-    <figure class="clip wide"><div class="vw"><video data-src="a/v1e.mp4" poster="a/v1e_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+    <figure class="clip"><div class="vw"><video data-src="a/v1e.mp4" poster="a/v1e_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>② 机器人编程 · 跟随车</b>同一套积木：<b>当物体「球」太远时 → 前进；太近时 → 后退</b>，图像识别就是这么接上去的</figcaption></figure>
   </div>
   <div class="stage-ft">这两段是<b>全场最好用的一组对比</b>：先播蜗牛，说「这是第一周学的」；再播跟随车，说「这是第四周，积木长得一样」——三位一体不用解释，家长自己看懂。</div>
@@ -290,7 +282,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">从写代码到作品站起来（13 秒，循环播）</span></div>
-  <div class="rail">
+  <div class="tiles">
     <figure class="clip"><div class="vw"><video data-src="a/v1a.mp4" poster="a/v1a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 写代码</b>平板上拖图形化积木</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v1b.mp4" poster="a/v1b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -321,8 +313,8 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">拆箱 → 全家福平铺（10 秒）</span></div>
-  <div class="rail">
-    <figure class="clip wide"><div class="vw"><video data-src="a/v2.mp4" poster="a/v2_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+  <div class="tiles">
+    <figure class="clip"><div class="vw"><video data-src="a/v2.mp4" poster="a/v2_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>拆箱实拍</b>孩子自己开红盒子，全套零件铺满桌</figcaption></figure>
   </div>
   <div class="stage-ft">这一条<b>必须有实物在桌上</b>，视频只是补位。主画面永远是达人手里拿着小核桃主控，一件一件报给镜头。</div>
@@ -347,7 +339,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">会认人 → 会互动 → 会跟随（15 秒，重点是「跟随」）</span></div>
-  <div class="rail">
+  <div class="tiles">
     <figure class="clip"><div class="vw"><video data-src="a/v3a.mp4" poster="a/v3a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 会认人</b>孩子对着主控屏，机器人有反应</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v3b.mp4" poster="a/v3b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -377,7 +369,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">孩子举作品 + 在家真的玩起来（9 秒）</span></div>
-  <div class="rail">
+  <div class="tiles">
     <figure class="clip"><div class="vw"><video data-src="a/v4a.mp4" poster="a/v4a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>能展示</b>孩子举着魔法吉他给镜头看</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v4b.mp4" poster="a/v4b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -396,24 +388,24 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="official"><span class="tag">卖点原话</span>
 直播实操体验：软编与 AI 课每节 50 分钟，老师直播带着孩子一步步做完一个项目；AI 公益课直播还增补 AI 科普内容。</div>
 <ul class="points">
-  <li><em>真人直播带练</em>老师现场出题、圈答案、点名答，孩子在评论区打字抢答。</li>
+  <li><em>真人直播带练</em>老师直播讲解，引导孩子主动回答问题，孩子在麦上和评论区都能答。</li>
   <li><em>每节 50 分钟做完一个项目</em>不是看完就结束，当节课要交出一个能跑的作品。</li>
   <li><em>AI 公益课额外加科普</em>直播里增补 AI 科普内容，家长也听得懂在学什么。</li>
   <li><em>班主任全程跟学</em>下单后 48 小时老师联系，按课表推进，不是买完就没人管。</li>
 </ul>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">真实直播课录屏 · 20 秒（老师现场圈答案）</span></div>
-  <div class="rail">
-    <figure class="clip wide"><div class="vw"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
-      <figcaption><b>Python 线 L4-1「and &amp; or 编程挑战赛」实录</b>老师现场读题、用红笔圈出正确答案，学生在麦上和评论区同步答题。孩子与老师的摄像头画面<b>已全部打码</b>，聊天区昵称已模糊，可直接在直播间播放。</figcaption></figure>
+    <span class="cue">真实直播课录屏 · 20 秒（老师讲解 + 引导孩子回答）</span></div>
+  <div class="tiles">
+    <figure class="clip"><div class="vw"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>Python 线 L4-1 实录</b>老师直播讲解，引导孩子主动回答问题。摄像头画面<b>已打码</b>、昵称已模糊，可直接播。<b>点开可全屏</b></figcaption></figure>
+    <figure class="clip"><div class="vw"><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy"></div>
+      <figcaption><b>官方直播间实拍</b>贴片与场景参考</figcaption></figure>
   </div>
-  <div class="sheet"><figure><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy">
-      <figcaption>官方直播间 · 贴片与场景</figcaption></figure></div>
-  <div class="stage-ft">这段录屏放在<b>画中画循环</b>最合适：家长最怕「买了没人管」，看到真人老师在圈答案，这个顾虑当场消掉。</div>
+  <div class="stage-ft">这段录屏放在<b>画中画循环</b>最合适：家长最怕「买了没人管」，看到真人老师在讲、孩子在答，这个顾虑当场消掉。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
-  <p>「每节课 50 分钟，<b>是老师真人直播带着做</b>，出题、圈答案、点名答，孩子在评论区抢答。不是买一堆视频丢给孩子自己看。」</p></div>
+  <p>「每节课 50 分钟，<b>是老师真人直播带着做</b>，老师讲解、引导孩子主动回答，孩子在麦上和评论区都能答。不是买一堆视频丢给孩子自己看。」</p></div>
 </section>
 
 <!-- ============ 卖点 6 ============ -->
@@ -431,7 +423,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">左右对照：低年级拖积木 vs 高年级敲代码</span></div>
-  <div class="rail">
+  <div class="tiles">
     <figure class="clip"><div class="vw"><video data-src="a/v6a.mp4" poster="a/v6a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>大班–三年级 · 图形化</b>平板上拖积木，不用打字</figcaption></figure>
     <figure class="clip"><div class="vw"><video data-src="a/v6b.mp4" poster="a/v6b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
@@ -502,7 +494,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <section id="a3">
 <div class="eyebrow"><span class="num">A3</span><span class="elabel">FAQ</span></div>
 <h2>评论区照着答</h2>
-<p class="sub">不确定的一律回「班主任加上后帮你确认」。<b>加粗的四条是萝卜那场问得最多的。</b></p>
+<p class="sub">遇到不确定的，一律回<b>「下单后问客服帮你确认」</b>。</p>
 <div class="tw"><table>
 <tr><th>家长问</th><th>怎么答</th></tr>
 <tr class="hl"><td class="k">是直播吗？</td><td><b>是。</b>老师真人直播带着做，不是看视频</td></tr>
