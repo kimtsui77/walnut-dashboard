@@ -16,7 +16,7 @@
   --ground:#FFFFFF; --surface:#FFF6F1; --surface2:#FDF0E9; --line:#F0DACD;
   --ink:#211A16; --ink2:#4B403A; --muted:#7A6C64;
   --accent:#FC4F00; --accent-deep:#C63C00; --accent-soft:#FFE7DA;
-  --stage:#2A1F19; --stage-line:#4A382D; --stage-ink:#F5EDE8;
+  --stage:#2A1F19; --stage-line:#4A382D; --stage-ink:#F5EDE8; --stage-mut:#C3B2A9; --stage-hi:#FFB68C;
   --shadow:0 1px 2px rgba(33,26,22,.05), 0 8px 24px rgba(198,60,0,.06);
   --cjk:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
   --lat:'Archivo',var(--cjk);
@@ -25,14 +25,14 @@
   --ground:#17110E; --surface:#221A15; --surface2:#2A1F19; --line:#3C2C23;
   --ink:#F5EDE8; --ink2:#DACEC7; --muted:#B2A199;
   --accent:#FF6A26; --accent-deep:#FF8A50; --accent-soft:#3A2318;
-  --stage:#0E0A08; --stage-line:#3C2C23; --stage-ink:#F5EDE8;
+  --stage:#0E0A08; --stage-line:#3C2C23;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
 }}
 :root[data-theme="dark"]{
   --ground:#17110E; --surface:#221A15; --surface2:#2A1F19; --line:#3C2C23;
   --ink:#F5EDE8; --ink2:#DACEC7; --muted:#B2A199;
   --accent:#FF6A26; --accent-deep:#FF8A50; --accent-soft:#3A2318;
-  --stage:#0E0A08; --stage-line:#3C2C23; --stage-ink:#F5EDE8;
+  --stage:#0E0A08; --stage-line:#3C2C23;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
@@ -64,8 +64,9 @@ a{color:var(--accent-deep)}
 h1{font-size:29px;line-height:1.28;font-weight:900;margin:9px 0 12px;text-wrap:balance;letter-spacing:-.01em}
 .sub{color:var(--ink2);font-size:15px;margin:0 0 16px}
 .sub b{color:var(--accent-deep)}
-.heroimg{border:1px solid var(--line);border-radius:16px;padding:8px;background:var(--surface)}
-.heroimg img{border-radius:11px}
+.heroimg{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--surface);
+         border:1px solid var(--line);border-radius:16px;padding:10px}
+.heroimg img{border-radius:10px;background:#fff}
 .jump{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}
 .jump a{display:flex;gap:8px;align-items:baseline;text-decoration:none;background:var(--surface);
         border:1px solid var(--line);border-radius:11px;padding:9px 11px;color:var(--ink2);font-size:13.5px;
@@ -85,7 +86,7 @@ h2{font-size:22px;font-weight:900;line-height:1.35;margin:0 0 10px;text-wrap:bal
 h3.sh{font-size:13px;letter-spacing:.06em;color:var(--accent-deep);margin:20px 0 8px;font-weight:900}
 b,strong{color:var(--accent-deep);font-weight:700}
 
-/* 官方口径原句 */
+/* 卖点原话 */
 .official{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
           padding:12px 15px;margin:0 0 14px;font-size:15px;color:var(--ink2)}
 .official .tag{display:block;font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.2em;
@@ -103,34 +104,52 @@ b,strong{color:var(--accent-deep);font-weight:700}
        padding:12px;color:var(--stage-ink)}
 .stage-hd{display:flex;align-items:center;gap:8px;padding:0 2px 10px;flex-wrap:wrap}
 .stage-hd .dot{width:7px;height:7px;border-radius:99px;background:var(--accent);flex:none}
-.stage-hd .lb{font-family:var(--lat);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#FFB68C}
+.stage-hd .lb{font-family:var(--lat);font-size:10.5px;font-weight:700;letter-spacing:.2em;
+              text-transform:uppercase;color:var(--stage-hi)}
 .stage-hd .cue{font-size:13px;font-weight:700;color:var(--stage-ink)}
 .rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
 .rail::-webkit-scrollbar{height:5px}
 .rail::-webkit-scrollbar-thumb{background:var(--stage-line);border-radius:99px}
-.clip{flex:none;width:180px}
+.clip{flex:none;width:180px;margin:0}
 .clip.wide{width:100%;flex:1 1 auto;min-width:0}
-.clip video,.clip img{border-radius:10px;width:100%;background:#000}
-.clip figcaption{font-size:11.5px;color:#C3B2A9;padding-top:6px;line-height:1.5}
-.clip figcaption b{color:#FFB68C}
-.stage-ft{font-size:12.5px;color:#C3B2A9;padding:9px 2px 0;line-height:1.6;border-top:1px solid var(--stage-line);margin-top:10px}
-.stage-ft b{color:#FFB68C}
+.vw{position:relative;border-radius:10px;overflow:hidden;background:#000;line-height:0}
+.vw video{width:100%;background:#000}
+.vw .pb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+        background:rgba(20,14,11,.28);cursor:pointer;transition:opacity .2s}
+.vw .pb svg{width:46px;height:46px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
+.vw.on .pb{opacity:0;pointer-events:none}
+.clip figcaption{font-size:11.5px;color:var(--stage-mut);padding-top:6px;line-height:1.5}
+.clip figcaption b{color:var(--stage-hi)}
+.stage-ft{font-size:12.5px;color:var(--stage-mut);padding:9px 2px 0;line-height:1.6;
+          border-top:1px solid var(--stage-line);margin-top:10px}
+.stage-ft b{color:var(--stage-hi)}
 .sheet{display:grid;gap:10px;margin-top:10px}
 @media (min-width:720px){.sheet.two{grid-template-columns:1fr 1fr}}
 .sheet figure{margin:0}
 .sheet img{border-radius:10px;background:#fff}
-.sheet figcaption{font-size:11.5px;color:#C3B2A9;padding-top:6px}
+.sheet figcaption{font-size:11.5px;color:var(--stage-mut);padding-top:6px}
+
+/* 三位一体链路 */
+.chain{display:grid;gap:0;margin-top:4px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
+.step.fin{background:var(--accent-soft);border-color:var(--accent)}
+.step .sk{font-family:var(--lat);font-size:10.5px;font-weight:700;letter-spacing:.18em;
+          color:var(--accent);text-transform:uppercase}
+.step h4{margin:3px 0 5px;font-size:16px;font-weight:900}
+.step p{margin:0;font-size:14.5px;color:var(--ink2)}
+.step p+p{margin-top:5px}
+.down{height:22px;display:flex;align-items:center;justify-content:center;color:var(--accent)}
 
 /* 直播怎么说 */
 .say{margin-top:14px;background:var(--accent);border-radius:13px;padding:13px 15px}
 .say .lb{font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-         color:rgba(255,255,255,.8)}
+         color:rgba(255,255,255,.82)}
 .say p{margin:3px 0 0;color:#fff;font-size:15.5px;font-weight:500;line-height:1.65}
 .say p b{color:#fff;background:rgba(255,255,255,.2);padding:0 4px;border-radius:4px}
 
 /* 表 */
 .tw{overflow-x:auto;border:1px solid var(--line);border-radius:13px}
-table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:480px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:460px}
 th{background:var(--accent);color:#fff;font-weight:700;text-align:left;padding:9px 12px;font-size:13.5px;white-space:nowrap}
 td{padding:9px 12px;border-top:1px solid var(--line);color:var(--ink2);vertical-align:top}
 td.k{color:var(--accent-deep);font-weight:700;white-space:nowrap}
@@ -182,6 +201,9 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
   .hero{padding:44px 16px 12px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
   .heroimg{margin-top:0}
   .clip{width:210px}
+  .chain{grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
+  .down{height:auto;width:30px}
+  .down svg{transform:rotate(-90deg)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -190,13 +212,13 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <body>
 <div class="top">
   <div class="topbar"><span class="mark"></span>
-    <span class="brand">核桃编程 · AI 硬件思维训练营</span>
+    <span class="brand">核桃编程 · AI 新编程机器人科创营</span>
     <span class="price">¥299</span></div>
   <nav class="nav">
     <a href="#p1"><span class="i">1</span>三位一体</a>
-    <a href="#p2"><span class="i">2</span>整套实物</a>
+    <a href="#p2"><span class="i">2</span>整套机器人</a>
     <a href="#p3"><span class="i">3</span>真 AI 技术</a>
-    <a href="#p4"><span class="i">4</span>硬件作品</a>
+    <a href="#p4"><span class="i">4</span>机器人作品</a>
     <a href="#p5"><span class="i">5</span>直播实操</a>
     <a href="#p6"><span class="i">6</span>分龄适配</a>
     <a href="#a1">课程介绍表</a>
@@ -208,20 +230,25 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 
 <header class="hero">
   <div>
-    <div class="kicker">直播间达人卖点手册 · 2026 改版</div>
+    <div class="kicker">直播间达人卖点手册 · 2026</div>
     <h1>六条核心卖点<br>每条都配好了展示画面</h1>
-    <p class="sub">¥299 含<b>整套 AI 硬件套装</b> + <b>16 节正课</b>，接待周 + 6 周行课完成闭环。<br>
+    <p class="sub">¥299 含<b>整套 AI 机器人套装</b> + <b>16 节正课</b>，接待周 + 6 周行课完成闭环。<br>
       <b>大班–三年级 图形化</b>　|　<b>四年级–初一 Python</b></p>
     <div class="jump">
-      <a href="#p1"><i>1</i>软编 + AI + 硬件三位一体</a>
-      <a href="#p2"><i>2</i>299 含整套硬件实物</a>
+      <a href="#p1"><i>1</i>软编 + AI + 机器人三位一体</a>
+      <a href="#p2"><i>2</i>299 含整套机器人套装</a>
       <a href="#p3"><i>3</i>真 AI 技术亲手做</a>
       <a href="#p4"><i>4</i>4 个可展示可互动作品</a>
       <a href="#p5"><i>5</i>直播实操体验</a>
       <a href="#p6"><i>6</i>分龄双语言 + 思维主线</a>
     </div>
   </div>
-  <div class="heroimg"><img src="a/p01.webp" fetchpriority="high" alt="AI 硬件思维训练营 · 299 元含全套 AI 硬件套装"></div>
+  <div class="heroimg">
+    <img src="a/w1.webp" fetchpriority="high" alt="AI 伙伴机器人">
+    <img src="a/w2.webp" fetchpriority="high" alt="AI 智能跟随车">
+    <img src="a/w3.webp" alt="超声波魔法吉他">
+    <img src="a/w4.webp" alt="AI 反应力挑战机">
+  </div>
 </header>
 
 <main>
@@ -229,44 +256,59 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <!-- ============ 卖点 1 ============ -->
 <section id="p1">
 <div class="eyebrow"><span class="num">01</span><span class="elabel">Closed Loop</span></div>
-<h2>软编 + AI + 硬件三位一体</h2>
-<div class="official"><span class="tag">官方口径原句</span>
-4 节软编 + 4 节 AI 课 + 8 节硬件课（4 搭建 + 4 硬件编程），6 周完成从「写代码」到「做出真实 AI 作品」的完整闭环。</div>
-<ul class="points">
-  <li><em>16 节正课 · 4 大模块</em>软件编程 ×4、AI 创意课 ×4、硬件搭建 ×4、硬件编程 ×4。</li>
-  <li><em>不是三样各学一点</em>软编学的循环、条件判断，到硬件编程课原封不动用上。</li>
-  <li><em>节奏是接待周 + 6 周</em>W1–W2 建编程基础，W3–W6 搭建与硬件编程，最后作品展示。</li>
-  <li><em>闭环的证据是作品</em>课程结束时，孩子手上有 4 个软件作品 + 4 个能动的硬件作品。</li>
-</ul>
+<h2>软编 + AI + 机器人三位一体</h2>
+<div class="official"><span class="tag">卖点原话</span>
+4 节软编 + 4 节 AI 课 + 8 节机器人课（4 搭建 + 4 机器人编程），6 周完成从「写代码」到「做出真实 AI 作品」的完整闭环。</div>
+
+<h3 class="sh">一条线是怎么串起来的</h3>
+<div class="chain">
+  <div class="step"><div class="sk">Week 1–2 · 软编 ×4</div><h4>先学会写代码</h4>
+    <p>顺序执行、条件判断、循环结构、变量。</p>
+    <p>例：<b>蜗牛爬井</b>——孩子改代码、改参数，让蜗牛一步步爬出井口。</p></div>
+  <div class="down"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13"/><polyline points="6 13 12 19 18 13"/></svg></div>
+  <div class="step"><div class="sk">AI 课 ×4</div><h4>再学会 AI 能力</h4>
+    <p>图像识别、语音识别、AI 生图、机器学习。</p>
+    <p>让机器人能<b>「看见」</b>颜色、物体和人。</p></div>
+  <div class="down"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13"/><polyline points="6 13 12 19 18 13"/></svg></div>
+  <div class="step fin"><div class="sk">机器人编程 ×4</div><h4>两样合流成作品</h4>
+    <p>同样的条件判断，接到小车上：</p>
+    <p><b>识别到绿球 → 球靠近就后退，拉远就前进。</b></p></div>
+</div>
+
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">写代码 → 拼硬件 → 作品站起来（13 秒，循环播）</span></div>
+    <span class="cue">真实课堂录屏：软编怎么学 → 同一套逻辑怎么用到机器人上</span></div>
   <div class="rail">
-    <figure class="clip"><video data-src="a/v1a.mp4" poster="a/v1a_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip wide"><div class="vw"><video data-src="a/v1d.mp4" poster="a/v1d_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>① 软编 · 蜗牛爬井</b>孩子改代码和参数，蜗牛爬出井口——学的是<b>条件判断 + 循环</b></figcaption></figure>
+    <figure class="clip wide"><div class="vw"><video data-src="a/v1e.mp4" poster="a/v1e_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>② 机器人编程 · 跟随车</b>同一套积木：<b>当物体「球」太远时 → 前进；太近时 → 后退</b>，图像识别就是这么接上去的</figcaption></figure>
+  </div>
+  <div class="stage-ft">这两段是<b>全场最好用的一组对比</b>：先播蜗牛，说「这是第一周学的」；再播跟随车，说「这是第四周，积木长得一样」——三位一体不用解释，家长自己看懂。</div>
+</div>
+
+<div class="stage">
+  <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
+    <span class="cue">从写代码到作品站起来（13 秒，循环播）</span></div>
+  <div class="rail">
+    <figure class="clip"><div class="vw"><video data-src="a/v1a.mp4" poster="a/v1a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 写代码</b>平板上拖图形化积木</figcaption></figure>
-    <figure class="clip"><video data-src="a/v1b.mp4" poster="a/v1b_p.jpg" muted loop playsinline preload="none" data-io></video>
-      <figcaption><b>② 拼硬件</b>结构件 + 小核桃主控上手</figcaption></figure>
-    <figure class="clip"><video data-src="a/v1c.mp4" poster="a/v1c_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip"><div class="vw"><video data-src="a/v1b.mp4" poster="a/v1b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>② 拼机器人</b>结构件 + 小核桃主控上手</figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v1c.mp4" poster="a/v1c_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>③ 成作品</b>孩子举起做好的机器人</figcaption></figure>
   </div>
-  <div class="sheet two">
-    <figure><img src="a/p04.webp" alt="课程信息 16 节正课 · 4 大模块每模块 4 节" loading="lazy">
-      <figcaption>16 节正课结构图（品牌方物料）</figcaption></figure>
-    <figure><img src="a/p06.webp" alt="接待周 + 6 周学习节奏" loading="lazy">
-      <figcaption>接待周 + 6 周学习节奏</figcaption></figure>
-  </div>
-  <div class="stage-ft">口播时把<b>三段视频当分镜</b>：说到「写代码」切第一条，说到「做出来」切第三条。结构图适合在讲课程构成时贴在画中画。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
-  <p>「前面 4 节课学的循环和 if else，到了机器人课就是<b>让跟随车认目标、让吉他按距离发不同的音</b>——一条线学下来，6 周就有做得出来的东西。」</p></div>
+  <p>「第一周学的<b>条件判断</b>，孩子拿来让蜗牛爬出井；第四周同样的积木，接上摄像头，<b>就变成让小车认球、追着球走</b>——一条线学下来，6 周就有做得出来的东西。」</p></div>
 </section>
 
 <!-- ============ 卖点 2 ============ -->
 <section id="p2">
-<div class="eyebrow"><span class="num">02</span><span class="elabel">What's in the box</span></div>
-<h2>299 元含整套 AI 硬件套装实物</h2>
-<div class="official"><span class="tag">官方口径原句</span>
-299 元含整套 AI 硬件套装实物：AI 主控「小核桃」（集成摄像头、显示屏、麦克风、扬声器）+ 运动控制模块 ×2 + 超声波传感器 + 遥控器 + 180+ 创意结构件等整套实物。</div>
+<div class="eyebrow"><span class="num">02</span><span class="elabel">In the box</span></div>
+<h2>299 元含整套 AI 机器人套装实物</h2>
+<div class="official"><span class="tag">卖点原话</span>
+299 元含整套 AI 机器人套装实物：AI 主控「小核桃」（集成摄像头、显示屏、麦克风、扬声器）+ 运动控制模块 ×2 + 超声波传感器 + 遥控器 + 180+ 创意结构件等整套实物。</div>
 <dl class="facts">
   <div class="f key"><dt>AI 主控</dt><dd><b>小核桃</b>：集成摄像头、显示屏、麦克风、扬声器——机器人的眼睛、脸、耳朵和嘴</dd></div>
   <div class="f"><dt>运动模块</dt><dd>运动控制模块 <b>×2</b>，驱动机器人行走与运动</dd></div>
@@ -278,16 +320,12 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 </dl>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">拆箱 → 全家福平铺（10 秒），配官方硬件清单图</span></div>
+    <span class="cue">拆箱 → 全家福平铺（10 秒）</span></div>
   <div class="rail">
-    <figure class="clip"><video data-src="a/v2.mp4" poster="a/v2_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip wide"><div class="vw"><video data-src="a/v2.mp4" poster="a/v2_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>拆箱实拍</b>孩子自己开红盒子，全套零件铺满桌</figcaption></figure>
-    <figure class="clip wide"><img src="a/p02.webp" alt="硬件套装包含：AI 主控小核桃、运动控制模块 ×2、超声波传感器 ×1、遥控器 ×1、创意结构件 180+、配件与印刷品" loading="lazy">
-      <figcaption><b>硬件清单</b>逐项对照，可直接截图发评论区</figcaption></figure>
   </div>
-  <div class="sheet"><figure><img src="a/p12.webp" alt="下单即赠《科技特长生必读手册》" loading="lazy">
-      <figcaption>赠品：《科技特长生必读手册》</figcaption></figure></div>
-  <div class="stage-ft">这一条<b>必须有实物在桌上</b>。视频只是补位，主画面永远是达人手里拿着小核桃主控。清单图用来回答「到底寄什么给我」。</div>
+  <div class="stage-ft">这一条<b>必须有实物在桌上</b>，视频只是补位。主画面永远是达人手里拿着小核桃主控，一件一件报给镜头。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
   <p>「299 不是买课送个塑料玩具——<b>带摄像头的 AI 主控、两个运动模块、超声波传感器、遥控器、180 多个结构件，整套寄到家</b>，加 16 节正课。」</p></div>
@@ -297,29 +335,27 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <section id="p3">
 <div class="eyebrow"><span class="num">03</span><span class="elabel">Real AI</span></div>
 <h2>真 AI 技术，孩子亲手做出来</h2>
-<div class="official"><span class="tag">官方口径原句</span>
+<div class="official"><span class="tag">卖点原话</span>
 人脸识别、图像识别、语音识别、手势识别——不是听 AI 故事，而是做出会认人、会跟随、会演奏、能展示能互动的 AI 作品。</div>
 <div class="tw"><table>
-<tr><th>AI 技术</th><th>孩子在哪一节用到</th><th>做出的效果</th></tr>
-<tr><td class="k">人脸识别</td><td>硬件编程第 1 节</td><td>机器人认出主人才抬手敬礼、播欢迎语</td></tr>
-<tr class="hl"><td class="k">图像识别 · 视觉跟随</td><td>硬件编程第 2 节</td><td>小车持续识别目标，自动跟随、自动避障</td></tr>
-<tr><td class="k">语音识别</td><td>硬件编程第 3 节</td><td>吉他按语音指令切换音色、语音播报</td></tr>
-<tr class="hl"><td class="k">手势识别</td><td>硬件编程第 4 节</td><td>挑战机识别手势出题、计分判输赢</td></tr>
+<tr><th>AI 技术</th><th>用在哪一节</th><th>做出的效果</th></tr>
+<tr><td class="k">人脸识别</td><td>机器人编程第 1 节</td><td>机器人认出主人才抬手敬礼、播欢迎语</td></tr>
+<tr class="hl"><td class="k">图像识别 · 视觉跟随</td><td>机器人编程第 2 节</td><td>小车持续识别目标，自动跟随、自动避障</td></tr>
+<tr><td class="k">语音识别</td><td>机器人编程第 3 节</td><td>吉他按语音指令切换音色、语音播报</td></tr>
+<tr class="hl"><td class="k">手势识别</td><td>机器人编程第 4 节</td><td>挑战机识别手势出题、计分判输赢</td></tr>
 </table></div>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">会认人 → 会互动 → 会跟随（15 秒，重点是「跟随」那一段）</span></div>
+    <span class="cue">会认人 → 会互动 → 会跟随（15 秒，重点是「跟随」）</span></div>
   <div class="rail">
-    <figure class="clip"><video data-src="a/v3a.mp4" poster="a/v3a_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip"><div class="vw"><video data-src="a/v3a.mp4" poster="a/v3a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>① 会认人</b>孩子对着主控屏，机器人有反应</figcaption></figure>
-    <figure class="clip"><video data-src="a/v3b.mp4" poster="a/v3b_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip"><div class="vw"><video data-src="a/v3b.mp4" poster="a/v3b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>② 会互动</b>边看平板边调机器人</figcaption></figure>
-    <figure class="clip"><video data-src="a/v3c.mp4" poster="a/v3c_p.jpg" muted loop playsinline preload="none" data-io></video>
-      <figcaption><b>③ 会跟随</b>小车跟着手里的红球走</figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v3c.mp4" poster="a/v3c_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>③ 会跟随</b>小车跟着手里的球走</figcaption></figure>
   </div>
-  <div class="sheet"><figure><img src="a/p03.webp" alt="4 款 AI 互动作品及其技术点" loading="lazy">
-      <figcaption>4 款作品对应的 AI 技术点（品牌方物料）</figcaption></figure></div>
-  <div class="stage-ft"><b>「跟随」是全场最好演的一条</b>：手拿一个红色物体，小车跟着走，两秒钟说服力胜过讲十句 AI。演完立刻接一句「这段程序是孩子自己写的」。</div>
+  <div class="stage-ft"><b>「跟随」是全场最好演的一条</b>：手拿一个球，小车跟着走，两秒钟胜过讲十句 AI。演完立刻接一句「这段程序是孩子自己写的」，再切卖点 1 的跟随车代码。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
   <p>「不是听老师讲 AI 是什么。是孩子自己写完程序，<b>这台车就真的跟着我的手走</b>——人脸识别、图像识别、语音识别、手势识别，四个都要亲手用一遍。」</p></div>
@@ -328,9 +364,9 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <!-- ============ 卖点 4 ============ -->
 <section id="p4">
 <div class="eyebrow"><span class="num">04</span><span class="elabel">Four Builds</span></div>
-<h2>4 个可展示、可互动的硬件作品</h2>
-<div class="official"><span class="tag">官方口径原句</span>
-4 个可展示、可互动的硬件作品：AI 伙伴机器人、AI 智能跟随车、超声波魔法吉他、AI 反应力挑战机，家长看得见、全家玩得了。</div>
+<h2>4 个可展示、可互动的机器人作品</h2>
+<div class="official"><span class="tag">卖点原话</span>
+4 个可展示、可互动的机器人作品：AI 伙伴机器人、AI 智能跟随车、超声波魔法吉他、AI 反应力挑战机，家长看得见、全家玩得了。</div>
 <div class="tw"><table>
 <tr><th>作品</th><th>会做什么</th><th>练到的能力</th></tr>
 <tr><td class="k">AI 伙伴机器人</td><td>人脸识别、表情互动、手势跟随，桌面陪伴</td><td>条件触发 + 工程思维</td></tr>
@@ -340,78 +376,68 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 </table></div>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">孩子举作品 + 在家真的玩起来（9 秒），配 4 款作品图</span></div>
+    <span class="cue">孩子举作品 + 在家真的玩起来（9 秒）</span></div>
   <div class="rail">
-    <figure class="clip"><video data-src="a/v4a.mp4" poster="a/v4a_p.jpg" muted loop playsinline preload="none" data-io></video>
-      <figcaption><b>能展示</b>孩子举着魔法吉他，笑着给镜头看</figcaption></figure>
-    <figure class="clip"><video data-src="a/v4b.mp4" poster="a/v4b_p.jpg" muted loop playsinline preload="none" data-io></video>
-      <figcaption><b>能玩</b>在地垫上开跟随车，全家能一起玩</figcaption></figure>
-  </div>
-  <div class="rail" style="margin-top:10px">
-    <figure class="clip" style="width:140px"><img src="a/w1.webp" alt="AI 伙伴机器人" loading="lazy"><figcaption>AI 伙伴机器人</figcaption></figure>
-    <figure class="clip" style="width:140px"><img src="a/w2.webp" alt="AI 智能跟随车" loading="lazy"><figcaption>AI 智能跟随车</figcaption></figure>
-    <figure class="clip" style="width:140px"><img src="a/w3.webp" alt="超声波魔法吉他" loading="lazy"><figcaption>超声波魔法吉他</figcaption></figure>
-    <figure class="clip" style="width:140px"><img src="a/w4.webp" alt="AI 反应力挑战机" loading="lazy"><figcaption>AI 反应力挑战机</figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v4a.mp4" poster="a/v4a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>能展示</b>孩子举着魔法吉他给镜头看</figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v4b.mp4" poster="a/v4b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>能玩</b>在地垫上开跟随车，全家一起玩</figcaption></figure>
   </div>
   <div class="stage-ft">桌面按顺序摆好这 4 个，<b>举起哪个就讲哪一格</b>。「能展示」讲给想看成果的家长，「全家玩得了」讲给怕孩子又多一个屏幕的家长。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
-  <p>「学完不是交个作业截图。是<b>桌上摆着 4 个能动的东西</b>——机器人会认人，车会跟着你走，吉他不用琴弦能弹，挑战机全家轮着玩。」</p></div>
+  <p>「学完不是交个作业截图。是<b>桌上摆着 4 个能动的机器人</b>——会认人，车会跟着你走，吉他不用琴弦能弹，挑战机全家轮着玩。」</p></div>
 </section>
 
 <!-- ============ 卖点 5 ============ -->
 <section id="p5">
 <div class="eyebrow"><span class="num">05</span><span class="elabel">Live Class</span></div>
-<h2>直播实操体验，不是纯录播</h2>
-<div class="official"><span class="tag">官方口径原句</span>
-直播实操体验：软编与 AI 课每节 50 分钟 = 20 分钟直播 + 30 分钟录播，AI 公益课直播还增补 AI 科普内容。</div>
+<h2>直播实操体验，老师带着做</h2>
+<div class="official"><span class="tag">卖点原话</span>
+直播实操体验：软编与 AI 课每节 50 分钟，老师直播带着孩子一步步做完一个项目；AI 公益课直播还增补 AI 科普内容。</div>
 <ul class="points">
-  <li><em>50 分钟 = 20 + 30</em>前 20 分钟老师直播带练，后 30 分钟录播巩固，能回看。</li>
-  <li><em>直播不是走过场</em>老师现场出题、圈答案、点名答，孩子在评论区打字抢答。</li>
+  <li><em>真人直播带练</em>老师现场出题、圈答案、点名答，孩子在评论区打字抢答。</li>
+  <li><em>每节 50 分钟做完一个项目</em>不是看完就结束，当节课要交出一个能跑的作品。</li>
   <li><em>AI 公益课额外加科普</em>直播里增补 AI 科普内容，家长也听得懂在学什么。</li>
-  <li><em>班主任全程跟学</em>购买后班主任联系，按课表推进，不是买完就没人管。</li>
+  <li><em>班主任全程跟学</em>下单后 48 小时老师联系，按课表推进，不是买完就没人管。</li>
 </ul>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">真实直播课录屏 · 20 秒（老师现场圈答案）</span></div>
   <div class="rail">
-    <figure class="clip wide"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video>
-      <figcaption><b>Python 线 L4-1「and &amp; or 编程挑战赛」实录</b>老师现场读题、用红笔圈出正确答案，学生在麦上和评论区同步答题。孩子与老师的<b>摄像头画面已全部打码</b>，聊天区昵称已模糊，可直接在直播间播放。</figcaption></figure>
+    <figure class="clip wide"><div class="vw"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>Python 线 L4-1「and &amp; or 编程挑战赛」实录</b>老师现场读题、用红笔圈出正确答案，学生在麦上和评论区同步答题。孩子与老师的摄像头画面<b>已全部打码</b>，聊天区昵称已模糊，可直接在直播间播放。</figcaption></figure>
   </div>
-  <div class="sheet two">
-    <figure><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy"><figcaption>官方直播间 · 贴片与场景</figcaption></figure>
-    <figure><img src="a/live2.webp" alt="官方直播间手举牌" loading="lazy"><figcaption>手举牌与权益条</figcaption></figure>
-  </div>
-  <div class="stage-ft">这段录屏放在<b>画中画循环</b>最合适：家长最怕「买了没人管的录播课」，看到真人老师在圈答案，这个顾虑当场消掉。</div>
+  <div class="sheet"><figure><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy">
+      <figcaption>官方直播间 · 贴片与场景</figcaption></figure></div>
+  <div class="stage-ft">这段录屏放在<b>画中画循环</b>最合适：家长最怕「买了没人管」，看到真人老师在圈答案，这个顾虑当场消掉。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
-  <p>「每节课 50 分钟，<b>前 20 分钟是老师真人直播带着做</b>，出题、圈答案、点名答；后 30 分钟录播，跟不上还能回看。不是买一堆视频丢给孩子自己看。」</p></div>
+  <p>「每节课 50 分钟，<b>是老师真人直播带着做</b>，出题、圈答案、点名答，孩子在评论区抢答。不是买一堆视频丢给孩子自己看。」</p></div>
 </section>
 
 <!-- ============ 卖点 6 ============ -->
 <section id="p6">
 <div class="eyebrow"><span class="num">06</span><span class="elabel">By Age</span></div>
 <h2>分龄双语言适配 + 思维培养主线</h2>
-<div class="official"><span class="tag">官方口径原句</span>
-分龄双语言适配 + 思维培养主线：全程提供图形化 / Python 双线课表，硬件编程课按低年级图形化、高年级 Python 分龄且作品完全一致；软编、AI 课、硬件编程课每节都有明确思维标签（逻辑、策略、观察、工程思维），助力科技特长起步。</div>
+<div class="official"><span class="tag">卖点原话</span>
+分龄双语言适配 + 思维培养主线：全程提供图形化 / Python 双线课表，机器人编程课按低年级图形化、高年级 Python 分龄且作品完全一致；软编、AI 课、机器人编程课每节都有明确思维标签（逻辑、策略、观察、工程思维），助力科技特长起步。</div>
 <dl class="facts">
   <div class="f key"><dt>怎么分</dt><dd><b>大班–三年级 学图形化</b>　|　<b>四年级–初一 学 Python</b></dd></div>
-  <div class="f"><dt>课表</dt><dd>软编、AI、硬件编程<b>全程双线</b>，同一节课两套内容，选一条走</dd></div>
-  <div class="f"><dt>作品一致</dt><dd>硬件编程课分龄但<b>作品完全一样</b>——低年级搭模、高年级写代码，做出来的机器人一模一样</dd></div>
+  <div class="f"><dt>课表</dt><dd>软编、AI、机器人编程<b>全程双线</b>，同一节课两套内容，选一条走</dd></div>
+  <div class="f"><dt>作品一致</dt><dd>机器人编程课分龄但<b>作品完全一样</b>——低年级搭模、高年级写代码，做出来的机器人一模一样</dd></div>
   <div class="f"><dt>思维标签</dt><dd>每节课都标了练什么：<b>逻辑 · 策略 · 观察 · 工程思维</b></dd></div>
 </dl>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">左右对照：低年级拖积木 vs 高年级敲代码</span></div>
   <div class="rail">
-    <figure class="clip"><video data-src="a/v6a.mp4" poster="a/v6a_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip"><div class="vw"><video data-src="a/v6a.mp4" poster="a/v6a_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>大班–三年级 · 图形化</b>平板上拖积木，不用打字</figcaption></figure>
-    <figure class="clip"><video data-src="a/v6b.mp4" poster="a/v6b_p.jpg" muted loop playsinline preload="none" data-io></video>
+    <figure class="clip"><div class="vw"><video data-src="a/v6b.mp4" poster="a/v6b_p.jpg" muted loop playsinline preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
       <figcaption><b>四年级–初一 · Python</b>真代码，直接写</figcaption></figure>
-    <figure class="clip wide"><img src="a/p08.webp" alt="孩子不只是玩硬件，而是在学习：六大核心学习行动与三层 AI 思维能力" loading="lazy">
-      <figcaption><b>思维培养主线</b>六大学习行动 + 三层 AI 思维能力</figcaption></figure>
   </div>
-  <div class="stage-ft">评论区一定会问年级。<b>让家长在评论区扣年级，你按学段推对应链接</b>——大班到三年级推图形化，四年级到初一推 Python。完整课表在下面「课程介绍表」。</div>
+  <div class="stage-ft">评论区一定会问年级。<b>让家长扣年级，你按学段推对应链接</b>——大班到三年级推图形化，四年级到初一推 Python。完整课表在下面「课程介绍表」。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
   <p>「不管几年级都能上：<b>大班到三年级拖图形化积木，四年级到初一直接写 Python</b>，但做出来的机器人是一样的四个。评论区扣个年级，我帮你选链接。」</p></div>
@@ -432,7 +458,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <tr><td class="k">第 3 节</td><td>田忌赛马</td><td>策略思维</td><td>巧克力博弈</td><td>抽象 · 算法</td></tr>
 <tr class="hl"><td class="k">第 4 节</td><td>飞机大战</td><td>观察力</td><td>理财策略</td><td>综合应用</td></tr>
 </table></div>
-<div class="note">这 4 节学的 <b>顺序执行 / 循环 / 条件判断 / 变量</b>，就是后面硬件编程课要用的全部语法——不是两门课，是一条线。</div>
+<div class="note">这 4 节学的 <b>顺序执行 / 循环 / 条件判断 / 变量</b>，就是后面机器人编程课要用的全部语法——不是两门课，是一条线。</div>
 
 <h3 class="sh">② 4 节创意 AI 课</h3>
 <div class="tw"><table>
@@ -443,20 +469,14 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <tr class="hl"><td class="k">第 4 节</td><td>设计我的全能 AI 小狗</td><td>综合运用</td><td>AI 小狗训练指南</td><td>解决问题</td></tr>
 </table></div>
 
-<h3 class="sh">③ 4 节搭建课 &amp; 4 节硬件编程课<span class="age">两条线作品完全一致</span></h3>
+<h3 class="sh">③ 4 节搭建课 &amp; 4 节机器人编程课<span class="age">两条线作品完全一致</span></h3>
 <div class="tw"><table>
-<tr><th>节次</th><th>搭建课</th><th>硬件编程课用到的技术</th></tr>
+<tr><th>节次</th><th>搭建课</th><th>机器人编程课用到的技术</th></tr>
 <tr><td class="k">第 1 节</td><td>搭建「你好 我的 AI 伙伴」</td><td>人脸识别、运动控制、超声波传感器、条件触发</td></tr>
 <tr class="hl"><td class="k">第 2 节</td><td>搭建「AI 智能跟随车」</td><td>图像识别、视觉跟随、多分支结构、循环控制</td></tr>
 <tr><td class="k">第 3 节</td><td>搭建「超声波魔法吉他」</td><td>超声波测距、条件判断嵌套、音效播放、语音识别</td></tr>
 <tr class="hl"><td class="k">第 4 节</td><td>搭建「AI 反应力挑战机」</td><td>随机数控制、电机控制、手势识别</td></tr>
 </table></div>
-<div class="sheet two" style="margin-top:14px">
-  <figure class="shot"><img src="a/p09.webp" alt="普通编程课 VS AI 硬件思维训练营 对比表" loading="lazy">
-    <figcaption style="font-size:11.5px;color:var(--muted);padding-top:6px">家长对比看（品牌方物料）</figcaption></figure>
-  <figure class="shot"><img src="a/kit.webp" alt="机器人套装清单" loading="lazy">
-    <figcaption style="font-size:11.5px;color:var(--muted);padding-top:6px">套装清单（品牌方物料）</figcaption></figure>
-</div>
 </section>
 
 <!-- ============ 家长好评 ============ -->
@@ -481,48 +501,50 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <!-- ============ FAQ ============ -->
 <section id="a3">
 <div class="eyebrow"><span class="num">A3</span><span class="elabel">FAQ</span></div>
-<h2>家长最常问的 10 个问题</h2>
-<p class="sub">评论区被问到，<b>照着答就行</b>。不确定的一律回「班主任加上后帮你确认」。</p>
+<h2>评论区照着答</h2>
+<p class="sub">不确定的一律回「班主任加上后帮你确认」。<b>加粗的四条是萝卜那场问得最多的。</b></p>
 <div class="tw"><table>
 <tr><th>家长问</th><th>怎么答</th></tr>
-<tr><td class="k">这是纯线上课吗？</td><td>线上课 + 硬件实操，整套实物寄到家</td></tr>
-<tr class="hl"><td class="k">零基础能学吗？</td><td>可以。<b>大班–三年级图形化，四年级–初一 Python</b>，两条线分龄</td></tr>
-<tr><td class="k">299 包含什么？</td><td>整套 AI 硬件套装 + 16 节正课（4 软编 + 4 AI + 4 搭建 + 4 硬件编程）</td></tr>
+<tr class="hl"><td class="k">是直播吗？</td><td><b>是。</b>老师真人直播带着做，不是看视频</td></tr>
+<tr><td class="k">什么时间上课？</td><td><b>一般是下单后的第二个周五开始上课</b>；下单后 48 小时会有老师联系你，跟你确认时间</td></tr>
+<tr class="hl"><td class="k">收到的是四个机器人吗？</td><td><b>不是。</b>收到的是 AI 主控（芯片）、电机等零件，<b>需要小朋友跟着课程动手拼搭</b>，一套零件按课程做出 4 个作品</td></tr>
+<tr><td class="k">这是纯线上课吗？</td><td>线上课 + 机器人实操，整套零件寄到家</td></tr>
+<tr class="hl"><td class="k">零基础能学吗？</td><td>可以。大班–三年级图形化，四年级–初一 Python，两条线分龄</td></tr>
+<tr><td class="k">299 包含什么？</td><td>整套 AI 机器人套装 + 16 节正课（4 软编 + 4 AI + 4 搭建 + 4 机器人编程）</td></tr>
 <tr class="hl"><td class="k">课程周期多久？</td><td>接待周 + 6 周行课</td></tr>
-<tr><td class="k">一周上几节课？</td><td>W1–W2 每周 2 节软编；W3–W6 每周 3 节（搭建 + 硬件编程 + AI）</td></tr>
-<tr class="hl"><td class="k">怎么上课？</td><td>每节 50 分钟 = 20 分钟直播实操 + 30 分钟录播回放；购买后班主任联系</td></tr>
-<tr><td class="k">可以退款吗？</td><td>支持 7 天无理由退款（硬件需未拆封，<b>具体以购买平台规则为准</b>）</td></tr>
-<tr class="hl"><td class="k">用什么设备？</td><td>电脑（Win7 以上 / Mac）或平板（安卓 7.0 / iOS 10.0 以上）</td></tr>
-<tr><td class="k">是玩具吗？</td><td>不是。带摄像头的 AI 主控 + 传感器，孩子要自己写程序才动得起来</td></tr>
-<tr class="hl"><td class="k">学完留下什么？</td><td>整套硬件可继续创作 + 4 个硬件作品 + 4 个软件作品</td></tr>
+<tr><td class="k">一周上几节课？</td><td>W1–W2 每周 2 节软编；W3–W6 每周 3 节（搭建 + 机器人编程 + AI）</td></tr>
+<tr class="hl"><td class="k">可以退款吗？</td><td>支持 7 天无理由退款（零件需未拆封，<b>具体以购买平台规则为准</b>）</td></tr>
+<tr><td class="k">用什么设备？</td><td>电脑（Win7 以上 / Mac）或平板（安卓 7.0 / iOS 10.0 以上）</td></tr>
+<tr class="hl"><td class="k">是玩具吗？</td><td>不是。带摄像头的 AI 主控 + 传感器，孩子要自己写程序才动得起来</td></tr>
+<tr><td class="k">学完留下什么？</td><td>整套零件可继续创作 + 4 个机器人作品 + 4 个软件作品</td></tr>
 </table></div>
-<div class="note"><b>口径红线：</b>不承诺升学、不说「必考」、不自行加码退款与名额；课程形式与套装清单以品牌方当期口径为准；硬件外观后续可能微调，以最新物料为准。</div>
+<div class="note"><b>口径红线：</b>不承诺升学、不说「必考」、不自行加码退款与名额；课程形式与套装清单以品牌方当期口径为准；机器人外观后续可能微调，以最新物料为准。</div>
 </section>
 
 <!-- ============ 直播讲法 ============ -->
 <section id="a4">
 <div class="eyebrow"><span class="num">A4</span><span class="elabel">Live Playbook</span></div>
-<h2>直播间怎么讲：轮次与话术</h2>
-<p class="sub">达人的打法是<b>亲测 + 演示 + 粉丝价</b>——先说自己买了，再当场演给粉丝看。</p>
+<h2>直播间怎么讲</h2>
+<p class="sub">打法是<b>亲测 + 演示 + 粉丝价</b>——先说自己买了，再当场演给粉丝看。</p>
 <h3 class="sh">拿来即用的三句话</h3>
 <div class="stack">
   <div class="card"><h4>开场钩子</h4><p>「你说孩子专注力不好？你把手机给他，他能刷俩小时不带动的——<b>不是他不专注，是没东西能吸引他</b>。」</p></div>
-  <div class="card" style="background:var(--accent);border-color:var(--accent)"><h4 style="color:#fff">讲三位一体（核心）</h4><p style="color:#fff">「前面学的循环和 if else，到了硬件编程课，就是让跟随车认目标、让吉他按距离发不同音——<b style="color:#fff;background:rgba(255,255,255,.2);padding:0 4px;border-radius:4px">是一条线，不是三样各学一点</b>。」</p></div>
-  <div class="card"><h4>收尾</h4><p>「299 就当给孩子买个玩具的钱，拿回去的是<b>一整套 AI 硬件 + 16 节课</b>。」</p></div>
+  <div class="card" style="background:var(--accent);border-color:var(--accent)"><h4 style="color:#fff">讲三位一体（核心）</h4><p style="color:#fff">「第一周学的条件判断，让蜗牛爬出井；第四周同样的积木接上摄像头，<b style="color:#fff;background:rgba(255,255,255,.2);padding:0 4px;border-radius:4px">就变成小车认球、追着球走</b>。」</p></div>
+  <div class="card"><h4>收尾</h4><p>「299 就当给孩子买个玩具的钱，拿回去的是<b>一整套 AI 机器人 + 16 节课</b>。」</p></div>
 </div>
 <h3 class="sh">售卖轮次：5–8 分钟一轮，循环讲</h3>
 <div class="flow">
   <div class="fl"><div class="t">30s</div><div class="n2">抛问题</div><div class="d">「你家娃是不是坐不住、只会死记硬背？」</div></div>
   <div class="fl"><div class="t">30s</div><div class="n2">做反转</div><div class="d">手机给他能刷俩小时——不是不专注，是没被吸引</div></div>
-  <div class="fl key"><div class="t">2min</div><div class="n2">摆实物 · 演效果</div><div class="d"><b>机器人上桌，代码和机器人同框；演「跟随」</b>（卖点 3）</div></div>
-  <div class="fl"><div class="t">1.5min</div><div class="n2">讲三位一体</div><div class="d">软编学的循环和条件判断，硬件编程课全用上（卖点 1）</div></div>
-  <div class="fl"><div class="t">1min</div><div class="n2">讲直播实操</div><div class="d">50 分钟 = 20 直播 + 30 录播，画中画放录屏（卖点 5）</div></div>
-  <div class="fl"><div class="t">1min</div><div class="n2">亮权益</div><div class="d">299 含整套 AI 硬件 + 16 节正课 + 180+ 结构件（卖点 2）</div></div>
-  <div class="fl"><div class="t">30s</div><div class="n2">催下单</div><div class="d">评论区扣年级我帮你选链接；福利到本场结束（卖点 6）</div></div>
+  <div class="fl key"><div class="t">2min</div><div class="n2">摆实物 · 演效果</div><div class="d"><b>机器人上桌，演「跟随」</b>（卖点 3）</div></div>
+  <div class="fl"><div class="t">1.5min</div><div class="n2">讲三位一体</div><div class="d">蜗牛爬井 → 跟随车代码，两段录屏对着放（卖点 1）</div></div>
+  <div class="fl"><div class="t">1min</div><div class="n2">讲直播实操</div><div class="d">老师真人带练，画中画放课堂录屏（卖点 5）</div></div>
+  <div class="fl"><div class="t">1min</div><div class="n2">亮权益</div><div class="d">299 含整套机器人套装 + 16 节正课 + 180+ 结构件（卖点 2）</div></div>
+  <div class="fl"><div class="t">30s</div><div class="n2">催下单</div><div class="d">评论区扣年级我帮你选链接（卖点 6）</div></div>
 </div>
 <h3 class="sh">直播间要准备什么</h3>
 <div class="stack">
-  <div class="card"><p><b>桌面必摆：</b>AI 主控小核桃 + 4 个硬件作品<br><b>画中画循环切：</b>直播课录屏（卖点 5）/ 拆箱全家福（卖点 2）/ 跟随车（卖点 3）/ 图形化与 Python 对照（卖点 6）</p></div>
+  <div class="card"><p><b>桌面必摆：</b>AI 主控小核桃 + 4 个机器人作品<br><b>画中画循环切：</b>蜗牛爬井与跟随车代码（卖点 1）/ 直播课录屏（卖点 5）/ 拆箱全家福（卖点 2）/ 跟随车实拍（卖点 3）</p></div>
   <div class="card"><p><b>手举牌两张：</b>权益牌 +「能力同步提升」能力牌<br><b>互动引导：</b>滚动条打「评论年级 · 升级福利」，按学段推对应链接</p></div>
 </div>
 </section>
@@ -530,14 +552,38 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 </main>
 <footer>核桃编程 · 达人合作物料　仅供合作达人参考<br>
 课程形式、套装清单与优惠口径以品牌方当期公告为准<br>
-录屏素材中孩子与老师的画面已打码，昵称已模糊</footer>
+课堂与直播录屏中孩子与老师的画面已打码，昵称已模糊</footer>
 
 <script>
 (function(){
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
   var map = {}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
   var nav = document.querySelector('.nav');
-  if('IntersectionObserver' in window){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function attempt(v){
+    var p = v.play();
+    if (p && p.catch) p.catch(function(){});
+  }
+  function wake(v){
+    var box = v.parentNode;
+    if (!v.dataset.armed){
+      v.dataset.armed = '1';
+      v.addEventListener('playing', function(){ box.classList.add('on'); });
+      v.addEventListener('pause',   function(){ box.classList.remove('on'); });
+      v.addEventListener('canplay', function(){ if (v.dataset.want === '1') attempt(v); });
+      box.addEventListener('click', function(){
+        if (!v.src && v.dataset.src){ v.src = v.dataset.src; v.load(); }
+        v.dataset.want = '1';
+        attempt(v);
+      });
+    }
+    if (!v.src && v.dataset.src){ v.src = v.dataset.src; v.load(); }
+    v.dataset.want = '1';
+    if (!reduce) attempt(v);
+  }
+
+  if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){
         if(!e.isIntersecting) return;
@@ -549,16 +595,16 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
     }, {rootMargin:'-104px 0px -70% 0px'});
     document.querySelectorAll('section').forEach(function(s){ io.observe(s); });
 
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var vio = new IntersectionObserver(function(es){
       es.forEach(function(e){
         var v = e.target;
-        if(e.isIntersecting){ if(!v.src && v.dataset.src){ v.src = v.dataset.src; }
-          if(!reduce){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } }
-        else { v.pause(); }
+        if (e.isIntersecting) wake(v);
+        else { v.dataset.want = '0'; v.pause(); }
       });
-    }, {threshold:0.25, rootMargin:'200px 0px'});
+    }, {threshold:0.25, rootMargin:'250px 0px'});
     document.querySelectorAll('video[data-io]').forEach(function(v){ vio.observe(v); });
+  } else {
+    document.querySelectorAll('video[data-io]').forEach(wake);
   }
 })();
 </script>
