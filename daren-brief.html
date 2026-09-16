@@ -73,24 +73,28 @@ h1{font-size:29px;line-height:1.28;font-weight:900;margin:9px 0 12px;text-wrap:b
         font-weight:700;line-height:1.45}
 .jump a i{font-family:var(--lat);font-weight:900;font-size:12px;color:#fff;background:var(--accent);
           border-radius:5px;padding:1px 5px;flex:none;font-style:normal}
+.jump a.key{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
 
 /* ---------- 区块 ---------- */
 main{max-width:1000px;margin:0 auto;padding:0 16px 64px}
-section{padding-top:40px;scroll-margin-top:104px}
+section{padding-top:44px;scroll-margin-top:104px}
+main > section + section{border-top:1px solid var(--line);margin-top:44px}
+hr.div{display:none}
 .eyebrow{display:flex;align-items:baseline;gap:9px;margin-bottom:5px}
 .num{font-family:var(--lat);font-size:12px;font-weight:900;color:#fff;background:var(--accent);
      border-radius:5px;padding:1px 6px;letter-spacing:.04em}
 .elabel{font-family:var(--lat);font-size:11px;font-weight:700;letter-spacing:.22em;
         text-transform:uppercase;color:var(--muted)}
-h2{font-size:22px;font-weight:900;line-height:1.35;margin:0 0 10px;text-wrap:balance}
+h2{font-size:25px;font-weight:900;line-height:1.3;margin:0 0 12px;text-wrap:balance;letter-spacing:-.01em}
+.hot{display:inline-block;vertical-align:4px;margin-left:8px;font-size:11px;font-weight:900;color:#fff;
+     background:var(--accent);border-radius:99px;padding:2px 9px;letter-spacing:.04em}
 h3.sh{font-size:13px;letter-spacing:.06em;color:var(--accent-deep);margin:20px 0 8px;font-weight:900}
 b,strong{color:var(--accent-deep);font-weight:700}
 
 /* 卖点原话 */
-.official{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
-          padding:12px 15px;margin:0 0 14px;font-size:15px;color:var(--ink2)}
-.official .tag{display:block;font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.2em;
-               text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.official{border-left:3px solid var(--line);padding:1px 0 1px 12px;margin:0 0 16px;
+          font-size:13px;line-height:1.7;color:var(--muted)}
+.official .tag{font-weight:900;color:var(--muted);margin-right:6px}
 
 /* 拆解要点 */
 .points{display:grid;gap:9px;margin:0;padding:0;list-style:none}
@@ -128,6 +132,15 @@ b,strong{color:var(--accent-deep);font-weight:700}
           border-top:1px solid var(--stage-line);margin-top:10px}
 .stage-ft b{color:var(--stage-hi)}
 
+/* 7 周节奏 */
+.weeks{display:grid;gap:8px;grid-template-columns:repeat(2,1fr);margin-bottom:4px}
+.wk{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.wk.on{background:var(--accent-soft);border-color:var(--accent)}
+.wk .w{font-family:var(--lat);font-size:11.5px;font-weight:900;letter-spacing:.08em;color:var(--accent)}
+.wk h5{margin:3px 0 3px;font-size:13.5px;font-weight:900;color:var(--ink);line-height:1.35}
+.wk p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (min-width:760px){.weeks{grid-template-columns:repeat(7,1fr)}}
+
 /* 三位一体链路 */
 .chain{display:grid;gap:0;margin-top:4px}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
@@ -140,10 +153,11 @@ b,strong{color:var(--accent-deep);font-weight:700}
 .down{height:22px;display:flex;align-items:center;justify-content:center;color:var(--accent)}
 
 /* 直播怎么说 */
-.say{margin-top:14px;background:var(--accent);border-radius:13px;padding:13px 15px}
+.say{margin-top:16px;background:var(--accent);border-radius:14px;padding:16px 18px;
+     box-shadow:0 10px 26px rgba(198,60,0,.18)}
 .say .lb{font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
          color:rgba(255,255,255,.82)}
-.say p{margin:3px 0 0;color:#fff;font-size:15.5px;font-weight:500;line-height:1.65}
+.say p{margin:5px 0 0;color:#fff;font-size:17px;font-weight:500;line-height:1.66}
 .say p b{color:#fff;background:rgba(255,255,255,.2);padding:0 4px;border-radius:4px}
 
 /* 表 */
@@ -181,15 +195,20 @@ tr.hl td{background:var(--surface2)}
 .fl.key{background:var(--accent-soft)}
 .fl .t{flex:0 0 50px;font-family:var(--lat);font-weight:900;font-size:13.5px;color:var(--accent);
        font-variant-numeric:tabular-nums;padding-top:1px}
-.fl .n2{flex:0 0 72px;font-weight:900;font-size:14px}
-.fl .d{font-size:14px;color:var(--ink2)}
+.fl .n2{flex:0 0 110px;font-weight:900;font-size:14px}
+.fl .d{flex:1;min-width:0;font-size:14px;color:var(--ink2)}
 .stack{display:flex;flex-direction:column;gap:10px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
 .card h4{margin:0 0 5px;font-size:15.5px;font-weight:900;color:var(--accent-deep)}
 .card p{margin:0;font-size:14.5px;color:var(--ink2)}
 hr.div{border:0;border-top:1px solid var(--line);margin:44px 0 0}
-.apx{font-family:var(--lat);font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
-     color:var(--muted);padding-top:26px}
+.apx{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;
+     color:var(--muted);padding-top:30px}
+.apx::after{content:"";flex:1;height:1px;background:var(--line)}
+.appendix h2{font-size:19px}
+.appendix .num{background:var(--muted)}
+.appendix section{padding-top:34px}
+.appendix > section + section{border-top:1px solid var(--line);margin-top:34px}
 footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40px;text-align:center;
        color:var(--muted);font-size:12.5px;max-width:1000px}
 
@@ -233,9 +252,9 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
     <p class="sub">¥299 含<b>整套 AI 机器人套装</b> + <b>16 节正课</b>，接待周 + 6 周行课完成闭环。<br>
       <b>大班–三年级 图形化</b>　|　<b>四年级–初一 Python</b></p>
     <div class="jump">
-      <a href="#p1"><i>1</i>软编 + AI + 机器人三位一体</a>
+      <a href="#p1" class="key"><i>1</i>软编 + AI + 机器人三位一体</a>
       <a href="#p2"><i>2</i>299 含整套机器人套装</a>
-      <a href="#p3"><i>3</i>真 AI 技术亲手做</a>
+      <a href="#p3" class="key"><i>3</i>真 AI 技术亲手做</a>
       <a href="#p4"><i>4</i>4 个可展示可互动作品</a>
       <a href="#p5"><i>5</i>直播实操体验</a>
       <a href="#p6"><i>6</i>分龄双语言 + 思维主线</a>
@@ -254,7 +273,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <!-- ============ 卖点 1 ============ -->
 <section id="p1">
 <div class="eyebrow"><span class="num">01</span><span class="elabel">Closed Loop</span></div>
-<h2>软编 + AI + 机器人三位一体</h2>
+<h2>软编 + AI + 机器人三位一体<span class="hot">主推</span></h2>
 <div class="official"><span class="tag">卖点原话</span>
 4 节软编 + 4 节 AI 课 + 8 节机器人课（4 搭建 + 4 机器人编程），6 周完成从「写代码」到「做出真实 AI 作品」的完整闭环。</div>
 
@@ -273,17 +292,17 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
     <p><b>识别到绿球 → 球靠近就后退，拉远就前进。</b></p></div>
 </div>
 
-<h3 class="sh">7 周怎么排（接待周 + 6 周行课）</h3>
-<div class="flow">
-  <div class="fl"><div class="t">接待周</div><div class="n2">接待 · 小灶</div><div class="d">老师对接，先上一节小灶课，把设备和账号都调通</div></div>
-  <div class="fl"><div class="t">W1</div><div class="n2">软编 ×2</div><div class="d">课前直播，建立编程基础</div></div>
-  <div class="fl"><div class="t">W2</div><div class="n2">软编 ×2</div><div class="d">课前直播，建立编程基础</div></div>
-  <div class="fl key"><div class="t">W3</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
-  <div class="fl key"><div class="t">W4</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
-  <div class="fl key"><div class="t">W5</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
-  <div class="fl key"><div class="t">W6</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，最后完成项目作品展示</div></div>
+<h3 class="sh">7 周怎么排 · 第三周起每周做出一个机器人</h3>
+<div class="weeks">
+  <div class="wk"><div class="w">接待周</div><h5>接待 · 小灶</h5><p>老师对接，调通设备与账号</p></div>
+  <div class="wk"><div class="w">W1</div><h5>软编 ×2</h5><p>课前直播，打基础</p></div>
+  <div class="wk"><div class="w">W2</div><h5>软编 ×2</h5><p>课前直播，打基础</p></div>
+  <div class="wk on"><div class="w">W3</div><h5>搭建 + 机器人 + AI</h5><p>做出作品 ①</p></div>
+  <div class="wk on"><div class="w">W4</div><h5>搭建 + 机器人 + AI</h5><p>做出作品 ②</p></div>
+  <div class="wk on"><div class="w">W5</div><h5>搭建 + 机器人 + AI</h5><p>做出作品 ③</p></div>
+  <div class="wk on"><div class="w">W6</div><h5>搭建 + 机器人 + AI</h5><p>作品 ④ + 展示</p></div>
 </div>
-<div class="note">前两周只学<b>软编</b>打基础，<b>第三周开始每周都做出一个机器人</b>——家长问「多久能看到东西」，答案是第三周。</div>
+<div class="note">家长问「多久能看到东西」，<b>答案是第三周</b>——前两周打软编基础，第三周起每周交付一个机器人作品。</div>
 
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
@@ -344,7 +363,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 <!-- ============ 卖点 3 ============ -->
 <section id="p3">
 <div class="eyebrow"><span class="num">03</span><span class="elabel">Real AI</span></div>
-<h2>真 AI 技术，孩子亲手做出来</h2>
+<h2>真 AI 技术，孩子亲手做出来<span class="hot">最好演</span></h2>
 <div class="official"><span class="tag">卖点原话</span>
 人脸识别、图像识别、语音识别、手势识别——不是听 AI 故事，而是做出会认人、会跟随、会演奏、能展示能互动的 AI 作品。</div>
 <div class="tw"><table>
@@ -453,8 +472,8 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
   <p>「不管几年级都能上：<b>大班到三年级拖图形化积木，四年级到初一直接写 Python</b>，但做出来的机器人是一样的四个。评论区扣个年级，我帮你选链接。」</p></div>
 </section>
 
-<hr class="div">
-<div class="apx">支撑资料 · Appendix</div>
+<div class="apx">支撑资料</div>
+<div class="appendix">
 
 <!-- ============ 课程介绍表 ============ -->
 <section id="a1">
@@ -572,6 +591,7 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 </div>
 </section>
 
+</div>
 </main>
 <footer>核桃编程 · 达人合作物料　仅供合作达人参考<br>
 课程形式、套装清单与优惠口径以品牌方当期公告为准<br>
