@@ -112,7 +112,8 @@ b,strong{color:var(--accent-deep);font-weight:700}
        grid-template-columns:repeat(auto-fit,minmax(var(--tmin),var(--tmax)))}
 .tiles.port{--ar:9/16; --tmin:150px; --tmax:258px}
 .tiles.wide{--ar:12/7; --tmin:280px; --tmax:452px}
-.tiles.live{--ar:8/5;  --tmin:280px; --tmax:640px}
+.tiles.live{--ar:96/49;--tmin:280px; --tmax:452px}
+.tiles.reel{--ar:16/9; --tmin:280px; --tmax:560px}
 .tiles.mid {--ar:3/4;  --tmin:170px; --tmax:322px}
 .clip{margin:0;min-width:0}
 .vw{position:relative;border-radius:10px;overflow:hidden;background:#120D0B;aspect-ratio:var(--ar)}
@@ -272,6 +273,18 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
     <p><b>识别到绿球 → 球靠近就后退，拉远就前进。</b></p></div>
 </div>
 
+<h3 class="sh">7 周怎么排（接待周 + 6 周行课）</h3>
+<div class="flow">
+  <div class="fl"><div class="t">接待周</div><div class="n2">接待 · 小灶</div><div class="d">老师对接，先上一节小灶课，把设备和账号都调通</div></div>
+  <div class="fl"><div class="t">W1</div><div class="n2">软编 ×2</div><div class="d">课前直播，建立编程基础</div></div>
+  <div class="fl"><div class="t">W2</div><div class="n2">软编 ×2</div><div class="d">课前直播，建立编程基础</div></div>
+  <div class="fl key"><div class="t">W3</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
+  <div class="fl key"><div class="t">W4</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
+  <div class="fl key"><div class="t">W5</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，一周做出一个机器人作品</div></div>
+  <div class="fl key"><div class="t">W6</div><div class="n2">搭建 · 机器人 · AI</div><div class="d">每周 3 节，最后完成项目作品展示</div></div>
+</div>
+<div class="note">前两周只学<b>软编</b>打基础，<b>第三周开始每周都做出一个机器人</b>——家长问「多久能看到东西」，答案是第三周。</div>
+
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
     <span class="cue">真实课堂录屏：软编怎么学 → 同一套逻辑怎么用到机器人上</span></div>
@@ -400,16 +413,14 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
 </ul>
 <div class="stage">
   <div class="stage-hd"><span class="dot"></span><span class="lb">展示画面</span>
-    <span class="cue">真实直播课录屏 · 20 秒（老师讲解 + 引导孩子回答）</span></div>
+    <span class="cue">小班直播课实录 · 各 30 秒（老师讲解 + 引导孩子回答）</span></div>
   <div class="tiles live">
-    <figure class="clip"><div class="vw"><video data-src="a/v5.mp4" poster="a/v5_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
-      <figcaption><b>Python 线 L4-1 实录</b>老师直播讲解，引导孩子主动回答问题。摄像头画面<b>已打码</b>、昵称已模糊，可直接播。<b>点开可全屏</b></figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v5a.mp4" poster="a/v5a_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>图形化 · 飞机大战</b>老师讲「如果碰到猪猪，那么…」，引导孩子自己说出条件怎么写。<b>点开可全屏</b></figcaption></figure>
+    <figure class="clip"><div class="vw"><video data-src="a/v5b.mp4" poster="a/v5b_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>Python · 理财策略</b>老师讲「判断相等的符号是 ==」，学生在麦上答。<b>点开可全屏</b></figcaption></figure>
   </div>
-  <div class="tiles port" style="margin-top:10px">
-    <figure class="clip"><div class="vw"><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy"></div>
-      <figcaption><b>官方直播间实拍</b>贴片与场景参考</figcaption></figure>
-  </div>
-  <div class="stage-ft">这段录屏放在<b>画中画循环</b>最合适：家长最怕「买了没人管」，看到真人老师在讲、孩子在答，这个顾虑当场消掉。</div>
+  <div class="stage-ft">这两段是<b>小班直播课的真实画面</b>：主讲老师出镜，学生带虚拟形象上麦。家长最怕「买了没人管」，看到真人老师在讲、孩子在答，这个顾虑当场消掉。</div>
 </div>
 <div class="say"><span class="lb">直播就这么说</span>
   <p>「每节课 50 分钟，<b>是老师真人直播带着做</b>，老师讲解、引导孩子主动回答，孩子在麦上和评论区都能答。不是买一堆视频丢给孩子自己看。」</p></div>
@@ -542,8 +553,21 @@ footer{border-top:1px solid var(--line);margin:44px auto 0;padding:20px 16px 40p
   <div class="fl"><div class="t">30s</div><div class="n2">催下单</div><div class="d">评论区扣年级我帮你选链接（卖点 6）</div></div>
 </div>
 <h3 class="sh">直播间要准备什么</h3>
+<div class="stage" style="margin-top:0;margin-bottom:12px">
+  <div class="stage-hd"><span class="dot"></span><span class="lb">画中画素材</span>
+    <span class="cue">299 全流程轮播 · 50 秒（到货开箱 → 小班讲解 → 作品展示）</span></div>
+  <div class="tiles reel">
+    <figure class="clip"><div class="vw"><video data-src="a/vlb.mp4" poster="a/vlb_p.jpg" muted loop playsinline controls preload="none" data-io></video><span class="pb"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="rgba(20,14,11,.42)" stroke="#fff" stroke-width="2"/><path d="M19.5 15.5 34 24 19.5 32.5z" fill="#fff"/></svg></span></div>
+      <figcaption><b>官方轮播片</b>整条剪好，直播时直接循环播</figcaption></figure>
+  </div>
+  <div class="tiles port" style="margin-top:10px">
+    <figure class="clip"><div class="vw"><img src="a/live1.webp" alt="官方直播间实拍" loading="lazy"></div>
+      <figcaption><b>官方直播间实拍</b>贴片与场景参考</figcaption></figure>
+  </div>
+  <div class="stage-ft">这条 50 秒轮播是<b>开播前和空档期的默认画面</b>：没在演示实物的时候就挂着它，家长随时进来都能看懂 299 到底是什么。</div>
+</div>
 <div class="stack">
-  <div class="card"><p><b>桌面必摆：</b>AI 主控小核桃 + 4 个机器人作品<br><b>画中画循环切：</b>蜗牛爬井与跟随车代码（卖点 1）/ 直播课录屏（卖点 5）/ 拆箱全家福（卖点 2）/ 跟随车实拍（卖点 3）</p></div>
+  <div class="card"><p><b>桌面必摆：</b>AI 主控小核桃 + 4 个机器人作品<br><b>画中画循环切：</b>上面这条 50 秒轮播打底；讲到哪条切哪条——蜗牛爬井与跟随车代码（卖点 1）/ 小班直播课（卖点 5）/ 拆箱全家福（卖点 2）/ 跟随车实拍（卖点 3）</p></div>
   <div class="card"><p><b>手举牌两张：</b>权益牌 +「能力同步提升」能力牌<br><b>互动引导：</b>滚动条打「评论年级 · 升级福利」，按学段推对应链接</p></div>
 </div>
 </section>
